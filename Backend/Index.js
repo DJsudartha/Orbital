@@ -17,7 +17,7 @@ homePlaceHolder.get("/", (request, response) => {
     }
 );
 
-homePlaceHolder.use("/Metronome", Metronome);
+homePlaceHolder.use("/metronome", Metronome);
 
 mongoose
     .connect(MetronomeDBURL)
