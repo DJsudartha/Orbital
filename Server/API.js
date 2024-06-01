@@ -30,6 +30,6 @@ app.post('/register', (req, res) => {
     .then(user => res.json(user))
     .catch(err => res.json(err))
 })
-app.listen(4000, () => {
+app.listen(3001, () => {
     console.log("server is good")
 })
