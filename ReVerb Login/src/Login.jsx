@@ -14,7 +14,7 @@ function Login() {
         axios.post('http://localhost:3001/login', {email, password})
         .then(y => {
             console.log(y)
-            if(result.data === "Success") {
+            if(y.data === "Success") {
                 navigate('/home')
             }
         })
