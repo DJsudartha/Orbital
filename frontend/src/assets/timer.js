@@ -1,6 +1,3 @@
-// Add accurate timer constructor function
-// taken from github user musicandcode
-
 function Timer(callback, timeInterval, options) {
     this.timeInterval = timeInterval;
     
@@ -20,6 +17,7 @@ function Timer(callback, timeInterval, options) {
     }
     // Add method to stop timer
     this.stop = () => {
+  
       clearTimeout(this.timeout);
       console.log('Timer Stopped');
     }

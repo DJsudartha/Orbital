@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Button from 'react-bootstrap/esm/Button'
 import FormRange from 'react-bootstrap/esm/FormRange'
-import Form from 'react-bootstrap/Form'
+import { click1, click2 } from '../assets/sounds'
 import Timer from '../assets/timer'
 
 const Metronome = () => {
@@ -12,31 +12,34 @@ const Metronome = () => {
     // slider movement
     const [sliderValue, setSliderValue] = useState(130);
 
-    // button on/off
-    const [playOn, setPlay] = useState(false);
-    const click = new Audio("//daveceddia.com/freebies/react-metronome/click1.wav");
+    // metronome on/off
+    const [playOn, setPlayOn] = useState(false);
 
-    // use effect to update metronome run or not
-    useEffect(() => {
-        const metronome = new Timer(() => click.play(), 60000/sliderValue, {immediate: true});
+    // pick the time signature
+    const [timeChosen, setTimeChosen] = useState(4);
+
+    // update state to use setInterval
+    const [timerID, setTimerID] = useState(0);
+
+    useEffect(() => { // can try make this more accurate using the timer function
         if (playOn) {
-            metronome.start();
+            const intervalID = setInterval(() => click1.play(), 60000 / sliderValue);
+            setTimerID(intervalID);
         } else {
-            // why doesn't this want to stop!!!!!!
-            metronome.stop();
+            clearInterval(timerID);
+            setTimerID(0);
         }
+
+        return () => clearInterval(timerID);
     }, [playOn]);
 
-    let test = "";
 
-    // change to assets folder later
-    const click1 = new Audio("//daveceddia.com/freebies/react-metronome/click1.wav");
 
     return (
         <div className='container'>
             <div className='row border h-25 d-flex align-items-center'>
                 <div className='d-flex justify-content-center fs-1'>
-                    BPM: {sliderValue}, test: {test}
+                    BPM: {sliderValue}
                 </div>
             </div>
             <div className='row border h-25 d-flex align-items-center justify-content-center'>
@@ -52,25 +55,23 @@ const Metronome = () => {
             <div className='row border h-25 d-flex align-items-center'>
                 <div className='col-6 d-flex justify-content-end'>
                     <DropdownButton id="dropdown-basic-button" variant='success' title="Time Signature">
-                        <Dropdown.Item href="#/action-1">4/4</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">3/4</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">2/4</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setTimeChosen(4)}>4/4</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setTimeChosen(3)}>3/4</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setTimeChosen(2)}>2/4</Dropdown.Item>
                     </DropdownButton>
                 </div>
                 <div className='col-6 d-flex justify-content-start fs-5'>
-                    Time Signature display
+                    {timeChosen}/4
                 </div>
             </div>
             <div className='row border h-25 d-flex align-items-center'>
                 <div className='col d-flex justify-content-center'>
-                    <Button variant='success'
-                        onClick={() => {setPlay(true);}}>
+                    <Button variant='success' onClick={() => setPlayOn(true)}>
                         Play
                     </Button>
                 </div>
                 <div className='col d-flex justify-content-center'>
-                    <Button variant='success'
-                        onClick={() => {setPlay(false);}}>
+                    <Button variant='success' onClick={() => setPlayOn(false)}>
                         Stop
                     </Button>
                 </div>
