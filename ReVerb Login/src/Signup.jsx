@@ -10,9 +10,9 @@ function Signup() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post('http://localhost:4000/register', {name, email, password})
+        axios.post("http://localhost:4000/register", {name, email, password})
         .then(y => {console.log(y)
-        navigate('/Login')
+        navigate("/Login")
         })
         .catch(err => console.log(err))
     }
@@ -28,44 +28,43 @@ function Signup() {
                         </label>
                         <input
                         type="text"
-                        placeholder='Enter Name'
-                        autoComplete='off'
-                        name='email'
-                        className='form-control rounded-0'
+                        placeholder="Enter Name"
+                        autoComplete="off"
+                        name="name"
+                        className="form-control rounded-0"
                         onChange={(x) => setName(x.target.value)}
                         />
                     </div>
-                    <div className='mb-3'>
-                        <label htmlFor='email'>
+                    <div className="mb-3">
+                        <label htmlFor="email">
                             <strong>Email</strong>
                         </label>
                         <input
                         type="email"
-                        placeholder='Enter Email'
-                        autoComplete='off'
-                        name='email'
-                        className='form-control rounded-0'
+                        placeholder="Enter Email"
+                        autoComplete="off"
+                        name="email"
+                        className="form-control rounded-0"
                         onChange={(x) => setEmail(x.target.value)}
                         />
                     </div>
-                    <div className='mb-3'>
-                        <label htmlFor='password'>
+                    <div className="mb-3">
+                        <label htmlFor="password">
                             <strong>Password</strong>
                         </label>
                         <input
                         type="password"
-                        placeholder='Enter Password'
-                        name='password'
-                        className='form-control rounded-0'
+                        placeholder="Enter Password"
+                        name="password"
+                        className="form-control rounded-0"
                         onChange={(x) => setPassword(x.target.value)}
                         />
                     </div>
-                    <button type='submit' className='btn btn-success w-100 rounded-0'>
+                    <button type="submit" className="btn btn-success w-100 rounded-0">
                         Register
                     </button>
                     </form>
-                    <div>Forgot Email?</div>
-                    <Link to='/Login' className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'>
+                    <Link to="/Login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
                         Login
                     </Link>
             </div>
