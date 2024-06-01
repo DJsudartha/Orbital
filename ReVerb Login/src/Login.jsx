@@ -2,8 +2,8 @@ import React from 'react'
 
 
 function Login() {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
     const handleSubmit = (x) => {
@@ -11,8 +11,9 @@ function Login() {
         axios.post('http://localhost:4000/login', {email, password})
         .then(y => {
             console.log(y)
-            if(result.data === "Success")
-        navigate('/home')
+            if(result.data === "Success") {
+                navigate('/home')
+            }
         })
         .catch(err => console.log(err))
     }
@@ -51,7 +52,7 @@ function Login() {
                     </button>
                     </form>
                     <p>Forgot Password? </p>
-                    <Link to="/Login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
+                    <Link to="/login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
                         Login
                     </Link>
             </div>

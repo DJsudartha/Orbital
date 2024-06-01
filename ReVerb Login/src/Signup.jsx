@@ -3,16 +3,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function Signup() {
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
     const handleSubmit = (x) => {
         x.preventDefault()
         axios.post("http://localhost:4000/register", {name, email, password})
         .then(y => {console.log(y)
-        navigate("/Login")
+        navigate("/login")
         })
         .catch(err => console.log(err))
     }
@@ -64,7 +64,7 @@ function Signup() {
                         Register
                     </button>
                     </form>
-                    <Link to="/Login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
+                    <Link to="/login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
                         Login
                     </Link>
             </div>
