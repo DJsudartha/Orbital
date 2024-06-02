@@ -23,7 +23,7 @@ function Login() {
     return (
         <div className = "d-flex justify-content-center align-items-center bg-secondary vh-100">
             <div className = "bg-white p-3 rounded w-25">
-                <h2> Register</h2>
+                <h2>Login </h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="email">
@@ -51,12 +51,12 @@ function Login() {
                         />
                     </div>
                     <button type="submit" className="btn btn-success w-100 rounded-0">
-                        Register
+                        Submit
                     </button>
                     </form>
-                    <p>Forgot Password? </p>
-                    <Link to="/login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
-                        Login
+                    <p>Forgot Password? (Link in progress)</p>
+                    <Link to="/register" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
+                        Sign Up
                     </Link>
             </div>
         </div>
