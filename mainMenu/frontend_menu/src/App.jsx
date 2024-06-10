@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import MainMenu from './mainMenuRil/MainMenu.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <h1>hello</ h1>
+      <Routes> 
+        <Route path='/' element={<MainMenu />}/>
+      </Routes>
   )
 }
 
