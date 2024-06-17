@@ -4,23 +4,41 @@ import Metronome from '../components/Metronome'
 
 const Home = () => {
   // I know this code is shit ;_;
-
-  // get props from other routes
-  let location = useLocation();
-  // default route
-  let songData = {
+  // Default value
+  const [songData, setSongData] = useState({
     Title: "",
     Artist: "",
     Tempo: 130,
     TimeSignature: "4/4"
-  }
+  });
+
+  // get props from other routes
+  let location = useLocation();
 
   /* checks if props are passed from other components, if there are props
-  update, if not stay with the default, sort of shit and I think the only
-  way for the data to persist (AFAIK) is to keep on passing state around */
+    update, if not stay with the default, sort of shit and I think the only
+    way for the data to persist (IIRC) is to keep on passing state around */
   if (location.state !== null) {
-    songData = location.state;
-  } 
+    setSongData(location.state);
+  }
+
+  const handleSongDataChange = (id, value) => {
+    if (id === "tempoRange") {
+      setSongData((previousSongData) => {
+        return {
+          ...previousSongData,
+          Tempo: value
+        }
+      });
+    } else if (id === "timeSignatureDropDown") {
+      setSongData((previousSongData) => {
+        return {
+          ...previousSongData,
+          TimeSignature: value 
+        }
+      });
+    }
+  }
 
   return (
     <div className="container h-100 w-100 px-3 py-1">
@@ -32,7 +50,7 @@ const Home = () => {
       </div>
 
       <div className='row h-75'>
-        <Metronome songData={songData}/>
+        <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
       </div>
 
       <div className='row py-4'>
