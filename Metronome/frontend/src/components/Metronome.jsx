@@ -18,7 +18,6 @@ const Metronome = ({ songData, handleSongDataChange }) => {
     // metronome on/off
     const [playOn, setPlayOn] = useState(false);
 
-
     // update state to use setInterval
     const [timerID, setTimerID] = useState(0);
 
