@@ -1,24 +1,20 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
 const AddSong = () => {
-
-  const [title, setTitle] = useState('');
-  const [artist, setArtist] = useState('');
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  /* for some reason I can't figure out how to pass a method with params into 
+  an object, so for now I guess we use derived state*/
+  const [songData, setSongData] = useState({ ...location.state });
+
+  console.log(songData);
 
   const handleAddSong = () => {
-    const songData = {
-      Title: title,
-      Artist: artist,
-      Tempo: 140, // replace with an inherited prop later
-      TimeSignature: "4/4" //replace with an inherited prop later 
-    }
-
     axios
       .post('http://localhost:1234/metronome', songData)
       // .then(() => {
@@ -29,7 +25,8 @@ const AddSong = () => {
         console.log(error);
       });
 
-      navigate("/", {state: { ...songData }}); // make this immutable cus SE principle?
+    // IDT I need to make this immutable cus im just passing it arnd?
+    navigate("/", { state: songData });
   };
 
   return (
@@ -42,9 +39,16 @@ const AddSong = () => {
           <Form>
             <Form.Group>
               <Form.Label>Enter Song Title</Form.Label>
-              <Form.Control type='text' 
-              defaultValue={title} 
-              onChange={(x) => setTitle(x.target.value)}/>
+              <Form.Control type='text'
+                defaultValue={songData.Title}
+                onChange={(event) => {
+                  setSongData(previousSongData => {
+                    return {
+                      ...previousSongData,
+                      Title: event.target.value
+                    }
+                  })
+                }} />
             </Form.Group>
           </Form>
         </div>
@@ -55,10 +59,17 @@ const AddSong = () => {
           <Form>
             <Form.Group>
               <Form.Label>Enter Artist Name</Form.Label>
-              <Form.Control placeholder='Optional' 
-              type='text' 
-              defaultValue={artist} 
-              onChange={(x) => setArtist(x.target.value)}/>
+              <Form.Control placeholder='Optional'
+                type='text'
+                defaultValue={songData.Artist}
+                onChange={(event) => {
+                  setSongData(previousData => {
+                    return {
+                      ...previousData,
+                      Artist: event.target.value
+                    }
+                  })
+                }} />
             </Form.Group>
           </Form>
         </div>

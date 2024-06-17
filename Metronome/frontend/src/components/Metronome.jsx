@@ -33,8 +33,6 @@ const Metronome = ({ songData, handleSongDataChange }) => {
         return () => clearInterval(timerID);
     }, [playOn]);
 
-
-
     return (
         <div className='container'>
             <div className='row border h-25 d-flex align-items-center'>
@@ -49,8 +47,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
                         onChange={(event) => {
                             handleSongDataChange("tempoRange",
                                 event.target.value);
-                        }}
-                    />
+                        }} />
                 </div>
             </div>
             <div className='row border h-25 d-flex align-items-center'>

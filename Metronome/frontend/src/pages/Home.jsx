@@ -15,12 +15,10 @@ const Home = () => {
       Artist: "",
       Tempo: 130,
       TimeSignature: "4/4"
-    } :
-    {
-      ...useLocation().state
-    }
+    } : useLocation().state
   );
 
+  // can try using [name], but idk how to do that with react bootstrap
   const handleSongDataChange = (id, value) => {
     if (id === "tempoRange") {
       setSongData((previousSongData) => {
@@ -34,6 +32,20 @@ const Home = () => {
         return {
           ...previousSongData,
           TimeSignature: value
+        }
+      });
+    } else if (id === "songTitleForm") {
+      setSongData((previousSongData) => {
+        return {
+          ...previousSongData,
+          Title: value
+        }
+      });
+    } else if (id === "songArtistForm") {
+      setSongData((previousSongData) => {
+        return {
+          ...previousSongData,
+          Artist: value
         }
       });
     }
@@ -59,7 +71,12 @@ const Home = () => {
           </Link>
         </div>
         <div className='col d-flex align-items-center justify-content-center'>
-          <Link to='/metronome/addSong'>
+          <Link to='/metronome/addSong' state=
+            {
+              songData
+                // I want to try to pass the function with params in object but cant
+            }
+          >
             <i className="bi bi-plus-square-fill h1" />
           </Link>
         </div>
