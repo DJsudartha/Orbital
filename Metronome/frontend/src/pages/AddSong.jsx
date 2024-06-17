@@ -8,11 +8,11 @@ const AddSong = () => {
 
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
+
   const navigate = useNavigate();
 
-
   const handleAddSong = () => {
-    const data = {
+    const songData = {
       Title: title,
       Artist: artist,
       Tempo: 140, // replace with an inherited prop later
@@ -20,7 +20,7 @@ const AddSong = () => {
     }
 
     axios
-      .post('http://localhost:1234/metronome', data)
+      .post('http://localhost:1234/metronome', songData)
       // .then(() => {
       //   navigate('/');
       // }) something fucking up in this then, idk why
@@ -28,6 +28,8 @@ const AddSong = () => {
         alert("Error occured, please check console");
         console.log(error);
       });
+
+      navigate("/", {state: { ...songData }}); // make this immutable cus SE principle?
   };
 
   return (

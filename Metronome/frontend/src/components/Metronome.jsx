@@ -7,16 +7,18 @@ import FormRange from 'react-bootstrap/esm/FormRange'
 import { click1, click2 } from '../assets/sounds'
 import Timer from '../assets/timer'
 
-const Metronome = () => {
+const Metronome = ({songData}) => {
+    const { Tempo, TimeSignature } = songData;
 
     // slider movement
-    const [sliderValue, setSliderValue] = useState(130);
+    const [sliderValue, setSliderValue] = useState(Tempo);
 
     // metronome on/off
     const [playOn, setPlayOn] = useState(false);
 
-    // pick the time signature
-    const [timeChosen, setTimeChosen] = useState(4);
+    /* pick the time signature, NOTE: TimeSignature is a string, here it should
+    be treated as an integer for calculations*/
+    const [timeChosen, setTimeChosen] = useState(parseInt(TimeSignature[0]));
 
     // update state to use setInterval
     const [timerID, setTimerID] = useState(0);
