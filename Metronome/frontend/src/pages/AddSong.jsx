@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, BackLink } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
@@ -11,8 +11,6 @@ const AddSong = () => {
   /* for some reason I can't figure out how to pass a method with params into 
   an object, so for now I guess we use derived state*/
   const [songData, setSongData] = useState({ ...location.state });
-
-  console.log(songData);
 
   const handleAddSong = () => {
     axios
@@ -85,7 +83,7 @@ const AddSong = () => {
 
       <div className='row align-items-center py-3'>
         <div className='col d-flex justify-content-center'>
-          <Link to='/'>
+          <Link to={-1}>
             <i className="bi bi-arrow-left-square-fill h1" />
           </Link>
         </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import SongListActual from '../components/SongListActual'
 
@@ -16,7 +15,7 @@ const SongList = () => {
 
         <div className='row '>
           <div className='col d-flex justify-content-center'>
-            <Link to='/'>
+            <Link to={-1}>
               <i className="bi bi-arrow-left-square-fill h1" />
             </Link>
           </div>

@@ -1,9 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const EditSong = () => {
+
   return (
   <div className="container h-100 px-3 py-1">
 
@@ -41,7 +42,7 @@ const EditSong = () => {
 
       <div className='row align-items-center py-3'>
         <div className='col d-flex justify-content-center'>
-          <Link to='/'>
+          <Link to={-1}>
             <i className="bi bi-arrow-left-square-fill h1" />
           </Link>
         </div>

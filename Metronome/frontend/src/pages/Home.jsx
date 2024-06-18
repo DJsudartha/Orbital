@@ -8,14 +8,14 @@ const Home = () => {
   /* checks if props are passed from other components, if there are props
       update, if not stay with the default, sort of shit and I think the only
       way for the data to persist (IIRC) is to keep on passing state around */
-  const [songData, setSongData] = useState(useLocation().state === null ?
-    // Default value
-    {
+  const [songData, setSongData] = useState(useLocation().state === null
+    ? { // default value
       Title: "",
       Artist: "",
       Tempo: 130,
       TimeSignature: "4/4"
-    } : useLocation().state
+    }
+    : useLocation().state
   );
 
   // can try using [name], but idk how to do that with react bootstrap
@@ -74,15 +74,10 @@ const Home = () => {
           <Link to='/metronome/addSong' state=
             {
               songData
-                // I want to try to pass the function with params in object but cant
+              // I want to try to pass the function with params in object but cant
             }
           >
             <i className="bi bi-plus-square-fill h1" />
-          </Link>
-        </div>
-        <div className='col d-flex align-items-center justify-content-center'>
-          <Link to='/metronome/editSong/:id'>
-            <i className="bi bi-pencil-square h1" />
           </Link>
         </div>
         <div className='col d-flex align-items-center justify-content-center'>

@@ -35,12 +35,12 @@ const Metronome = ({ songData, handleSongDataChange }) => {
 
     return (
         <div className='container'>
-            <div className='row border h-25 d-flex align-items-center'>
+            <div className='row h-25 d-flex align-items-center'>
                 <div className='d-flex justify-content-center fs-1'>
                     BPM: {Tempo}
                 </div>
             </div>
-            <div className='row border h-25 d-flex align-items-center justify-content-center'>
+            <div className='row h-25 d-flex align-items-center justify-content-center'>
                 <div className='col-8 d-flex justify-content-center'>
                     <FormRange min={60} max={200}
                         value={Tempo}
@@ -50,7 +50,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
                         }} />
                 </div>
             </div>
-            <div className='row border h-25 d-flex align-items-center'>
+            <div className='row h-25 d-flex align-items-center'>
                 <div className='col-6 d-flex justify-content-end'>
                     <DropdownButton id="dropdown-basic-button" variant='info' title="Time Signature">
                         <Dropdown.Item onClick={() =>
@@ -68,7 +68,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
                     {numericTimeSignature[0]}/{numericTimeSignature[1]}
                 </div>
             </div>
-            <div className='row border h-25 d-flex align-items-center'>
+            <div className='row h-25 d-flex align-items-center'>
                 <div className='col d-flex justify-content-center'>
                     <Button variant='info' onClick={() => setPlayOn(!playOn)}>
                         Play

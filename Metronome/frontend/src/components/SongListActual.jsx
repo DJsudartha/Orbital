@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import DeleteSong from '../pages/DeleteSong';
 
 const SongListActual = () => {
@@ -43,6 +44,11 @@ const SongListActual = () => {
                                 <td>{song.TimeSignature}</td>
                                 <td>
                                     <i className='bi bi-check2-square' />
+                                </td>
+                                <td>
+                                    <Link to={`/metronome/editSong/${song._id}`}>
+                                    <i className="bi bi-pencil-square" />
+                                    </Link>
                                 </td>
                                 <td>
                                     <i className="bi bi-trash3-fill" onClick={() => setModalShow(true)} />
