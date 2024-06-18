@@ -14,7 +14,7 @@ const App = () => {
       <Route path='/' element={<Home />} />
       <Route path='/metronome/addSong' element={<AddSong />} />
       <Route path='/metronome/songList' element={<SongList />} />
-      <Route path='/metronome/editSong/:id' element={<EditSong />} />
+      <Route path='/metronome/songList/editSong/:id' element={<EditSong />} />
       <Route path='/metronome/songList/deleteSong/:id' element={<DeleteSong />} />
     </Routes>
   )

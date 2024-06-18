@@ -8,9 +8,6 @@ const SongListActual = () => {
     // the song list from the backend
     const [songs, setSongs] = useState([]);
 
-    // experimenting with using a modal for deleting songs instead of a page
-    const [modalShow, setModalShow] = useState(false);
-
     useEffect(() => {
         axios.get('http://localhost:1234/metronome')
             .then((response) => {
@@ -46,20 +43,20 @@ const SongListActual = () => {
                                     <i className='bi bi-check2-square' />
                                 </td>
                                 <td>
-                                    <Link to={`/metronome/editSong/${song._id}`}>
-                                    <i className="bi bi-pencil-square" />
+                                    <Link to={`/metronome/songList/editSong/${song._id}`}>
+                                        <i className="bi bi-pencil-square" />
                                     </Link>
                                 </td>
                                 <td>
-                                    <i className="bi bi-trash3-fill" onClick={() => setModalShow(true)} />
+                                    <Link to={`/metronome/songList/deleteSong/${song._id}`}>
+                                        <i className="bi bi-trash3-fill" />
+                                    </Link>
                                 </td>
                             </tr>
                         ))
                     }
                 </tbody>
             </table>
-
-            <DeleteSong show={modalShow} onHide={() => setModalShow(false)} />
 
         </div>
     )
