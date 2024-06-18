@@ -21,6 +21,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
     // update state to use setInterval
     const [timerID, setTimerID] = useState(0);
 
+    // FIX: if switch page metronome still plays
     useEffect(() => { // can try make this more accurate using the timer function
         if (playOn) {
             const intervalID = setInterval(() => click1.play(), 60000 / Tempo);
