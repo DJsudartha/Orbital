@@ -26,7 +26,8 @@ const SongListActual = () => {
                         <th>Title</th>
                         <th>Artist</th>
                         <th>BPM</th>
-                        <th>Time Signature</th>
+                        <th>Measure</th>
+                        <th />
                         <th />
                         <th />
                     </tr>
@@ -40,7 +41,14 @@ const SongListActual = () => {
                                 <td>{song.Tempo}</td>
                                 <td>{song.TimeSignature}</td>
                                 <td>
-                                    <i className='bi bi-check2-square' />
+                                    <Link to="/" state={{
+                                            Title: song.Title,
+                                            Artist: song.Artist,
+                                            Tempo: song.Tempo,
+                                            TimeSignature: song.TimeSignature
+                                        }}>
+                                        <i className='bi bi-check2-square' />
+                                    </Link>
                                 </td>
                                 <td>
                                     <Link to={`/metronome/songList/editSong/${song._id}`}>
