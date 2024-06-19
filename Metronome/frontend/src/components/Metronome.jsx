@@ -18,13 +18,28 @@ const Metronome = ({ songData, handleSongDataChange }) => {
     // metronome on/off
     const [playOn, setPlayOn] = useState(false);
 
+    // keeps track of the time signature
+    let beatCountTracker = 0;
+
+    const keepTime = () => {
+        const beatCount = beatCountTracker;
+
+        if (beatCount % numericTimeSignature[0] === 0) {
+            click2.play();
+        } else {
+            click1.play();
+        }
+
+        beatCountTracker = (beatCount + 1) % numericTimeSignature[0];
+    }
+
     // update state to use setInterval
     const [timerID, setTimerID] = useState(0);
-
     // FIX: if switch page metronome still plays
     useEffect(() => { // can try make this more accurate using the timer function
         if (playOn) {
-            const intervalID = setInterval(() => click1.play(), 60000 / Tempo);
+            let beatCount = 0;
+            const intervalID = setInterval(keepTime, 60000 / Tempo);
             setTimerID(intervalID);
         } else {
             clearInterval(timerID);
@@ -72,7 +87,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
             <div className='row h-25 d-flex align-items-center'>
                 <div className='col d-flex justify-content-center'>
                     <Button variant='info' onClick={() => setPlayOn(!playOn)}>
-                        Play
+                        {playOn ? <div>Stop</div> : <div>Play</div>}
                     </Button>
                 </div>
             </div>
