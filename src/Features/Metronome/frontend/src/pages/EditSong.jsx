@@ -73,7 +73,7 @@ const EditSong = () => {
       });
 
     // IDT I need to make this immutable cus im just passing it arnd?
-    navigate("/", { state: songData });
+    navigate("/metronome", { state: songData });
   }
 
   return (

@@ -41,7 +41,7 @@ const SongListActual = () => {
                                 <td>{song.Tempo}</td>
                                 <td>{song.TimeSignature}</td>
                                 <td>
-                                    <Link to="/" state={{
+                                    <Link to="/metronome" state={{
                                             Title: song.Title,
                                             Artist: song.Artist,
                                             Tempo: song.Tempo,

@@ -20,7 +20,7 @@ const DeleteSong = () => {
   const handleDeleteSong = () => {
     axios
       .delete(`http://localhost:1234/metronome/${id}`)
-      .then(navigate("/"))
+      .then(navigate("/metronome"))
       .catch(error => {
         alert("there was an error, check console");
         console.log(error);
