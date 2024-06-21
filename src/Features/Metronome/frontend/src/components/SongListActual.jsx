@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
-import DeleteSong from '../pages/DeleteSong';
 
 const SongListActual = () => {
 
@@ -42,21 +41,23 @@ const SongListActual = () => {
                                 <td>{song.TimeSignature}</td>
                                 <td>
                                     <Link to="/metronome" state={{
-                                            Title: song.Title,
-                                            Artist: song.Artist,
-                                            Tempo: song.Tempo,
-                                            TimeSignature: song.TimeSignature
-                                        }}>
+                                        Title: song.Title,
+                                        Artist: song.Artist,
+                                        Tempo: song.Tempo,
+                                        TimeSignature: song.TimeSignature
+                                    }}>
                                         <i className='bi bi-check2-square' />
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to={`/metronome/songList/editSong/${song._id}`}>
+                                    <Link
+                                        to={`/metronome/songList/editSong/${song._id}`}>
                                         <i className="bi bi-pencil-square" />
                                     </Link>
                                 </td>
                                 <td>
-                                    <Link to={`/metronome/songList/deleteSong/${song._id}`}>
+                                    <Link
+                                        to={`/metronome/songList/deleteSong/${song._id}`}>
                                         <i className="bi bi-trash3-fill" />
                                     </Link>
                                 </td>
