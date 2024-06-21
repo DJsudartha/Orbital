@@ -16,7 +16,7 @@ import Tester from './Features/MusicStarterJourney/Tester.jsx'
 import MusicStarterHome from './Features/MusicStarterJourney/Pages/MusicStarterHome.jsx'
 import Journey from './Features/MusicStarterJourney/Pages/Journey.jsx'
 import AudioTest from './Features/MusicStarterJourney/Pages/AudioTest.jsx'
-import VisualTest from './Features/MusicStarterJourney/Pages/VisualTest.jsx'
+import VisualTest from './Features/MusicStarterJourney/Pages/TestInterface.jsx'
 import RhythmTest from './Features/MusicStarterJourney/Pages/RhythmTest.jsx'
 
 function App() {
@@ -32,6 +32,9 @@ function App() {
 
       <Route path='/MusicStarterJourney' element={<MusicStarterHome />} />
       <Route path='/MusicStarterJourney/Journey' element={<Journey />} />
+      {/*Mayhaps use the above line as a parennt to the rest of the routes below
+      and then wrap necessary components in a div that has the navbar so 
+      theres no need to copy it around */}
       <Route path='/MusicStarterJourney/Journey/AudioTest/:id' element={<AudioTest />} />
       <Route path='/MusicStarterJourney/Journey/VisualTest/:id' element={<VisualTest />} />
       <Route path='/MusicStarterJourney/Journey/RhythmTest/:id' element={<RhythmTest />} />
