@@ -27,6 +27,13 @@ const Menu = () => {
                     Tuner
                 </Button>
             </Col>
+            <Col className='h-25 d-flex align-items-center justify-content-center'>
+                <Link to="/MusicStarterJourney">
+                    <Button variant='info' size='lg' style={{ color: 'white' }}>
+                        Music Journey
+                    </Button>
+                </Link>
+            </Col>
         </Container>
     )
 }

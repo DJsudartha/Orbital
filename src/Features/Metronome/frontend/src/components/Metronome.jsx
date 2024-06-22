@@ -87,7 +87,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
             <div className='row h-25 d-flex align-items-center'>
                 <div className='col d-flex justify-content-center'>
                     <Button variant='info' onClick={() => setPlayOn(!playOn)}>
-                        {playOn ? <div>Stop</div> : <div>Play</div>}
+                        {playOn ? <>Stop</> : <>Play</>}
                     </Button>
                 </div>
             </div>

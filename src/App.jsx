@@ -12,12 +12,9 @@ import EditSong from './Features/Metronome/frontend/src/pages/EditSong.jsx'
 import DeleteSong from './Features/Metronome/frontend/src/pages/DeleteSong.jsx'
 
 // from music starter journey
-import Tester from './Features/MusicStarterJourney/Tester.jsx'
 import MusicStarterHome from './Features/MusicStarterJourney/Pages/MusicStarterHome.jsx'
 import Journey from './Features/MusicStarterJourney/Pages/Journey.jsx'
-import AudioTest from './Features/MusicStarterJourney/Pages/AudioTest.jsx'
-import VisualTest from './Features/MusicStarterJourney/Pages/TestInterface.jsx'
-import RhythmTest from './Features/MusicStarterJourney/Pages/RhythmTest.jsx'
+import TestInterface from './Features/MusicStarterJourney/Pages/TestInterface.jsx'
 
 function App() {
   return (
@@ -35,9 +32,7 @@ function App() {
       {/*Mayhaps use the above line as a parennt to the rest of the routes below
       and then wrap necessary components in a div that has the navbar so 
       theres no need to copy it around */}
-      <Route path='/MusicStarterJourney/Journey/AudioTest/:id' element={<AudioTest />} />
-      <Route path='/MusicStarterJourney/Journey/VisualTest/:id' element={<VisualTest />} />
-      <Route path='/MusicStarterJourney/Journey/RhythmTest/:id' element={<RhythmTest />} />
+      <Route path='/MusicStarterJourney/Journey/Unit/:id' element={<TestInterface/>} />
 
     </Routes>
   )
