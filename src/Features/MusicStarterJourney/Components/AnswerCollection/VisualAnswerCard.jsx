@@ -3,15 +3,19 @@ import Card from 'react-bootstrap/Card'
 
 const VisualAnswerCard = () => {
   const [hasImage, setImage] = useState(true);
+
   return (
-    <Card bg='info' className='my-2' style={{width:'150px'}}>
-      {hasImage && <Card.Img src='https://placebear.com/300/200'/>}
-      <Card.Body style={{backgroundColor:'transparent'}}>
-        <Card.Title style={{backgroundColor:'transparent'}}>
-          Bear
-        </Card.Title>
-      </Card.Body>
-    </Card>
+    <button className='MusicJourney--Button'>
+      <Card bg='info' className='my-2' style={{ width: '150px' }}>
+        {hasImage && <Card.Img src='https://placebear.com/300/200' className='p-1'/>}
+        <Card.Body style={{ backgroundColor: 'transparent' }}>
+          <Card.Title style={{ backgroundColor: 'transparent' }}>
+            Visual
+          </Card.Title>
+        </Card.Body>
+      </Card>
+    </button>
+
   )
 }
 

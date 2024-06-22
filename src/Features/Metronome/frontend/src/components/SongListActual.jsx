@@ -18,8 +18,8 @@ const SongListActual = () => {
     }, []);
 
     return (
-        <div className='overflow-auto'>
-            <table className='table'>
+        <div style={{overflowX:"hidden", overflowY:"auto"}}>
+            <table className='table--custom'>
                 <thead>
                     <tr>
                         <th>Title</th>

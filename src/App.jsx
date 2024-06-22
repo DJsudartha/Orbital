@@ -28,10 +28,7 @@ function App() {
       <Route path='/metronome/songList/deleteSong/:id' element={<DeleteSong />} />
 
       <Route path='/MusicStarterJourney' element={<MusicStarterHome />} />
-      <Route path='/MusicStarterJourney/Journey' element={<Journey />} />
-      {/*Mayhaps use the above line as a parennt to the rest of the routes below
-      and then wrap necessary components in a div that has the navbar so 
-      theres no need to copy it around */}
+      <Route path='/MusicStarterJourney/Journey' element={<Journey />}> </Route>
       <Route path='/MusicStarterJourney/Journey/Unit/:id' element={<TestInterface/>} />
 
     </Routes>

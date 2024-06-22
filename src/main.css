@@ -1,3 +1,18 @@
 :root {
     background-color: #313338;
 }
+
+.MusicJourney--Button {
+    background-color: transparent;
+    border: none;
+}
+
+table--custom {
+    background-color: transparent;
+    color: white;
+}
+
+td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

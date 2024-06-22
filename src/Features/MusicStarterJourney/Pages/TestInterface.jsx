@@ -14,7 +14,7 @@ import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
 
 const TestInterface = () => {
   const QuestionType = "Visual";
-  const AnswerType = "Visual";
+  const AnswerType = "Rhythm";
 
   let questionOut;
   if (QuestionType === "Audio") {
@@ -35,41 +35,44 @@ const TestInterface = () => {
   }
 
   return (
-    <Container>
+    <Container className='h-100'>
+      <div style={{ height: "92%", overflowY:'auto', overflowX:'hidden'}}>
+        <Row className='pt-3'>
+          <Col className='d-flex justify-content-center'>
+            <h2>Journey</h2>
+          </Col>
+        </Row>
+        <Row>
+          {questionOut}
+        </Row>
+
+        <Row>
+          <Col className='d-flex justify-content-end'>
+            {answerOutCard /*Once back end done replace this with a map */}
+          </Col>
+          <Col className='d-flex justify-content-start'>
+            {answerOutCard}
+          </Col>
+        </Row>
+        <Row>
+          <Col className='d-flex justify-content-end'>
+            {answerOutCard}
+          </Col>
+          <Col className='d-flex justify-content-Start'>
+            {answerOutCard}
+          </Col>
+        </Row>
+
+        <Row className='pt-2'>
+            <Col className='d-flex justify-content-center'>
+            <Button variant='info'>
+              Check
+            </Button>
+            </Col>
+        </Row>
+      </div>
+
       <Row className='pt-3'>
-        <Col className='d-flex justify-content-center'>
-          <h2>Journey</h2>
-        </Col>
-      </Row>
-
-      <Row>
-        {questionOut}
-      </Row>
-
-      <Row>
-        <Col className='d-flex justify-content-end'>
-          {answerOutCard /*Once back end done replace this with a map */}
-        </Col>
-        <Col className='d-flex justify-content-start'>
-          {answerOutCard}
-        </Col>
-      </Row>
-      <Row>
-        <Col className='d-flex justify-content-end'>
-          {answerOutCard}
-        </Col>
-        <Col className='d-flex justify-content-Start'>
-          {answerOutCard}
-        </Col>
-      </Row>
-
-      <Row className='pt-1 px-5 jusify-content-center'>
-        <Button variant='info'>
-          Check
-        </Button>
-      </Row>
-
-      <Row>
         <NavFooter />
       </Row>
     </Container>
