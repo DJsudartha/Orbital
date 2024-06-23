@@ -7,7 +7,7 @@ const NavFooter = () => {
         <Container>
             <Row>
                 <Col className='d-flex justify-content-end px-5'>
-                    <Link to="/MusicStarter/Journey">
+                    <Link to="/MusicStarterJourney">
                         <i className="bi bi-house-fill h1" />
                     </Link>
                 </Col>

@@ -18,7 +18,7 @@ const SongListActual = () => {
     }, []);
 
     return (
-        <div style={{overflowX:"hidden", overflowY:"auto"}}>
+        <div>
             <table className='table--custom'>
                 <thead>
                     <tr>

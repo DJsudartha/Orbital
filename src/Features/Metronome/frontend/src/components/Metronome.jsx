@@ -1,11 +1,8 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import Button from 'react-bootstrap/esm/Button'
 import FormRange from 'react-bootstrap/esm/FormRange'
-import { click1, click2 } from '../assets/sounds'
-import Timer from '../assets/timer'
+import MetronomeButton from './MetronomeButton'
 
 const Metronome = ({ songData, handleSongDataChange }) => {
     const { Tempo, TimeSignature } = songData;
@@ -14,40 +11,6 @@ const Metronome = ({ songData, handleSongDataChange }) => {
     for calculation purposes, thus */
     const numericTimeSignature = [parseInt(TimeSignature[0]),
     parseInt(TimeSignature[2])];
-
-    // metronome on/off
-    const [playOn, setPlayOn] = useState(false);
-
-    // keeps track of the time signature
-    let beatCountTracker = 1;
-
-    const keepTime = () => {
-        const beatCount = beatCountTracker;
-
-        if (beatCount % numericTimeSignature[0] === 0) {
-            click2.play();
-        } else {
-            click1.play();
-        }
-
-        beatCountTracker = (beatCount + 1) % numericTimeSignature[0];
-    }
-
-    // update state to use setInterval
-    const [timerID, setTimerID] = useState(0);
-    // FIX: if switch page metronome still plays
-    useEffect(() => { // can try make this more accurate using the timer function
-        if (playOn) {
-            click2.play(); // play instantly
-            const intervalID = setInterval(keepTime, 60000 / Tempo);
-            setTimerID(intervalID);
-        } else {
-            clearInterval(timerID);
-            setTimerID(0);
-        }
-
-        return () => clearInterval(timerID);
-    }, [playOn]);
 
     return (
         <div className='container'>
@@ -86,9 +49,7 @@ const Metronome = ({ songData, handleSongDataChange }) => {
             </div>
             <div className='row h-25 d-flex align-items-center'>
                 <div className='col d-flex justify-content-center'>
-                    <Button variant='info' onClick={() => setPlayOn(!playOn)}>
-                        {playOn ? <>Stop</> : <>Play</>}
-                    </Button>
+                   <MetronomeButton Tempo={Tempo} numericTimeSignature={numericTimeSignature}/> 
                 </div>
             </div>
         </div>

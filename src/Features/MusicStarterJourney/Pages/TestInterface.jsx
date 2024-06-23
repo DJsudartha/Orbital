@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../Components/NavFooter'
 
@@ -13,8 +13,10 @@ import VisualAnswerCard from '../Components/AnswerCollection/VisualAnswerCard'
 import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
 
 const TestInterface = () => {
-  const QuestionType = "Rhythm";
+  const QuestionType = "Audio";
   const AnswerType = "Rhythm";
+
+  const [selected, setSelected] = useState(0); // pass setSelected down as props
 
   let questionOut;
   if (QuestionType === "Audio") {

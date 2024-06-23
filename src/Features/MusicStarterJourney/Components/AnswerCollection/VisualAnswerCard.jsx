@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 
-const VisualAnswerCard = () => {
+const VisualAnswerCard = () => { // need to pass down a generic function prop for use to be selected in questions and to navigate in journey
   const [hasImage, setImage] = useState(true);
 
   return (

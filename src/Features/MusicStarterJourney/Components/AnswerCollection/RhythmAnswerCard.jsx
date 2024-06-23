@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
+import MetronomeButton from '../../../Metronome/frontend/src/components/MetronomeButton'
 
 
 const RhythmAnswerCard = () => {
-const [hasImage, setImage] = useState(true);
-
   return (
     <button className='MusicJourney--Button'>
       <Card bg='info' className='my-2' style={{ width: '150px' }}>
-        {hasImage && <Card.Img src='https://placebear.com/300/200' className='p-1'/>}
+        <MetronomeButton Tempo={130} numericTimeSignature={[4, 4]}/>
         <Card.Body style={{ backgroundColor: 'transparent' }}>
           <Card.Title style={{ backgroundColor: 'transparent' }}>
             Rhythm

@@ -1,14 +1,9 @@
 import React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
-import Metronome from '../../../Metronome/frontend/src/components/Metronome'
+import MetronomeButton from '../../../Metronome/frontend/src/components/MetronomeButton'
 
 const RhythmQuestion = () => {
-  const songData = {
-    Title: "",
-    Artist: "",
-    Tempo: 130,
-    TimeSignature: "4/4"
-  }
+  // props here
 
   return (
     <Container>
@@ -19,7 +14,7 @@ const RhythmQuestion = () => {
       </Row>
       <Row>
         <Col className='d-flex justify-content-center pb-1 px-5'>
-          <Metronome songData={songData}/>
+          <MetronomeButton Tempo={130} numericTimeSignature={[4, 4]} />
         </Col>
       </Row>
     </Container>
