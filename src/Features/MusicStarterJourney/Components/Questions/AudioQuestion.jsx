@@ -1,7 +1,15 @@
 import React from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Col, Row, Button } from 'react-bootstrap'
+import { Synth } from 'tone';
 
 const AudioQuestion = () => {
+  // get props here
+  const synth = new Synth().toDestination();
+
+  const handlePlayback = () => {
+    synth.triggerAttackRelease("C4", 2);
+  }
+
   return (
     <Container>
       <Row>
@@ -9,9 +17,11 @@ const AudioQuestion = () => {
           <h1>Long long long long long long Audio</h1>
         </Col>
       </Row>
-      <Row>
+      <Row className='pt-2'>
         <Col className='d-flex justify-content-center pb-3'>
-          <img src='https://placebear.com/300/200' />
+        <Button onClick={handlePlayback} size='lg'>
+          <i className="bi bi-play-circle-fill h1" />
+        </Button>
         </Col>
       </Row>
     </Container>

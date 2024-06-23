@@ -13,7 +13,7 @@ import VisualAnswerCard from '../Components/AnswerCollection/VisualAnswerCard'
 import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
 
 const TestInterface = () => {
-  const QuestionType = "Visual";
+  const QuestionType = "Rhythm";
   const AnswerType = "Rhythm";
 
   let questionOut;
