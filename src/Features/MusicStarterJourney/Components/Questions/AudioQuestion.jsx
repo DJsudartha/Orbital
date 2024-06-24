@@ -1,11 +1,14 @@
+// Buggy, I think all mapped audio questions might share a common tone that builds up
+
 import React from 'react'
 import { Container, Col, Row, Button } from 'react-bootstrap'
 import * as Tone from 'tone'
 
-const AudioQuestion = () => {
+const AudioQuestion = (props) => {
+  const { Title, Data } = props.data;
   const synth = new Tone.PolySynth().toDestination();
   // get props here
-  const seq = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
+  const seq = Data;
 
   /**
    * Notes play an eigth note apart, since im using polysynth if i make this any
@@ -26,7 +29,7 @@ const AudioQuestion = () => {
     <Container>
       <Row>
         <Col className='d-flex justify-content-center pb-1 px-5'>
-          <h1>Long long long long long long Audio</h1>
+          <h1>{Title}</h1>
         </Col>
       </Row>
       <Row className='pt-2'>

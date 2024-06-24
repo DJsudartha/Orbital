@@ -1,16 +1,24 @@
+// Buggy, I think all the mapped AudioAnswerCards share a common tone
+
 import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import * as Tone from 'tone'
 
-const AudioAnswerCard = () => {
-  const synth = new Tone.PolySynth().toDestination();
+const AudioAnswerCard = (props) => {
+  const { Title, Data } = props.data;
+  const synth = new Tone.Synth().toDestination();
   // get props here
-  const seq = [[0, "C2"], ["1", "D2"], ["2", "E2"], ["3", "F2"],
-  ["4", "G2"], ["5", "A2"], ["6", "B2"], ["7", "C3"]];
+  const seq = Data;
 
-  const part = new Tone.Part((time, note) => {
-    synth.triggerAttackRelease(note, "4n", time);
+  /**
+     * Notes play an eigth note apart, since im using polysynth if i make this any
+     * longer notes overlay eachother. I want to keep polysynth for chords later
+     */
+  const sequence = new Tone.Sequence((time, note) => {
+    synth.triggerAttackRelease(note, "8n", time);
   }, seq).start(0);
+
+  sequence.loop = false;
 
   const handlePlayback = () => {
     Tone.getTransport().stop();
@@ -23,7 +31,7 @@ const AudioAnswerCard = () => {
         <i className='bi bi-play-circle-fill h1 p-1' />
         <Card.Body style={{ backgroundColor: 'transparent' }}>
           <Card.Title style={{ backgroundColor: 'transparent' }}>
-            Audio
+            {Title}
           </Card.Title>
         </Card.Body>
       </Card>

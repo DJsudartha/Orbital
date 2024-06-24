@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../Components/NavFooter'
-import axios from 'axios'
+import { useLocation } from 'react-router-dom'
 
 // Question portion concrete module
 import AudioQuestion from '../Components/Questions/AudioQuestion'
@@ -14,32 +14,46 @@ import VisualAnswerCard from '../Components/AnswerCollection/VisualAnswerCard'
 import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
 
 const TestInterface = () => {
-  const QuestionType = "Audio";
-  const AnswerType = "Rhythm";
+  const location = useLocation();
+  const props = location.state;
+  const { Correct, Question, Answers } = props;
+
+  const questionType = Question.Var;
+  const answerType = Answers.Var;
+  const answerCollection = Answers.Data;
 
   const [selected, setSelected] = useState(0); // pass setSelected down as props
 
   let questionOut;
-  if (QuestionType === "Audio") {
-    questionOut = <AudioQuestion />;
-  } else if (QuestionType === "Visual") {
-    questionOut = <VisualQuestion />;
-  } else if (QuestionType === "Rhythm") {
-    questionOut = <RhythmQuestion />;
+  if (questionType === "Audio") {
+    questionOut = <AudioQuestion data={Question} />;
+  } else if (questionType === "Visual") {
+    questionOut = <VisualQuestion data={Question} />;
+  } else if (questionType === "Rhythm") {
+    questionOut = <RhythmQuestion data={Question} />;
   }
 
-  let answerOutCard;
-  if (AnswerType === "Audio") {
-    answerOutCard = <AudioAnswerCard />;
-  } else if (AnswerType === "Visual") {
-    answerOutCard = <VisualAnswerCard />;
-  } else if (AnswerType === "Rhythm") {
-    answerOutCard = <RhythmAnswerCard />;
+  let answerOutCards;
+  if (answerType === "Audio") {
+    answerOutCards = answerCollection.map((answer) =>
+      <Col className='d-flex justify-content-center'>
+        <AudioAnswerCard data={answer} />
+      </Col>);
+  } else if (answerType === "Visual") {
+    answerOutCards = answerCollection.map((answer) =>
+      <Col className='d-flex justify-content-center'>
+        <VisualAnswerCard data={answer} />
+      </Col>);
+  } else if (answerType === "Rhythm") {
+    answerOutCards = answerCollection.map((answer) =>
+      <Col className='d-flex justify-content-center'>
+        <RhythmAnswerCard data={answer} />
+      </Col>);
   }
 
   return (
     <Container className='h-100'>
-      <div style={{ height: "92%", overflowY:'auto', overflowX:'hidden'}}>
+      <div style={{ height: "92%", overflowY: 'auto', overflowX: 'hidden' }}>
         <Row className='pt-3'>
           <Col className='d-flex justify-content-center'>
             <h2>Journey</h2>
@@ -48,30 +62,15 @@ const TestInterface = () => {
         <Row>
           {questionOut}
         </Row>
-
         <Row>
-          <Col className='d-flex justify-content-end'>
-            {answerOutCard /*Once back end done replace this with a map */}
-          </Col>
-          <Col className='d-flex justify-content-start'>
-            {answerOutCard}
-          </Col>
+          {answerOutCards}
         </Row>
-        <Row>
-          <Col className='d-flex justify-content-end'>
-            {answerOutCard}
-          </Col>
-          <Col className='d-flex justify-content-Start'>
-            {answerOutCard}
-          </Col>
-        </Row>
-
-        <Row className='pt-2'>
-            <Col className='d-flex justify-content-center'>
+        <Row className='pt-3'>
+          <Col className='d-flex justify-content-center'>
             <Button variant='info'>
               Check
             </Button>
-            </Col>
+          </Col>
         </Row>
       </div>
 

@@ -36,8 +36,8 @@ QuizJourney.post("/", async (request, response) => {
 // Read All / get Journey
 QuizJourney.get("/", async (request, response) => {
     try {
-        const journey = await QuizJourneyModel.find({});
-
+        const journey = await QuizJourneyModel.find({})
+            .sort({ QuizID: "asc" });
         return response.status(200).json(journey); // problems w/ wrapper'?
     } catch (error) {
         console.log(error.Message);
@@ -60,7 +60,7 @@ QuizJourney.get("/:id", async (request, response) => {
         }
 
         // <-> json and send for diff purposes
-        return response.status(200).json({quiz: quizFound}); 
+        return response.status(200).json({ quiz: quizFound });
     } catch (error) {
         console.log(error.Message);
         return response.status(500).send({ message: error.message });
@@ -109,7 +109,7 @@ QuizJourney.delete("/:id", async (request, response) => {
 
         }
 
-        return response.status(200).send({deleted: quizFound});
+        return response.status(200).send({ deleted: quizFound });
     } catch (error) {
         console.log(error.Message);
         return response.status(500).send({ message: error.message });

@@ -16,11 +16,13 @@ const MusicStarterHome = () => {
                 <Row>
                     <Col className='d-flex justify-content-end'>
                         <Link to="/MusicStarterJourney/Journey">
-                            <VisualAnswerCard /> {/**need to map for this later */}
+                            <VisualAnswerCard 
+                            data={{Title: "Journey", Data: ["https://placebear.com/300/200"]}}/> {/**need to map for this later */}
                         </Link>
                     </Col>
                     <Col className='d-flex justify-content-start'>
-                        <VisualAnswerCard />
+                        <VisualAnswerCard 
+                        data={{Title: "Journey", Data: ["https://placebear.com/300/200"]}}/>
                     </Col>
                 </Row>
             </div>
