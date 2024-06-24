@@ -18,18 +18,20 @@ const Journey = () => {
 
         <Row className='py-5'>
           <Col className='d-flex justify-content-center'>
-            <Button size='lg' onClick={() => navigate("/MusicStarterJourney/Journey/Unit/id")}/>
+            <Button size='lg' onClick={() => navigate("/MusicStarterJourney/Journey/Unit/id")} />
           </Col>
         </Row>
 
         <Row className='py-5'>
           <Col className='d-flex justify-content-center'>
-            <Button size='lg' disabled/>
+            <Button size='lg' disabled />
           </Col>
         </Row>
       </div>
 
-      <NavFooter />
+      <Row className='pt-3'>
+        <NavFooter />
+      </Row>
 
     </Container>
   )

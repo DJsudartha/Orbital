@@ -25,7 +25,14 @@ const MusicStarterHome = () => {
                 </Row>
             </div>
 
-        </Container>
+            <Row className='pt-3'>
+                <Col className='d-flex justify-content-center'>
+                    <Link to="/">
+                        <i className='bi bi-house-fill h1' />
+                    </Link>
+                </Col>
+            </Row>
+        </Container >
     )
 }
 
