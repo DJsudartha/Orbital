@@ -5,12 +5,17 @@ import * as Tone from 'tone'
 const AudioQuestion = () => {
   const synth = new Tone.PolySynth().toDestination();
   // get props here
-  const seq = [[0, "C4"], ["1", "D4"], ["2", "E4"], ["3", "F4"],
-  ["4", "G4"], ["5", "A4"], ["6", "B4"], ["7", "C5"]];
+  const seq = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
 
-  const part = new Tone.Part((time, note) => {
-    synth.triggerAttackRelease(note, "4n", time);
+  /**
+   * Notes play an eigth note apart, since im using polysynth if i make this any
+   * longer notes overlay eachother. I want to keep polysynth for chords later
+   */
+  const sequence = new Tone.Sequence((time, note) => {
+    synth.triggerAttackRelease(note, "8n", time);
   }, seq).start(0);
+
+  sequence.loop = false;
 
   const handlePlayback = () => {
     Tone.getTransport().stop();

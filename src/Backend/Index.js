@@ -3,6 +3,7 @@ import { port } from "./Port.js";
 import mongoose from "mongoose";
 import { MetronomeDBURL } from "./Port.js";
 import Metronome from "./Routes/MetronomeRoute.js";
+import QuizJourney from "./Routes/QuizRoute.js";
 import cors from 'cors';
 
 const homePlaceHolder = express();
@@ -18,6 +19,9 @@ homePlaceHolder.get("/", (request, response) => {
 );
 
 homePlaceHolder.use("/metronome", Metronome);
+
+homePlaceHolder.use("/musicJourney", QuizJourney);
+// need to refactor soon
 
 mongoose
     .connect(MetronomeDBURL)

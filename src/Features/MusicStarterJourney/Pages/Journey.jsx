@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Container, Col, Row, Button } from 'react-bootstrap';
 import NavFooter from '../Components/NavFooter'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Journey = () => {
   const [progress, setProgress] = useState(0);
