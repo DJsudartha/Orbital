@@ -52,8 +52,8 @@ const Journey = () => {
                         QuizID: quiz.QuizID,
                       }
                     }) : null
-                    }
-                    disabled={quiz.QuizID > progress}>
+                  }
+                  disabled={quiz.QuizID > progress}>
                   {quiz.QuizID}
                 </Button>
               </Col>
@@ -61,10 +61,18 @@ const Journey = () => {
           ))
         }
 
+        {progress >= (journey.length + 1) &&
+          <Col className='d-flex justify-content-center pt-5'>
+            <Row>
+              <h1>Journey Complete!</h1>
+            </Row>
+          </Col>
+        }
+
       </div>
 
       <Row className='pt-3'>
-        <NavFooter />
+        <NavFooter /> {/*nav footer back arrow goes to last visited, might not want */}
       </Row>
 
     </Container>
