@@ -17,12 +17,14 @@ const MusicStarterHome = () => {
                     <Col className='d-flex justify-content-end'>
                         <Link to="/MusicStarterJourney/Journey">
                             <VisualAnswerCard 
-                            data={{Title: "Journey", Data: ["https://placebear.com/300/200"]}}/> {/**need to map for this later */}
+                            data={{Title: "Journey", Data: 
+                            ["https://www.musictheoryacademy.com/wp-content/uploads/2020/06/Treble-Clef-Symbol.jpg"]}}/>
                         </Link>
                     </Col>
                     <Col className='d-flex justify-content-start'>
                         <VisualAnswerCard 
-                        data={{Title: "Journey", Data: ["https://placebear.com/300/200"]}}/>
+                        data={{Title: "Journey", Data: 
+                        ["https://www.musictheoryacademy.com/wp-content/uploads/2011/02/BassClef-Middle-C-e1297176615910.jpg"]}}/>
                     </Col>
                 </Row>
             </div>

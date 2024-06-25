@@ -13,6 +13,12 @@ import AudioAnswerCard from '../Components/AnswerCollection/AudioAnswerCard'
 import VisualAnswerCard from '../Components/AnswerCollection/VisualAnswerCard'
 import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
 
+/**
+ * This could be accomplished well with a class/OOP based approach,
+ * however I did not want to take the time to bother to learn how to do that
+ * inside react modules and stuff. Therefore this is the result. 
+ */
+
 const TestInterface = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,28 +40,33 @@ const TestInterface = () => {
     questionOut = <RhythmQuestion data={Question} />;
   }
 
+  /**
+   * Gets variant of answer from database and then maps the components according
+   * to the type
+   */
   let answerOutCards;
   if (answerType === "Audio") {
     answerOutCards = answerCollection.map((answer, index) =>
-      <Col className='d-flex justify-content-center' key={index+1}>
-        <AudioAnswerCard data={answer} what={index+1} foo={setSelected}/>
+      <Col className='d-flex justify-content-center' key={index + 1}>
+        <AudioAnswerCard data={answer} what={index + 1} foo={setSelected} />
       </Col>);
   } else if (answerType === "Visual") {
     answerOutCards = answerCollection.map((answer, index) =>
-      <Col className='d-flex justify-content-center' key={index+1}>
-        <VisualAnswerCard data={answer} what={index+1} foo={setSelected}/>
+      <Col className='d-flex justify-content-center' key={index + 1}>
+        <VisualAnswerCard data={answer} what={index + 1} foo={setSelected} />
       </Col>);
   } else if (answerType === "Rhythm") {
     answerOutCards = answerCollection.map((answer, index) =>
-      <Col className='d-flex justify-content-center' key={index+1}>
-        <RhythmAnswerCard data={answer} what={index+1} foo={setSelected}/>
+      <Col className='d-flex justify-content-center' key={index + 1}>
+        <RhythmAnswerCard data={answer} what={index + 1} foo={setSelected} />
       </Col>);
   }
 
   const handleCheck = () => {
-    if (Correct === selected) { // need to change correct into an array for more flexibility
+    // need to change correct into an array for more flexibility
+    if (Correct === selected) {
       alert("Correct!");
-      navigate("/MusicStarterJourney/Journey", { state: QuizID+1 });
+      navigate("/MusicStarterJourney/Journey", { state: QuizID + 1 });
     } else {
       alert("Try again!");
     }

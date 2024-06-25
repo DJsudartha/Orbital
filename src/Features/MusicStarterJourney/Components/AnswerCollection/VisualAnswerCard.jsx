@@ -22,8 +22,8 @@ const VisualAnswerCard = (props) => { // need to pass down a generic function pr
   // need to figure out how to display or not display image
   return (
     <button className='MusicJourney--Button' style={onStyle} onClick={handleClick}>
-      <Card bg='info' className='my-2' style={{ width: '150px' }}>
-        {Data !== null && <Card.Img src={Data[0]} className='p-1' />}
+      <Card bg='info' className='my-2' style={{ width: '150px', height: '170px' }}>
+        {Data !== null && <Card.Img src={Data[0]} className='p-1' style={{height: '100px', width: '147px'}}/>}
         <Card.Body style={{ backgroundColor: 'transparent' }}>
           <Card.Title style={{ backgroundColor: 'transparent' }}>
             {Title}
