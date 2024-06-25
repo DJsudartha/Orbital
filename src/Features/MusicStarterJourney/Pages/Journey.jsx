@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Col, Row, Button } from 'react-bootstrap';
 import NavFooter from '../Components/NavFooter'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const Journey = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [journey, setJourney] = useState([]);
 
   useEffect(() => {
@@ -18,7 +20,13 @@ const Journey = () => {
       });
   }, []);
 
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(1);
+
+  useEffect(() => {
+    if (location.state !== null) {
+      setProgress(location.state);
+    }
+  })
 
   return (
     <Container className='h-100'>
@@ -30,20 +38,23 @@ const Journey = () => {
         </Row>
 
         {
-          journey.map((quiz, index) => (
-            <Row className='py-5'>
+          journey.map((quiz) => (
+            <Row className='py-5' key={quiz.QuizID}>
               <Col className='d-flex justify-content-center'>
                 <Button size='lg'
-                  onClick={() =>
+                  onClick={quiz.QuizID <= progress ? () =>
                     navigate(`/MusicStarterJourney/Journey/Unit/${quiz._id}`, {
                       state:
                       {
                         Correct: quiz.Correct,
                         Question: quiz.Question,
-                        Answers: quiz.Answers
+                        Answers: quiz.Answers,
+                        QuizID: quiz.QuizID,
                       }
-                    })}>
-                  {index + 1}
+                    }) : null
+                    }
+                    disabled={quiz.QuizID > progress}>
+                  {quiz.QuizID}
                 </Button>
               </Col>
             </Row>

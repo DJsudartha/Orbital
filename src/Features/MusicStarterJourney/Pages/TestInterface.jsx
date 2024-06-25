@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../Components/NavFooter'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // Question portion concrete module
 import AudioQuestion from '../Components/Questions/AudioQuestion'
@@ -15,8 +15,9 @@ import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
 
 const TestInterface = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const props = location.state;
-  const { Correct, Question, Answers } = props;
+  const { Correct, Question, Answers, QuizID } = props;
 
   const questionType = Question.Var;
   const answerType = Answers.Var;
@@ -35,20 +36,29 @@ const TestInterface = () => {
 
   let answerOutCards;
   if (answerType === "Audio") {
-    answerOutCards = answerCollection.map((answer) =>
-      <Col className='d-flex justify-content-center'>
-        <AudioAnswerCard data={answer} />
+    answerOutCards = answerCollection.map((answer, index) =>
+      <Col className='d-flex justify-content-center' key={index+1}>
+        <AudioAnswerCard data={answer} what={index+1} foo={setSelected}/>
       </Col>);
   } else if (answerType === "Visual") {
-    answerOutCards = answerCollection.map((answer) =>
-      <Col className='d-flex justify-content-center'>
-        <VisualAnswerCard data={answer} />
+    answerOutCards = answerCollection.map((answer, index) =>
+      <Col className='d-flex justify-content-center' key={index+1}>
+        <VisualAnswerCard data={answer} what={index+1} foo={setSelected}/>
       </Col>);
   } else if (answerType === "Rhythm") {
-    answerOutCards = answerCollection.map((answer) =>
-      <Col className='d-flex justify-content-center'>
-        <RhythmAnswerCard data={answer} />
+    answerOutCards = answerCollection.map((answer, index) =>
+      <Col className='d-flex justify-content-center' key={index+1}>
+        <RhythmAnswerCard data={answer} what={index+1} foo={setSelected}/>
       </Col>);
+  }
+
+  const handleCheck = () => {
+    if (Correct === selected) { // need to change correct into an array for more flexibility
+      alert("Correct!");
+      navigate("/MusicStarterJourney/Journey", { state: QuizID+1 });
+    } else {
+      alert("Try again!");
+    }
   }
 
   return (
@@ -67,7 +77,7 @@ const TestInterface = () => {
         </Row>
         <Row className='pt-3'>
           <Col className='d-flex justify-content-center'>
-            <Button variant='info'>
+            <Button variant='info' onClick={handleCheck}>
               Check
             </Button>
           </Col>
