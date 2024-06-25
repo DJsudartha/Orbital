@@ -12,7 +12,12 @@ table--custom {
     color: white;
 }
 
+th {
+    padding-right: 10px;
+}
+
 td {
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-right: 10px;
 }
