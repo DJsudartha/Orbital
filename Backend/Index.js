@@ -10,11 +10,17 @@ const homePlaceHolder = express();
 
 homePlaceHolder.use(express.json());
 
-homePlaceHolder.use(cors());
+homePlaceHolder.use(cors(
+    {
+        origin: ["https://deploy-mern-1-whq.vercel.app"],
+        methods: ["POST", "GET", "PUT", "DELETE"],
+        credentials: true
+    }
+));
 
 homePlaceHolder.get("/", (request, response) => {
         console.log(request);
-        return response.status(200).send("200");
+        return response.json("hello");
     }
 );
 
