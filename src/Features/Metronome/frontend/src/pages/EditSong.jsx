@@ -4,6 +4,7 @@ import axios from 'axios'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Metronome from '../components/Metronome'
+import { baseURL } from '../../../../..'
 
 const EditSong = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const EditSong = () => {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:1234/metronome/${id}`)
+    axios.get(`${baseURL}/metronome/${id}`)
       .then((response) => {
         // gets rid of _id and __v which we don't wanna pass inside (for now)
         const { _id, __v, ...rest } = response.data.song;
@@ -63,7 +64,7 @@ const EditSong = () => {
 
   const handleEditSong = () => {
     axios
-      .put(`http://localhost:1234/metronome/${id}`, songData)
+      .put(`${baseURL}/metronome/${id}`, songData)
       // .then(() => {
       //   navigate('/');
       // }) something fucking up in this then, idk why

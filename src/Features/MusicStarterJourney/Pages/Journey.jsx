@@ -3,6 +3,7 @@ import { Container, Col, Row, Button } from 'react-bootstrap';
 import NavFooter from '../Components/NavFooter'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { baseURL } from '../../..';
 
 const Journey = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Journey = () => {
   const [journey, setJourney] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:1234/musicJourney')
+    axios.get(`${baseURL}/musicJourney`)
       .then((response) => {
         setJourney(response.data);
       })

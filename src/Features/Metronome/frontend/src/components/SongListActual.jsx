@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import { baseURL } from '../../../../..';
 
 const SongListActual = () => {
 
@@ -8,7 +9,7 @@ const SongListActual = () => {
     const [songs, setSongs] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:1234/metronome')
+        axios.get(`${baseURL}/metronome`)
             .then((response) => {
                 setSongs(response.data);
             })

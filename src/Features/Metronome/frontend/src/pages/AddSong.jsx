@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { baseURL } from '../../../../..'
 import axios from 'axios'
 
 const AddSong = () => {
@@ -14,7 +15,7 @@ const AddSong = () => {
 
   const handleAddSong = () => {
     axios
-      .post('http://localhost:1234/metronome', songData)
+      .post(`${baseURL}/metronome`, songData)
       // .then(() => {
       //   navigate('/');
       // }) something fucking up in this then, idk why

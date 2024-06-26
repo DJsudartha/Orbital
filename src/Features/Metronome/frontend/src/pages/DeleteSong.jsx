@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Button from 'react-bootstrap/esm/Button'
+import { baseURL } from '../../../../..'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 
 const DeleteSong = () => {
@@ -9,7 +10,7 @@ const DeleteSong = () => {
   const [songTitle, setSongTitle] = useState("loading");
 
   useEffect(() => {
-    axios.get(`http://localhost:1234/metronome/${id}`)
+    axios.get(`${baseURL}/metronome/${id}`)
       .then((response) => {
         // gets rid of _id and __v which we don't wanna pass inside (for now)
         const { Title, Artist } = response.data.song;
@@ -19,7 +20,7 @@ const DeleteSong = () => {
 
   const handleDeleteSong = () => {
     axios
-      .delete(`http://localhost:1234/metronome/${id}`)
+      .delete(`${baseURL}}/metronome/${id}`)
       .then(navigate("/metronome"))
       .catch(error => {
         alert("there was an error, check console");
