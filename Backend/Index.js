@@ -30,7 +30,7 @@ homePlaceHolder.use("/musicJourney", QuizJourney);
 // need to refactor soon
 
 mongoose
-    .connect(MetronomeDBURL)
+    .connect("mongodb+srv://ReVerb:Orbital24@reverb-metronome.nzdpgjb.mongodb.net/Metronome?retryWrites=true&w=majority&appName=Reverb-Metronome")
     .then(() => {
         console.log("connected to DB, attempting to connect to backend server");
         homePlaceHolder
