@@ -79,50 +79,53 @@ const EditSong = () => {
   return (
     <div className="container h-100 px-3 py-1">
 
-      <div className="row align-items-center py-3">
-        <div className='col d-flex justify-content-center fs-5'>
-          <Form>
-            <Form.Group>
-              <Form.Label>Edit Song Title</Form.Label>
-              <Form.Control 
-              onChange={
-                (event) => {
-                  handleSongDataChange("songTitleForm", event.target.value);
-                }
-              } />
-            </Form.Group>
-          </Form>
+      <div style={{ height: "92%" }}>
+        <div className="row align-items-center py-3">
+          <div className='col d-flex justify-content-center fs-5'>
+            <Form>
+              <Form.Group>
+                <Form.Label>Edit Song Title</Form.Label>
+                <Form.Control
+                  onChange={
+                    (event) => {
+                      handleSongDataChange("songTitleForm", event.target.value);
+                    }
+                  } />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+
+        <div className="row align-items-center py-3">
+          <div className='col d-flex justify-content-center fs-5'>
+            <Form>
+              <Form.Group>
+                <Form.Label>Edit Artist Name</Form.Label>
+                <Form.Control placeholder='Optional' onChange={
+                  (event) => {
+                    handleSongDataChange("songArtistForm", event.target.value);
+                  }
+                } />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+
+        <div className='row h-50'>
+          <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
+        </div>
+
+        <div className='row align-items-center py-3'>
+          <div className='col d-flex justify-content-center'>
+            <Button variant='success' onClick={handleEditSong}>
+              Edit
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="row align-items-center py-3">
-        <div className='col d-flex justify-content-center fs-5'>
-          <Form>
-            <Form.Group>
-              <Form.Label>Edit Artist Name</Form.Label>
-              <Form.Control placeholder='Optional' onChange={
-                (event) => {
-                  handleSongDataChange("songArtistForm", event.target.value);
-                }
-              } />
-            </Form.Group>
-          </Form>
-        </div>
-      </div>
 
-      <div className='row h-50'>
-        <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
-      </div>
-
-      <div className='row align-items-center py-3'>
-        <div className='col d-flex justify-content-center'>
-          <Button variant='success' onClick={handleEditSong}>
-            Edit
-          </Button>
-        </div>
-      </div>
-
-      <div className='row align-items-center py-3'>
+      <div className='row align-items-center pt-3'>
         <div className='col d-flex justify-content-center'>
           <Link to={-1}>
             <i className="bi bi-arrow-left-square-fill h1" />

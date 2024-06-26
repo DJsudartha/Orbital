@@ -30,58 +30,60 @@ const AddSong = () => {
   return (
     <div className="container h-100 px-3 py-1">
 
-      <div className="row h-25" />
+      <div style={{ height: "92%" }}>
+        <div className="row h-25" />
 
-      <div className="row align-items-center py-3">
-        <div className='col d-flex justify-content-center fs-4'>
-          <Form>
-            <Form.Group>
-              <Form.Label>Enter Song Title</Form.Label>
-              <Form.Control type='text'
-                defaultValue={songData.Title}
-                onChange={(event) => {
-                  setSongData(previousSongData => {
-                    return {
-                      ...previousSongData,
-                      Title: event.target.value
-                    }
-                  })
-                }} />
-            </Form.Group>
-          </Form>
+        <div className="row align-items-center py-3">
+          <div className='col d-flex justify-content-center fs-4'>
+            <Form>
+              <Form.Group>
+                <Form.Label>Enter Song Title</Form.Label>
+                <Form.Control type='text'
+                  defaultValue={songData.Title}
+                  onChange={(event) => {
+                    setSongData(previousSongData => {
+                      return {
+                        ...previousSongData,
+                        Title: event.target.value
+                      }
+                    })
+                  }} />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+
+        <div className="row align-items-center py-3">
+          <div className='col d-flex justify-content-center fs-5'>
+            <Form>
+              <Form.Group>
+                <Form.Label>Enter Artist Name</Form.Label>
+                <Form.Control placeholder='Optional'
+                  type='text'
+                  defaultValue={songData.Artist}
+                  onChange={(event) => {
+                    setSongData(previousData => {
+                      return {
+                        ...previousData,
+                        Artist: event.target.value
+                      }
+                    })
+                  }} />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+
+        <div className='row align-items-center py-3'>
+          <div className='col d-flex justify-content-center'>
+            <Button variant='success' onClick={handleAddSong}>
+              Add
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="row align-items-center py-3">
-        <div className='col d-flex justify-content-center fs-5'>
-          <Form>
-            <Form.Group>
-              <Form.Label>Enter Artist Name</Form.Label>
-              <Form.Control placeholder='Optional'
-                type='text'
-                defaultValue={songData.Artist}
-                onChange={(event) => {
-                  setSongData(previousData => {
-                    return {
-                      ...previousData,
-                      Artist: event.target.value
-                    }
-                  })
-                }} />
-            </Form.Group>
-          </Form>
-        </div>
-      </div>
-
-      <div className='row align-items-center py-3'>
-        <div className='col d-flex justify-content-center'>
-          <Button variant='success' onClick={handleAddSong}>
-            Add
-          </Button>
-        </div>
-      </div>
-
-      <div className='row align-items-center py-3'>
+      <div className='row align-items-center pt-3'>
         <div className='col d-flex justify-content-center'>
           <Link to={-1}>
             <i className="bi bi-arrow-left-square-fill h1" />

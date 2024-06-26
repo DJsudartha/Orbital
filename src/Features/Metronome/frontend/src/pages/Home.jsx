@@ -54,17 +54,19 @@ const Home = () => {
   return (
     <div className="container h-100 w-100 px-3 py-1">
 
-      <div className="row align-items-center py-5">
-        <div className='col d-flex justify-content-center fs-3'>
-          {songData.Title}
+      <div style={{ height: "92%" }}>
+        <div className="row align-items-center py-5">
+          <div className='col d-flex justify-content-center fs-3'>
+            {songData.Title}
+          </div>
+        </div>
+
+        <div className='row h-75'>
+          <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
         </div>
       </div>
 
-      <div className='row h-75'>
-        <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
-      </div>
-
-      <div className='row py-4'>
+      <div className='row pt-3'>
         <div className='col d-flex align-items-center justify-content-center'>
           <Link to='/'>
             <i className="bi bi-house-fill h1" />
