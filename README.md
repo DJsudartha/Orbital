@@ -8,7 +8,7 @@ Description:
 
 The metronome feature allows users to quickly practice songs with the ability to choose a BPM with an interactive slider and play an audio click to follow along to their favorite songs. Currently, the metronome has a functional while albeit simple click function that responds to the slider and updates the click whenever the play button is clicked if the click has been stopped with the stop button.
 
-In the future, we plan to add a feature where different time signatures can be chosen, in order to expand the pool of songs that users can play along to. Following that philosophy, we plan to implement basic CRUD functionality in order for users to save certain presets for songs and refer back to those presets with ease, decreassing the friction of practice. Both plans have already had their foundations built, further explained in the code description. We also plan to iteratively improve the basic click functionality, by making the click respond to slider movements without the need to stop and start the slider.
+In the future, we plan to add a feature where different time signatures can be chosen, in order to expand the pool of songs that users can play along to. Following that philosophy, we plan to implement basic CRUD functionality in order for users to save certain presets for songs and refer back to those presets with ease, decreasing the friction of practice. Both plans have already had their foundations built, further explained in the code description. We also plan to iteratively improve the basic click functionality, by making the click respond to slider movements without the need to stop and start the slider.
 
 Code description:
 
