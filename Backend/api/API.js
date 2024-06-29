@@ -1,13 +1,13 @@
+import { MONGODB_LOGIN } from "../Port.js";
+
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const UserModel = require('./models/users')
+const UserModel = require('./Models/LoginDetails')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const nodemailer = require('nodemailer')
-
-const MONGODB_URL = "mongodb+srv://ReVerb:IdkWtfToDo@reverb.fi5it34.mongodb.net/Login?retryWrites=true&w=majority&appName=ReVerb"
 
 
 const app = express()
@@ -25,7 +25,7 @@ app.use(cors({
 app.use(cookieParser())
 
 mongoose
-    .connect(MONGODB_URL)
+    .connect(MONGODB_LOGIN)
     .then(() => {
         console.log("connected to DB, attempting to connect to backend server");
         app
