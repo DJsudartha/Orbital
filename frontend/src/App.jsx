@@ -16,6 +16,13 @@ import MusicStarterHome from './Features/MusicStarterJourney/Pages/MusicStarterH
 import Journey from './Features/MusicStarterJourney/Pages/Journey.jsx'
 import TestInterface from './Features/MusicStarterJourney/Pages/TestInterface.jsx'
 
+// from Login Page
+import Signup from './Features/LoginPage/src/Signup.jsx'
+import Login from './Features/LoginPage/src/Login.jsx'
+import Homepage from './Features/LoginPage/src/Homepage.jsx'
+import ForgotPassword from './Features/LoginPage/src/ForgotPassword.jsx'
+import ResetPassword from './Features/LoginPage/src/ResetPassword.jsx'
+
 function App() {
   return (
     <Routes>
@@ -30,6 +37,12 @@ function App() {
       <Route path='/MusicStarterJourney' element={<MusicStarterHome />} />
       <Route path='/MusicStarterJourney/Journey' element={<Journey />}> </Route>
       <Route path='/MusicStarterJourney/Journey/Unit/:id' element={<TestInterface/>} />
+
+      <Route path = '/register' element = {<Signup />}></Route>
+      <Route path = '/login' element = {<Login />}></Route>
+      <Route path = '/home' element = {<Homepage />}></Route>
+      <Route path = '/forgot-password' element = {<ForgotPassword />}></Route>
+      <Route path = '/reset-password/:id/:token' element = {<ResetPassword />}></Route>
 
     </Routes>
   )
