@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const nodemailer = require('nodemailer')
+const port = 3001
 
 
 const app = express()
@@ -29,7 +30,7 @@ mongoose
     .then(() => {
         console.log("connected to DB, attempting to connect to backend server");
         app
-            .listen(3001, () => console.log("connected to backend server")); 
+            .listen(port, () => console.log("connected to backend server")); 
     })
     .catch((error) => {
         console.log(error);
@@ -52,9 +53,6 @@ const verifyFunction = (req, res, next) => {
     }
 
     }
-app.get('/home/', verifyFunction, (req, res) => {
-    return res.json("Success")
-    })
 app.post('/login', (req, res) => {
     const {email, password} = req.body;
     UserModel.findOne({email: email})
