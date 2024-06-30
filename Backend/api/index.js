@@ -6,6 +6,12 @@ import Metronome from "../Routes/MetronomeRoute.js";
 import QuizJourney from "../Routes/QuizRoute.js";
 import cors from 'cors';
 
+const UserModel = require('./Models/LoginDetails')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
+const nodemailer = require('nodemailer')
+
 const homePlaceHolder = express();
 
 homePlaceHolder.use(express.json());
