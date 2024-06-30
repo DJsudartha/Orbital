@@ -2,4 +2,4 @@
  * Connect to back end server for easy access to change
  */
 
-export const baseURL = "http://localhost:1234";
+export const baseURL = "https://re-verb-server.vercel.app";
