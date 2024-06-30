@@ -16,18 +16,7 @@ const homePlaceHolder = express();
 
 homePlaceHolder.use(express.json());
 
-homePlaceHolder.use(cors(
-    {
-        origin: "https://re-verb-app.vercel.app/",
-        credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        exposedHeaders: ["Content-Type", "Authorization"],
-        optionsSuccessStatus: 200,
-        preflightContinue: false,
-        optionsSuccessStatus: 200,
-    }
-));
+homePlaceHolder.use(cors());
 
 homePlaceHolder.use(cookieParser())
 
