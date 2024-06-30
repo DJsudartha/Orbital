@@ -5,12 +5,12 @@ import { MetronomeDBURL } from "../Port.js";
 import Metronome from "../Routes/MetronomeRoute.js";
 import QuizJourney from "../Routes/QuizRoute.js";
 import cors from 'cors';
+import UserModel from '../Models/LoginDetails.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import cookieParser from "cookie-parser";
+import nodemailer from 'nodemailer';
 
-const UserModel = require('./Models/LoginDetails')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
-const nodemailer = require('nodemailer')
 
 const homePlaceHolder = express();
 
