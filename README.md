@@ -25,9 +25,7 @@ In order to test the metronome, follow the link in the google docs or alternativ
 Login page:
 
 Description: 
-The current login page is a simple interface that allows users to make an account with their email and set a password that they can use to login. The current design isn't final as we will create a color scheme that will be used for ReVerb as such many changes are in order.
-
-The login page is still a work in progress as we plan to add a password retrieval system as well as a more in depth user creation to ensure that your profile will be unique and secure. A default page where you will need to login is also required as the starting point of the ReVerb app. 
+The current login page is a simple interface that allows users to make an account with their email and set a password that they can use to login. There is also a forgot password and reset password feature now.
 
 Code description:
 There are 2 folders required: ReVerb Login(Frontend) and Server(Backend). Most of the code is inspired by a very informative tutorial by Code with Yousaf, however some changes are made especially in the backend.
@@ -36,5 +34,9 @@ The frontend is made with react and bootstrap. Inside the src folder, you can se
 
 The backend has been linked up with any inputs in the frontend. We are mainly using MongoDB as our database but if we face any major constraints this may change in the future. Data inputted inside the signup page will be inputted inside our mongoDB cluster, while the login page looks inside our cluster for any matching data.
 
+The password has now been encrypted with the help of 'bcrypt'. Now inside the database, you can't actually see what the password is. Instead, you can only see the hash of the password, so when you login we are only comparing the hash of the password with the hash of the current input.
+
+There is also now a profile page that currently doesn't work yet, only the front end has been created. In the future, we plan for this to become a progress tracker and place to show of what you have done in ReVerb. A custom profile picture and following system will also be implemented.
+
 Technical Test: 
-To test the login page, follow the instructions on the documentation provided here (LINK TO DOCS). After opening the login page in Vite, you should be able to see the Register page. From here you can input any name, email, and password you want, then it would direct you into the login page. Input the same email and password,  if done successfully you should be transferred into the home page
+To test the login page, follow the instructions on the documentation. After opening the login page, you should be able to see the Register page. From here you can input any name, email, and password you want, then it would direct you into the login page. Input the same email and password,  if done successfully you should be transferred into the profile page. You should also try the password forget link and try to reset the password.
