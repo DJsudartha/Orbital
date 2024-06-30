@@ -6,6 +6,8 @@ import Login from './Login'
 import Homepage from './Homepage'
 import ForgotPassword from './ForgotPassword'
 import ResetPassword from './ResetPassword'
+import ProfileMaker from './ProfileMaker'
+import ProfilePage from './ProfilePage'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Route path = '/' element={<Signup />} />
       <Route path = '/forgot-password' element = {<ForgotPassword />}></Route>
       <Route path = '/reset-password/:id/:token' element = {<ResetPassword />}></Route>
+      <Route path = '/profile-maker' element = {<ProfileMaker />}></Route>
+      <Route path = '/profile-page' element = {<ProfilePage />}></Route>
     </Routes>
     </BrowserRouter>
   )
