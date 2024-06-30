@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { baseURL } from '../../..';
 
 
 function ForgotPassword() {
@@ -11,7 +12,7 @@ function ForgotPassword() {
     axios.defaults.withCredentials = true
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post('http://localhost:3001/forgot-password', {email})
+        axios.post(`${baseURL}/forgot-password`, {email})
         .then(y => {
             console.log(y)
             if(y.data === "Success") {

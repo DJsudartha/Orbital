@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
+import { baseURL } from '../../..';
 
 
 function ResetPassword() {
@@ -12,7 +13,7 @@ function ResetPassword() {
     axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:3001/reset-password/${id}/${token}`, {password})
+        axios.post(`${baseURL}/reset-password/${id}/${token}`, {password})
         .then(navigate('/login'))
         .catch(err => console.log(err))
     }

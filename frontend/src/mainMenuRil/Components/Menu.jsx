@@ -6,14 +6,18 @@ const Menu = () => {
     return (
         <Container fluid style={{ height: '80vh' }}>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
-                <Button variant='info' size='lg' style={{ color: 'white' }}>
-                    Log In
-                </Button>
+                <Link to="/login">
+                    <Button variant='info' size='lg' style={{ color: 'white' }}>
+                        Log In
+                    </Button>
+                </Link>
             </Col>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
-                <Button variant='info' size='lg' style={{ color: 'white' }}>
-                    Sign Up
-                </Button>
+                <Link to="/register">
+                    <Button variant='info' size='lg' style={{ color: 'white' }}>
+                        Sign Up
+                    </Button>
+                </Link>
             </Col>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
                 <Link to="/metronome">

@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { baseURL } from '../../..';
 
 function Homepage() {
     const navigate = useNavigate()
     axios.defaults.withCredentials = true
 
     useEffect(() => {
-        axios.get("http://localhost:3001/home")
+        axios.get(`${baseURL}/home`)
         .then(y => {console.log(y)
             if (y.data !== "Success") {
                 // navigate("/login")

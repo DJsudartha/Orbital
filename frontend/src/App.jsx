@@ -22,6 +22,9 @@ import Login from './Features/LoginPage/src/Login.jsx'
 import Homepage from './Features/LoginPage/src/Homepage.jsx'
 import ForgotPassword from './Features/LoginPage/src/ForgotPassword.jsx'
 import ResetPassword from './Features/LoginPage/src/ResetPassword.jsx'
+import ProfileMaker from './Features/LoginPage/src/ProfileMaker.jsx'
+import ProfilePage from './Features/LoginPage/src/ProfilePage.jsx'
+import MyProfilePage from './Features/LoginPage/src/MyProfilePage.jsx'
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { baseURL } from '../../..'
 
 function Signup() {
     const [name, setName] = useState("")
@@ -10,7 +11,7 @@ function Signup() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post("http://localhost:3001/register", {name, email, password})
+        axios.post(`${baseURL}/register`, {name, email, password})
         .then(y => {console.log(y)
         navigate("/login")
         })
