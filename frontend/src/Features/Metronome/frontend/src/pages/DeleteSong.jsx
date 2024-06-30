@@ -20,7 +20,7 @@ const DeleteSong = () => {
 
   const handleDeleteSong = () => {
     axios
-      .delete(`${baseURL}}/metronome/${id}`)
+      .delete(`${baseURL}/metronome/${id}`)
       .then(navigate("/metronome"))
       .catch(error => {
         alert("there was an error, check console");

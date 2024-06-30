@@ -10,8 +10,6 @@ function Login() {
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
-    axios.defaults.withCredentials = true
-
     const handleSubmit = (x) => {
         x.preventDefault()
         axios.post(`${baseURL}/login`, {email, password})
