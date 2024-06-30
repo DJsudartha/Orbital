@@ -43,6 +43,9 @@ function App() {
       <Route path = '/home' element = {<Homepage />}></Route>
       <Route path = '/forgot-password' element = {<ForgotPassword />}></Route>
       <Route path = '/reset-password/:id/:token' element = {<ResetPassword />}></Route>
+      <Route path = '/profile-maker' element = {<ProfileMaker />}></Route>
+      <Route path = '/profile-page' element = {<ProfilePage />}></Route>
+      <Route path = '/my-profile-page' element = {<MyProfilePage />}></Route>
 
     </Routes>
   )
