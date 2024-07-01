@@ -5,7 +5,6 @@ import { baseURL } from '../../..';
 
 function Homepage() {
     const navigate = useNavigate()
-    axios.defaults.withCredentials = true
 
     useEffect(() => {
         axios.get(`${baseURL}/home`)
