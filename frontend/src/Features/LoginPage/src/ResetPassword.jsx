@@ -10,7 +10,6 @@ function ResetPassword() {
     const navigate = useNavigate()
     const {id, token} = useParams();
 
-    axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post(`${baseURL}/reset-password/${id}/${token}`, {password})
