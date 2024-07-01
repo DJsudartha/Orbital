@@ -9,7 +9,6 @@ function ForgotPassword() {
     const [email, setEmail] = useState("")
     const navigate = useNavigate()
 
-    axios.defaults.withCredentials = true
     const handleSubmit = (x) => {
         x.preventDefault()
         axios.post(`${baseURL}/forgot-password`, {email})
