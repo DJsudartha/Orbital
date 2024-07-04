@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Metronome from '../components/Metronome'
+import Metronome from '../../../components/Metronome/Metronome.jsx'
 
 const Home = () => {
   // I know this code is shit ;_;

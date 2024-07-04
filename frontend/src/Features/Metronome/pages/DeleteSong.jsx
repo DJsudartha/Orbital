@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Button from 'react-bootstrap/esm/Button'
-import { baseURL } from '../../../../..'
+import { baseURL } from '../../../index'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 
 const DeleteSong = () => {

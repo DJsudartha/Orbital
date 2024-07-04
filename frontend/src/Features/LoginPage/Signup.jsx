@@ -1,31 +1,41 @@
-import React from 'react'
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { baseURL } from '../../..';
+import { baseURL } from '../..'
 
-
-function Login() {
+function Signup() {
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/login`, {email, password})
-        .then(y => {
-            console.log(y)
-            if(y.data === "Success") {
-                navigate('/profile-page')
-            }
+        axios.post(`${baseURL}/register`, {name, email, password})
+        .then(y => {console.log(y)
+        navigate("/login")
         })
         .catch(err => console.log(err))
     }
+
     return (
-        <div className = "d-flex justify-content-center align-items-center bg-secondary vh-100" style={{backgroundColor: '#313338'}}>
+        <div className = "d-flex justify-content-center align-items-center bg-secondary vh-100">
             <div className = "bg-white p-3 rounded w-25">
-                <h2>Login </h2>
+                <h2> Register</h2>
                 <form onSubmit={handleSubmit}>
+                    <div className = "mb-3">
+                        <label htmlFor = "name">
+                            <strong>Name</strong>
+                        </label>
+                        <input
+                        type="text"
+                        placeholder="Enter Name"
+                        autoComplete="off"
+                        name="name"
+                        className="form-control rounded-0"
+                        onChange={(x) => setName(x.target.value)}
+                        />
+                    </div>
                     <div className="mb-3">
                         <label htmlFor="email">
                             <strong>Email</strong>
@@ -51,19 +61,16 @@ function Login() {
                         onChange={(x) => setPassword(x.target.value)}
                         />
                     </div>
-                    <button type="submit" className="btn btn-info w-100 rounded-0">
-                        Submit
+                    <button type="submit" className="btn btn-success w-100 rounded-0">
+                        Register
                     </button>
                     </form>
-                    <Link to="/forgot-password">Forgot Password?</Link>
-                    <Link to="/register" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
-                        Sign Up
+                    <Link to="/login" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
+                        Login
                     </Link>
             </div>
         </div>
     );
-
 }
 
-
-export default Login;
+export default Signup;

@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import NavFooter from '../Components/NavFooter'
+import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 // Question portion concrete module
-import AudioQuestion from '../Components/Questions/AudioQuestion'
-import VisualQuestion from '../Components/Questions/VisualQuestion'
-import RhythmQuestion from '../Components/Questions/RhythmQuestion'
+import AudioQuestion from '../../../components/MusicStarterJourney/Questions/AudioQuestion'
+import VisualQuestion from '../../../components/MusicStarterJourney/Questions/VisualQuestion'
+import RhythmQuestion from '../../../components/MusicStarterJourney/Questions/RhythmQuestion'
 
 // Answer Portion conrete module
-import AudioAnswerCard from '../Components/AnswerCollection/AudioAnswerCard'
-import VisualAnswerCard from '../Components/AnswerCollection/VisualAnswerCard'
-import RhythmAnswerCard from '../Components/AnswerCollection/RhythmAnswerCard'
+import AudioAnswerCard from '../../../components/MusicStarterJourney/AnswerCollection/AudioAnswerCard'
+import VisualAnswerCard from '../../../components/MusicStarterJourney/AnswerCollection/VisualAnswerCard'
+import RhythmAnswerCard from '../../../components/MusicStarterJourney/AnswerCollection/RhythmAnswerCard'
 
 /**
  * This could be accomplished well with a class/OOP based approach,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Col, Row } from 'react-bootstrap'
-import MetronomeButton from '../../../Metronome/frontend/src/components/MetronomeButton'
+import MetronomeButton from '../../Metronome/MetronomeButton'
 
 const RhythmQuestion = (props) => {
   const { Title, Data } = props.data;

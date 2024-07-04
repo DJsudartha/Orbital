@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Col, Row, Button } from 'react-bootstrap';
-import NavFooter from '../Components/NavFooter'
+import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../..';

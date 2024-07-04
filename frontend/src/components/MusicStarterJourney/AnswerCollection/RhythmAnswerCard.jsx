@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
-import MetronomeButton from '../../../Metronome/frontend/src/components/MetronomeButton'
+import MetronomeButton from '../../Metronome/MetronomeButton'
 
 
 const RhythmAnswerCard = (props) => {

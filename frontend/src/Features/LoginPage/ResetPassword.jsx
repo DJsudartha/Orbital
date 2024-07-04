@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios'
-import { baseURL } from '../../..';
+import { baseURL } from '../..';
 
 
 function ResetPassword() {

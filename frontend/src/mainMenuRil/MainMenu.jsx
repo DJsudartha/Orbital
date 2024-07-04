@@ -1,6 +1,6 @@
 import React from 'react'
-import Menu from './Components/Menu'
-import NavBar from './Components/NavBar'
+import Menu from '../components/MainMenu/Menu'
+import NavBar from '../components/MainMenu/NavBar'
 import './MainMenu.css'
 
 const MainMenu = () => {

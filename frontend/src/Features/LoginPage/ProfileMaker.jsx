@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { baseURL } from '../../..'
+import { baseURL } from '../..'
 
-function Signup() {
+function ProfileMaker() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -13,7 +13,7 @@ function Signup() {
         x.preventDefault()
         axios.post(`${baseURL}/register`, {name, email, password})
         .then(y => {console.log(y)
-        navigate("/login")
+        navigate("/profilePage")
         })
         .catch(err => console.log(err))
     }
@@ -73,4 +73,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default ProfileMaker;

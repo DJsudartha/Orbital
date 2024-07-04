@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import SongListActual from '../components/SongListActual'
+import SongListActual from '../../../components/Metronome/SongListActual'
 
 
 const SongList = () => {

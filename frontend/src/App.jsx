@@ -5,11 +5,11 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import MainMenu from './mainMenuRil/MainMenu.jsx'
 
 // from the metronome
-import Home from './Features/Metronome/frontend/src/pages/Home.jsx'
-import AddSong from './Features/Metronome/frontend/src/pages/AddSong.jsx'
-import SongList from './Features/Metronome/frontend/src/pages/SongList.jsx'
-import EditSong from './Features/Metronome/frontend/src/pages/EditSong.jsx'
-import DeleteSong from './Features/Metronome/frontend/src/pages/DeleteSong.jsx'
+import Home from './Features/Metronome/pages/Home.jsx'
+import AddSong from './Features/Metronome/pages/AddSong.jsx'
+import SongList from './Features/Metronome/pages/SongList.jsx'
+import EditSong from './Features/Metronome/pages/EditSong.jsx'
+import DeleteSong from './Features/Metronome/pages/DeleteSong.jsx'
 
 // from music starter journey
 import MusicStarterHome from './Features/MusicStarterJourney/Pages/MusicStarterHome.jsx'
@@ -17,14 +17,14 @@ import Journey from './Features/MusicStarterJourney/Pages/Journey.jsx'
 import TestInterface from './Features/MusicStarterJourney/Pages/TestInterface.jsx'
 
 // from Login Page
-import Signup from './Features/LoginPage/src/Signup.jsx'
-import Login from './Features/LoginPage/src/Login.jsx'
-import Homepage from './Features/LoginPage/src/Homepage.jsx'
-import ForgotPassword from './Features/LoginPage/src/ForgotPassword.jsx'
-import ResetPassword from './Features/LoginPage/src/ResetPassword.jsx'
-import ProfileMaker from './Features/LoginPage/src/ProfileMaker.jsx'
-import ProfilePage from './Features/LoginPage/src/ProfilePage.jsx'
-import MyProfilePage from './Features/LoginPage/src/MyProfilePage.jsx'
+import Signup from './Features/LoginPage/Signup.jsx'
+import Login from './Features/LoginPage/Login.jsx'
+import Homepage from './Features/LoginPage/Homepage.jsx'
+import ForgotPassword from './Features/LoginPage/ForgotPassword.jsx'
+import ResetPassword from './Features/LoginPage/ResetPassword.jsx'
+import ProfileMaker from './Features/LoginPage/ProfileMaker.jsx'
+import ProfilePage from './Features/LoginPage/ProfilePage.jsx'
+import MyProfilePage from './Features/LoginPage/MyProfilePage.jsx'
 
 function App() {
   return (

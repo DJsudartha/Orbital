@@ -3,8 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Metronome from '../components/Metronome'
-import { baseURL } from '../../../../..'
+import Metronome from '../../../components/Metronome/Metronome'
+import { baseURL } from '../../../index'
 
 const EditSong = () => {
   const navigate = useNavigate();

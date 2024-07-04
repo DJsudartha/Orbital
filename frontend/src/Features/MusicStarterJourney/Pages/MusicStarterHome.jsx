@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import VisualAnswerCard from '../Components/AnswerCollection/VisualAnswerCard'
+import VisualAnswerCard from '../../../components/MusicStarterJourney/AnswerCollection/VisualAnswerCard'
 import { Link } from 'react-router-dom'
 
 const MusicStarterHome = () => {

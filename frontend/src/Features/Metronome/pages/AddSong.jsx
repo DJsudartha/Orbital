@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { baseURL } from '../../../../..'
+import { baseURL } from '../../../index'
 import axios from 'axios'
 
 const AddSong = () => {
