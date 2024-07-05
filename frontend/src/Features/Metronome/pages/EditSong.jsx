@@ -5,10 +5,13 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Metronome from '../../../components/Metronome/Metronome'
 import { baseURL } from '../../../index'
+import WholePageSpinner from '../../../components/Utility/WholePageSpinner'
 
 const EditSong = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const [isLoading, setLoading] = useState(false);
   const [songData, setSongData] = useState({
     /* this acts as the default until the get actually gets it and updates
     needs to be fixed cus if slow internet metronome doesn't wanna load
@@ -21,11 +24,13 @@ const EditSong = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     axios.get(`${baseURL}/metronome/${id}`)
       .then((response) => {
         // gets rid of _id and __v which we don't wanna pass inside (for now)
         const { _id, __v, ...rest } = response.data.song;
         setSongData({ ...rest });
+        setLoading(false);
       })
   }, []);
 
@@ -78,61 +83,67 @@ const EditSong = () => {
   }
 
   return (
-    <div className="container h-100 px-3 py-1">
+    <div>
+      {isLoading ? (
+        <WholePageSpinner />
+      ) : (
+        <div className="container h-100 px-3 py-1">
 
-      <div style={{ height: "92%" }}>
-        <div className="row align-items-center py-3">
-          <div className='col d-flex justify-content-center fs-5'>
-            <Form>
-              <Form.Group>
-                <Form.Label>Edit Song Title</Form.Label>
-                <Form.Control
-                  onChange={
-                    (event) => {
-                      handleSongDataChange("songTitleForm", event.target.value);
-                    }
-                  } />
-              </Form.Group>
-            </Form>
+          <div style={{ height: "92%" }}>
+            <div className="row align-items-center py-3">
+              <div className='col d-flex justify-content-center fs-5'>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Edit Song Title</Form.Label>
+                    <Form.Control
+                      onChange={
+                        (event) => {
+                          handleSongDataChange("songTitleForm", event.target.value);
+                        }
+                      } />
+                  </Form.Group>
+                </Form>
+              </div>
+            </div>
+
+            <div className="row align-items-center py-3">
+              <div className='col d-flex justify-content-center fs-5'>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Edit Artist Name</Form.Label>
+                    <Form.Control placeholder='Optional' onChange={
+                      (event) => {
+                        handleSongDataChange("songArtistForm", event.target.value);
+                      }
+                    } />
+                  </Form.Group>
+                </Form>
+              </div>
+            </div>
+
+            <div className='row h-50'>
+              <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
+            </div>
+
+            <div className='row align-items-center py-3'>
+              <div className='col d-flex justify-content-center'>
+                <Button variant='success' onClick={handleEditSong}>
+                  Edit
+                </Button>
+              </div>
+            </div>
+          </div>
+
+
+          <div className='row align-items-center pt-3'>
+            <div className='col d-flex justify-content-center'>
+              <Link to={-1}>
+                <i className="bi bi-arrow-left-square-fill h1" />
+              </Link>
+            </div>
           </div>
         </div>
-
-        <div className="row align-items-center py-3">
-          <div className='col d-flex justify-content-center fs-5'>
-            <Form>
-              <Form.Group>
-                <Form.Label>Edit Artist Name</Form.Label>
-                <Form.Control placeholder='Optional' onChange={
-                  (event) => {
-                    handleSongDataChange("songArtistForm", event.target.value);
-                  }
-                } />
-              </Form.Group>
-            </Form>
-          </div>
-        </div>
-
-        <div className='row h-50'>
-          <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
-        </div>
-
-        <div className='row align-items-center py-3'>
-          <div className='col d-flex justify-content-center'>
-            <Button variant='success' onClick={handleEditSong}>
-              Edit
-            </Button>
-          </div>
-        </div>
-      </div>
-
-
-      <div className='row align-items-center pt-3'>
-        <div className='col d-flex justify-content-center'>
-          <Link to={-1}>
-            <i className="bi bi-arrow-left-square-fill h1" />
-          </Link>
-        </div>
-      </div>
+      )}
     </div>
   )
 }
