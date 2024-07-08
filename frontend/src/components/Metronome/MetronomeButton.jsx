@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 const MetronomeButton = ({ Tempo, numericTimeSignature }) => {
     const click1 = new Audio("//daveceddia.com/freebies/react-metronome/click1.wav");
     const click2 = new Audio("//daveceddia.com/freebies/react-metronome/click2.wav");
 
-    const location = useLocation();
 
     // metronome on/off
     const [playOn, setPlayOn] = useState(false);
@@ -27,6 +25,7 @@ const MetronomeButton = ({ Tempo, numericTimeSignature }) => {
     }
 
     // update state to use setInterval
+    // inefficient because of use of stores timerID and intervalID, no time!
     const [timerID, setTimerID] = useState(0);
     // FIX: if switch page metronome still plays
     useEffect(() => { // can try make this more accurate using the timer function
@@ -35,23 +34,20 @@ const MetronomeButton = ({ Tempo, numericTimeSignature }) => {
             click2.play(); // play instantly
             intervalID = setInterval(keepTime, 60000 / Tempo);
             setTimerID(intervalID);
-            console.log("true " + timerID + intervalID);
         } else {
             clearInterval(timerID);
-            console.log("false " + timerID);
             setTimerID(0);
         }
 
         return () => {
-            console.log("cleanup " + intervalID)
             clearInterval(intervalID);
         }
-    }, [playOn, location]);
+    }, [playOn]);
 
 
     return (
         <Button variant='info' onClick={() => setPlayOn(!playOn)}>
-            {playOn ? <i class="bi bi-pause-circle-fill h1" /> : <i class="bi bi-play-circle-fill h1" />}
+            {playOn ? <i className="bi bi-pause-circle-fill h1" /> : <i className="bi bi-play-circle-fill h1" />}
         </Button>
     )
 }
