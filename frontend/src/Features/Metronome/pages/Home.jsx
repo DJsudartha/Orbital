@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Metronome from '../../../components/Metronome/Metronome.jsx'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import FormRange from 'react-bootstrap/esm/FormRange'
+import MetronomeButton from '../../../components/Metronome/MetronomeButton'
 
 const Home = () => {
   // I know this code is shit ;_;
@@ -51,6 +54,9 @@ const Home = () => {
     }
   }
 
+  const numericTimeSignature = [parseInt(songData.TimeSignature[0]),
+  parseInt(songData.TimeSignature[2])];
+
   return (
     <div className="container h-100 w-100 px-3 py-1">
 
@@ -62,7 +68,46 @@ const Home = () => {
         </div>
 
         <div className='row h-75'>
-          <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
+          <div className='container'>
+            <div className='row h-25 d-flex align-items-center'>
+              <div className='d-flex justify-content-center fs-1'>
+                BPM: {songData.Tempo}
+              </div>
+            </div>
+            <div className='row h-25 d-flex align-items-center justify-content-center'>
+              <div className='col-8 d-flex justify-content-center'>
+                <FormRange min={60} max={200}
+                  value={songData.Tempo}
+                  onChange={(event) => {
+                    handleSongDataChange("tempoRange",
+                      event.target.value);
+                  }} />
+              </div>
+            </div>
+            <div className='row h-25 d-flex align-items-center'>
+              <div className='col-6 d-flex justify-content-end'>
+                <DropdownButton id="dropdown-basic-button" variant='info' title="Time Signature">
+                  <Dropdown.Item onClick={() =>
+                    handleSongDataChange("timeSignatureDropDown", "4/4")}>
+                    4/4</Dropdown.Item>
+                  <Dropdown.Item onClick={() =>
+                    handleSongDataChange("timeSignatureDropDown", "3/4")}>
+                    3/4</Dropdown.Item>
+                  <Dropdown.Item onClick={() =>
+                    handleSongDataChange("timeSignatureDropDown", "2/4")}>
+                    2/4</Dropdown.Item>
+                </DropdownButton>
+              </div>
+              <div className='col-6 d-flex justify-content-start fs-5'>
+                {numericTimeSignature[0]}/{numericTimeSignature[1]}
+              </div>
+            </div>
+            <div className='row h-25 d-flex align-items-center'>
+              <div className='col d-flex justify-content-center'>
+                <MetronomeButton Tempo={songData.Tempo} numericTimeSignature={numericTimeSignature} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
