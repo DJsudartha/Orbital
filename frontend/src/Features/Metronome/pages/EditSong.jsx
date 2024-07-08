@@ -83,13 +83,13 @@ const EditSong = () => {
   }
 
   return (
-    <div>
+    <div className='container h-100 px-3 py-1'>
       {isLoading ? (
         <WholePageSpinner />
       ) : (
-        <div className="container h-100 px-3 py-1">
+        <div className='container h-100'>
 
-          <div style={{ height: "92%" }}>
+          <div style={{ height: "92%" }} className='container '>
             <div className="row align-items-center py-3">
               <div className='col d-flex justify-content-center fs-5'>
                 <Form>
@@ -122,7 +122,7 @@ const EditSong = () => {
             </div>
 
             <div className='row h-50'>
-              <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
+            <Metronome songData={songData} handleSongDataChange={handleSongDataChange} />
             </div>
 
             <div className='row align-items-center py-3'>

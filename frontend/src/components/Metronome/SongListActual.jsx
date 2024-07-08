@@ -24,9 +24,11 @@ const SongListActual = () => {
     }, []);
 
     return (
-        <div>
+        <div className='container h-100 d-flex justify-content-center'>
             {isLoading ? (
-                <WholePageSpinner />
+                <div style={{position:'absolute', top:'50%'}}>
+                    <WholePageSpinner />
+                </div>
             ) : (
                 <table className='table--custom'>
                     <thead>
