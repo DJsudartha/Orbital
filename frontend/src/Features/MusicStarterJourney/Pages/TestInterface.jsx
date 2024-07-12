@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import Hearts from '../../../components/MusicStarterJourney/Hearts'
@@ -24,6 +24,7 @@ import RhythmAnswerCard from '../../../components/MusicStarterJourney/AnswerColl
 const TestInterface = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const heartsRef = useRef();
   const props = location.state;
   const { Correct, Question, Answers, QuizID } = props;
 
@@ -36,8 +37,9 @@ const TestInterface = () => {
   if that number matches its token, if it does, setOn inside the card on, if 
   it doesn't, off. Therefore the onClick should be in here and not in the card*/
 
-  const [showModal, setShowModal] = useState(false);
+  /** if i was smarter this would be handled in the answer collection class */
 
+  /** This section is resonsible for figuring out what type of components to show */
   let questionOut;
   if (questionType === "Audio") {
     questionOut = <AudioQuestion data={Question} />;
@@ -69,12 +71,16 @@ const TestInterface = () => {
       </Col>);
   }
 
+  /** This section is reponsible for handling checks */
+  const [showModal, setShowModal] = useState(false);
+
   const handleCheck = () => {
     // need to change correct into an array for more flexibility
     if (Correct === selected) {
       setShowModal(true);
     } else {
       setShowModal(true);
+      heartsRef.current.crementHearts(-1);
     }
   }
 
@@ -86,10 +92,10 @@ const TestInterface = () => {
             <h2>Journey</h2>
           </Col>
           <Col>
-            <Hearts />
+            <Hearts ref={heartsRef}/>
           </Col>
         </Row>
-        <Row>
+        <Row className='pt-3'>
           {questionOut}
         </Row>
         <Row>
