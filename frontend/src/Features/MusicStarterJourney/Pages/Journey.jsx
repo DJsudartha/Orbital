@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Col, Row, Button } from 'react-bootstrap';
 import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import WholePageSpinner from '../../../components/Utility/WholePageSpinner';
+import Hearts from '../../../components/MusicStarterJourney/Hearts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../..';
@@ -40,11 +41,14 @@ const Journey = () => {
       {isLoading ? (
         <WholePageSpinner />
       ) : (
-        <Container>
+        <Container className='h-100'>
           <div style={{ height: "92%", overflowX: "hidden", overflowY: "auto" }}>
-            <Row className='py-4'>
-              <Col className='d-flex justify-content-center'>
-                <h1>Journey</h1>
+            <Row className='pt-2 '>
+              <Col className='d-flex justify-content-start'>
+                <h1>Its better if this and hearts is sticky</h1>
+              </Col>
+              <Col>
+                <Hearts />
               </Col>
             </Row>
 

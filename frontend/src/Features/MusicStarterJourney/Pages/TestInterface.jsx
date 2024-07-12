@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
+import Hearts from '../../../components/MusicStarterJourney/Hearts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TestModal from '../../../components/MusicStarterJourney/TestModal'
 
@@ -24,7 +25,6 @@ const TestInterface = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const props = location.state;
-  console.log(props);
   const { Correct, Question, Answers, QuizID } = props;
 
   const questionType = Question.Var;
@@ -81,9 +81,12 @@ const TestInterface = () => {
   return (
     <Container className='h-100'>
       <div style={{ height: "92%", overflowY: 'auto', overflowX: 'hidden' }}>
-        <Row className='pt-3'>
-          <Col className='d-flex justify-content-center'>
+        <Row className='pt-2'>
+          <Col className='d-flex justify-content-start'>
             <h2>Journey</h2>
+          </Col>
+          <Col>
+            <Hearts />
           </Col>
         </Row>
         <Row>
@@ -105,8 +108,8 @@ const TestInterface = () => {
         <NavFooter />
       </Row>
 
-      <TestModal show={showModal} onHide={() => setShowModal(false)} 
-      result={Correct == selected} quizID={QuizID} />
+      <TestModal show={showModal} onHide={() => setShowModal(false)}
+        result={Correct == selected} quizID={QuizID} />
 
     </Container>
 
