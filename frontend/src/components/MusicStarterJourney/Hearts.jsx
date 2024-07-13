@@ -50,6 +50,26 @@ const Hearts = (props, ref) => {
 
     // maybe I have to seperate useEffects, one to update the DB and the other
     // to update hearts based on time..., will there be crossbreeding there?
+
+    // updates hearts based on x amount of time difference from db with local time
+    // for now only run this during first render (in journey), if that works u
+    // can think of keeping a lastUpdated local state (confusing)
+    useEffect(() => {
+        const localDate = new Date();
+
+        /**if (localDate.getTime() - lastLoggedDate > x) {
+         * regenerate 3 hearts 
+        }  else if (localDate - lastLoggedDate > x - y) {
+          regenerate 2 hearts
+          } else if (localDate - lastLoggedDate > x - y) {
+           regenerate 1 heart
+           }
+
+           at the very end update the lastLoggedDate to when this was called
+        */
+    }, [])
+
+    // updates the DB whenever hearts changes, update time and hearts
     useEffect(() => {
         /** if (hearts === 0) {
          *  navigate to journey (hopefully this also unmounts and runs cleanup function)
@@ -60,6 +80,7 @@ const Hearts = (props, ref) => {
          * }
         */
         return () => {
+            // update the DB
             console.log("DB updated!");
         }
     }, [hearts]);

@@ -5,9 +5,6 @@ import './MainMenu.css'
 import WholePageSpinner from '../components/Utility/WholePageSpinner'
 
 const MainMenu = () => {
-  const test = useUser();
-  const toggleTest = useUserUpdate();
-
   return (
     <div className='h-100'>
       <NavBar />
