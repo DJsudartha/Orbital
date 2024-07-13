@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import MainMenu from './mainMenuRil/MainMenu.jsx'
+import { UserProvider } from './UserContext.jsx'
 
 // from the metronome
 import Home from './Features/Metronome/pages/Home.jsx'
@@ -31,31 +32,33 @@ import WholePageSpinner from './components/Utility/WholePageSpinner.jsx'
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<MainMenu />} />
+    <UserProvider>
+      <Routes>
+        <Route path='/' element={<MainMenu />} />
 
-      <Route path='/metronome' element={<Home />} />
-      <Route path='/metronome/addSong' element={<AddSong />} />
-      <Route path='/metronome/songList' element={<SongList />} />
-      <Route path='/metronome/songList/editSong/:id' element={<EditSong />} />
-      <Route path='/metronome/songList/deleteSong/:id' element={<DeleteSong />} />
+        <Route path='/metronome' element={<Home />} />
+        <Route path='/metronome/addSong' element={<AddSong />} />
+        <Route path='/metronome/songList' element={<SongList />} />
+        <Route path='/metronome/songList/editSong/:id' element={<EditSong />} />
+        <Route path='/metronome/songList/deleteSong/:id' element={<DeleteSong />} />
 
-      <Route path='/MusicStarterJourney' element={<MusicStarterHome />} />
-      <Route path='/MusicStarterJourney/Journey' element={<Journey />}> </Route>
-      <Route path='/MusicStarterJourney/Journey/Unit/:id' element={<TestInterface/>} />
+        <Route path='/MusicStarterJourney' element={<MusicStarterHome />} />
+        <Route path='/MusicStarterJourney/Journey' element={<Journey />}> </Route>
+        <Route path='/MusicStarterJourney/Journey/Unit/:id' element={<TestInterface />} />
 
-      <Route path = '/register' element = {<Signup />}></Route>
-      <Route path = '/login' element = {<Login />}></Route>
-      <Route path = '/home' element = {<Homepage />}></Route>
-      <Route path = '/forgot-password' element = {<ForgotPassword />}></Route>
-      <Route path = '/reset-password/:id/:token' element = {<ResetPassword />}></Route>
-      <Route path = '/profile-maker' element = {<ProfileMaker />}></Route>
-      <Route path = '/profile-page' element = {<ProfilePage />}></Route>
-      <Route path = '/my-profile-page' element = {<MyProfilePage />}></Route>
+        <Route path='/register' element={<Signup />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/home' element={<Homepage />}></Route>
+        <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+        <Route path='/reset-password/:id/:token' element={<ResetPassword />}></Route>
+        <Route path='/profile-maker' element={<ProfileMaker />}></Route>
+        <Route path='/profile-page' element={<ProfilePage />}></Route>
+        <Route path='/my-profile-page' element={<MyProfilePage />}></Route>
 
-      <Route path = '/dev' element = {<WholePageSpinner/>}></Route>
+        <Route path='/dev' element={<WholePageSpinner />}></Route>
 
-    </Routes>
+      </Routes>
+    </UserProvider>
   )
 }
 
