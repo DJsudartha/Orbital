@@ -25,7 +25,7 @@ const TestModal = (props) => {
                 <Col className='d-flex justify-content-center'>
                     {result ? 
                     <img src='/rightAnswer.png' alt="right answer" /> :
-                    <img src='/wrongAnswer.png' alt="right answer" /> }
+                    <i className='bi bi-heartbreak-fill h1' style={{color: 'red'}}/>}
                 </Col>
             </Modal.Body>
             <Modal.Footer style={{ background: '#313338' }}>

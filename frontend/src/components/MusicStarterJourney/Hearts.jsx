@@ -1,9 +1,43 @@
 import React from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
-import { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
+import { Container, Col, Row, Button, Modal } from 'react-bootstrap'
+import { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
+// modal to inform user u ran out of hearts
+function MyVerticallyCenteredModal(props) {
+
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    You ran out of hearts!
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <h4>Wait to regenerate hearts</h4>
+                <Col className='d-flex justify-content-center'>
+                    <img src="/wrongAnswer.png" alt="out of hearts" />
+                </Col>
+            </Modal.Body>
+            <Modal.Footer style={{ background: '#313338' }}>
+                <Button onClick={props.onHide}>Continue</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
 const Hearts = (props, ref) => {
+    // props: hearts and time.
+    const navigate = useNavigate();
+
+    const [modalShow, setModalShow] = React.useState(false);
+
     const [hearts, setHearts] = useState(3); // axios.get in journey, pass it into testInterface, pass it here, testInterface calls the function here cus idw to clutter
 
     /** const lastLoggedTime = props.whatever // passed down from journey 
@@ -24,9 +58,24 @@ const Hearts = (props, ref) => {
 
     // need to pass in hearts as a prop from journey to testInterval aswell 
 
+    // i think can use a modal to say no more hearts, make that pop up and navigate with that
+    // no need to use a testModal, just make a new one
+
+    // I think can justify that if u get everything wrong, u have to start from the beginning again
+
     useImperativeHandle(ref, () => {
         return {
-            crementHearts: (crement) => setHearts(previous => previous + crement)
+            // crementHearts should also handle if hearts is zero
+            // this function can't see the updated hearts
+            crementHearts: (crement) => {
+                setHearts(previous => {
+                    if (previous + crement <= 0) {
+                        return 0;
+                    } else {
+                        return previous + crement;
+                    }
+                });
+            }
         }
     }, []);
 
@@ -54,36 +103,43 @@ const Hearts = (props, ref) => {
     // updates hearts based on x amount of time difference from db with local time
     // for now only run this during first render (in journey), if that works u
     // can think of keeping a lastUpdated local state (confusing)
-    useEffect(() => {
-        const localDate = new Date();
+    // useEffect(() => {
+    //     const localDate = new Date();
+    //     /**if (localDate.getTime() - lastLoggedDate > x) {
+    //      * regenerate 3 hearts 
+    //     }  else if (localDate - lastLoggedDate > x - y) {
+    //       regenerate 2 hearts
+    //       } else if (localDate - lastLoggedDate > x - y) {
+    //        regenerate 1 heart
+    //        }
+    //          
+    //      if (hearts >= 3) {
+    // setHearts(3);
+    //          }
 
-        /**if (localDate.getTime() - lastLoggedDate > x) {
-         * regenerate 3 hearts 
-        }  else if (localDate - lastLoggedDate > x - y) {
-          regenerate 2 hearts
-          } else if (localDate - lastLoggedDate > x - y) {
-           regenerate 1 heart
-           }
+    //        at the very end update the lastLoggedDate to when this was called
+    //     */
+    // }, [])
 
-           at the very end update the lastLoggedDate to when this was called
-        */
-    }, [])
 
     // updates the DB whenever hearts changes, update time and hearts
     useEffect(() => {
-        /** if (hearts === 0) {
-         *  navigate to journey (hopefully this also unmounts and runs cleanup function)
-         * }
-         * if (local time >= some interval of time in DB passed down from journey) {
-         *      setHearts(prev => prev + 1) // I cant do this because then it would be infinite
-         *      axios.put(setHearts)
-         * }
-        */
-        return () => {
-            // update the DB
-            console.log("DB updated!");
+        console.log("DB updated" + hearts);
+        if (hearts === 0) {
+            setModalShow(true);
         }
     }, [hearts]);
+
+    // when unmounted
+    const onUnmount = useRef();
+
+    onUnmount.current = () => {
+        console.log("Cleanup: DB updated!" + hearts);
+    };
+
+    useEffect(() => {
+        return () => onUnmount.current();
+    }, [])
 
     return (
         <Container ref={ref}>
@@ -104,6 +160,11 @@ const Hearts = (props, ref) => {
                         <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
                 </Col>
             </Row>
+
+            <MyVerticallyCenteredModal
+                show={modalShow}
+                onHide={() => navigate("/MusicStarterJourney/Journey")}
+            />
         </Container>
     )
 }

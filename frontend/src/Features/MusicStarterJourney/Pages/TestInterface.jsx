@@ -79,7 +79,7 @@ const TestInterface = () => {
     if (Correct === selected) {
       setShowModal(true);
     } else {
-      setShowModal(true);
+      setShowModal(true); // might be a bit weird, will it just nav or show then nav, test 
       heartsRef.current.crementHearts(-1);
     }
   }
