@@ -1,9 +1,9 @@
 import React from 'react'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import VisualAnswerCard from '../../../components/MusicStarterJourney/AnswerCollection/VisualAnswerCard'
 import { Link } from 'react-router-dom'
 
 const MusicStarterHome = () => {
-    // using visual answer card doesn't make sense here, just use a normal card
     return (
         <Container className='h-100'>
             <div style={{ height: "92%", overflowX: "hidden", overflowY: "auto" }}>
@@ -16,25 +16,15 @@ const MusicStarterHome = () => {
                 <Row>
                     <Col className='d-flex justify-content-end'>
                         <Link to="/MusicStarterJourney/Journey">
-                            <Card bg='info' className='my-2' style={{ width: '150px', height: '170px' }}>
-                                <Card.Img src="bear" className='p-1' style={{ height: '100px', width: '147px' }} />
-                                <Card.Body style={{ backgroundColor: 'transparent' }}>
-                                    <Card.Title style={{ backgroundColor: 'transparent' }}>
-                                        Journey 1
-                                    </Card.Title>
-                                </Card.Body>
-                            </Card>
+                            <VisualAnswerCard 
+                            data={{Title: "Journey", Data: 
+                            ["https://www.musictheoryacademy.com/wp-content/uploads/2020/06/Treble-Clef-Symbol.jpg"]}}/>
                         </Link>
                     </Col>
                     <Col className='d-flex justify-content-start'>
-                        <Card bg='info' className='my-2' style={{ width: '150px', height: '170px' }}>
-                            <Card.Img src="bear" className='p-1' style={{ height: '100px', width: '147px' }} />
-                            <Card.Body style={{ backgroundColor: 'transparent' }}>
-                                <Card.Title style={{ backgroundColor: 'transparent' }}>
-                                    WIP
-                                </Card.Title>
-                            </Card.Body>
-                        </Card>
+                        <VisualAnswerCard 
+                        data={{Title: "WIP", Data: 
+                        ["https://www.musictheoryacademy.com/wp-content/uploads/2011/02/BassClef-Middle-C-e1297176615910.jpg"]}}/>
                     </Col>
                 </Row>
             </div>

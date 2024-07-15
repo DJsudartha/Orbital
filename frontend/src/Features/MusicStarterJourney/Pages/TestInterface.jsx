@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import { useLocation, useNavigate } from 'react-router-dom'
-import TestModal from '../../../components/MusicStarterJourney/TestModal'
 
 // Question portion concrete module
 import AudioQuestion from '../../../components/MusicStarterJourney/Questions/AudioQuestion'
@@ -24,19 +23,13 @@ const TestInterface = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const props = location.state;
-  console.log(props);
   const { Correct, Question, Answers, QuizID } = props;
 
   const questionType = Question.Var;
   const answerType = Answers.Var;
   const answerCollection = Answers.Data;
 
-  const [selected, setSelected] = useState(0); // default = 0 
-  /* pass the number selected down as props, perform a check inside the card
-  if that number matches its token, if it does, setOn inside the card on, if 
-  it doesn't, off. Therefore the onClick should be in here and not in the card*/
-
-  const [showModal, setShowModal] = useState(false);
+  const [selected, setSelected] = useState(0); // pass setSelected down as props
 
   let questionOut;
   if (questionType === "Audio") {
@@ -55,26 +48,27 @@ const TestInterface = () => {
   if (answerType === "Audio") {
     answerOutCards = answerCollection.map((answer, index) =>
       <Col className='d-flex justify-content-center' key={index + 1}>
-        <AudioAnswerCard data={answer} token={index + 1} foo={setSelected} curr={selected} />
+        <AudioAnswerCard data={answer} what={index + 1} foo={setSelected} />
       </Col>);
   } else if (answerType === "Visual") {
     answerOutCards = answerCollection.map((answer, index) =>
       <Col className='d-flex justify-content-center' key={index + 1}>
-        <VisualAnswerCard data={answer} token={index + 1} foo={setSelected} curr={selected} />
+        <VisualAnswerCard data={answer} what={index + 1} foo={setSelected} />
       </Col>);
   } else if (answerType === "Rhythm") {
     answerOutCards = answerCollection.map((answer, index) =>
       <Col className='d-flex justify-content-center' key={index + 1}>
-        <RhythmAnswerCard data={answer} token={index + 1} foo={setSelected} curr={selected} />
+        <RhythmAnswerCard data={answer} what={index + 1} foo={setSelected} />
       </Col>);
   }
 
   const handleCheck = () => {
     // need to change correct into an array for more flexibility
     if (Correct === selected) {
-      setShowModal(true);
+      alert("Correct!");
+      navigate("/MusicStarterJourney/Journey", { state: QuizID + 1 });
     } else {
-      setShowModal(true);
+      alert("Try again!");
     }
   }
 
@@ -104,10 +98,6 @@ const TestInterface = () => {
       <Row className='pt-3'>
         <NavFooter />
       </Row>
-
-      <TestModal show={showModal} onHide={() => setShowModal(false)} 
-      result={Correct == selected} quizID={QuizID} />
-
     </Container>
 
   )
