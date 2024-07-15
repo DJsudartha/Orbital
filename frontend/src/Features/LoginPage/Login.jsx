@@ -12,7 +12,7 @@ function Login() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/login`, {email, password})
+        axios.post(`${baseURL}/verification/login`, {email, password})
         .then(y => {
             console.log(y)
             if(y.data === "Success") {

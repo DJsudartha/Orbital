@@ -7,7 +7,7 @@ function Homepage() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`${baseURL}/home`)
+        axios.get(`${baseURL}/verification/home`)
         .then(y => {console.log(y)
             if (y.data !== "Success") {
                 // navigate("/login")
