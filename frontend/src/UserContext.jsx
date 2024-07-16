@@ -12,15 +12,15 @@ export function useUserUpdate() { // update with only the id for security/simpli
 }
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(true);
+    const [user, setUser] = useState("no user");
 
-    const toggleUser = (user) => {
+    const defineUser = (user) => {
         setUser(user); 
     }
 
     return (
-        <UserContext.Provider value={"hi " + user}>
-            <UserUpdateContext.Provider value={(user) => toggleUser(user)}>
+        <UserContext.Provider value={user}>
+            <UserUpdateContext.Provider value={(user) => defineUser(user)}>
                 {children}
             </UserUpdateContext.Provider>
         </UserContext.Provider>

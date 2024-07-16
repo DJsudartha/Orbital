@@ -18,6 +18,10 @@ const SongMetronomeSchema = mongoose.Schema(
         TimeSignature: { // will have very limited options
             type: String,
             required: true
+        },
+        User_id: { // will have very limited options
+            type: String,
+            required: true
         }
     }
 );

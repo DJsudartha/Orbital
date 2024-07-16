@@ -32,7 +32,10 @@ LoginPage.post('/login', (req, res) => {
                     if (result) {
                         const token = jwt.sign({ email: user.email }, "iamindo", { expiresIn: "1d" })
                         res.cookie("token", token)
-                        return res.json("Success")
+                        return res.json({
+                            "Success": "Success", 
+                            "_id": user._id
+                        })
                     }
                     else {
                         return res.json("Wrong Password")

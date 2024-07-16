@@ -18,7 +18,8 @@ Metronome.post("/", async (request, response) => {
             Title: request.body.Title,
             Artist: request.body.Artist,
             Tempo: request.body.Tempo,
-            TimeSignature: request.body.TimeSignature
+            TimeSignature: request.body.TimeSignature,
+            User_id: request.body.User_id
         };
 
         // update DB
@@ -33,10 +34,11 @@ Metronome.post("/", async (request, response) => {
 }
 );
 
-// Read All
+// Read All, filtered
 Metronome.get("/", async (request, response) => {
     try {
-        const songs = await SongMetronome.find({});
+        const filterParams = request.query;
+        const songs = await SongMetronome.find({filterParams});
 
         return response.status(200).json(songs); // problems w/ wrapper'?
     } catch (error) {

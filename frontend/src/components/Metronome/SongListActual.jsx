@@ -3,16 +3,24 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { baseURL } from '../../index';
 import WholePageSpinner from '../Utility/WholePageSpinner';
+import { useUser } from '../../UserContext';
 
 const SongListActual = () => {
     const [isLoading, setLoading] = useState(false);
+
+    // find songs only belonging to this user
+    const User_id = useUser();
 
     // the song list from the backend
     const [songs, setSongs] = useState([]);
 
     useEffect(() => {
         setLoading(true)
-        axios.get(`${baseURL}/metronome`)
+        axios.get(`${baseURL}/metronome`, { // this might not work
+            params: {
+                User_id: User_id
+            }
+        })
             .then((response) => {
                 setSongs(response.data);
                 setLoading(false);
