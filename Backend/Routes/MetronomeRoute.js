@@ -37,8 +37,8 @@ Metronome.post("/", async (request, response) => {
 // Read All, filtered
 Metronome.get("/", async (request, response) => {
     try {
-        const filterParams = request.query;
-        const songs = await SongMetronome.find({filterParams});
+        const { User_id } = request.query;
+        const songs = await SongMetronome.find({User_id: User_id});
 
         return response.status(200).json(songs); // problems w/ wrapper'?
     } catch (error) {
