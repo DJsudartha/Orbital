@@ -11,6 +11,8 @@ import jwt from 'jsonwebtoken'
 import cookieParser from "cookie-parser";
 import nodemailer from 'nodemailer';
 import LoginPage from "../Routes/LoginRoute.js";
+import QuizCollection from "../Routes/QuizCollectionRoute.js";
+import UserJourneyProgress from "../Routes/UserJourneyProgressRoute.js";
 
 
 const homePlaceHolder = express();
@@ -32,6 +34,10 @@ homePlaceHolder.use("/metronome", Metronome);
 homePlaceHolder.use("/musicJourney", QuizJourney);
 
 homePlaceHolder.use("/verification", LoginPage);
+
+homePlaceHolder.use("/musicJourneyCollection", QuizCollection);
+
+homePlaceHolder.use("/userJourneyProgress", UserJourneyProgress);
 
 mongoose
     .connect(MetronomeDBURL)

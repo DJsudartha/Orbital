@@ -7,7 +7,8 @@ const QuizJourney = express.Router();
 QuizJourney.post("/", async (request, response) => {
     try {
         if (!(request.body.QuizID && request.body.Correct &&
-            request.body.Question && request.body.Answers)) {
+            request.body.Question && request.body.Answers &&
+            request.body.Journey_id)) {
             return response
                 .status(400)
                 .send({ message: "Incomplete data" });
@@ -18,7 +19,8 @@ QuizJourney.post("/", async (request, response) => {
             QuizID: request.body.QuizID,
             Correct: request.body.Correct,
             Question: request.body.Question,
-            Answers: request.body.Answers
+            Answers: request.body.Answers,
+            Journey_id: request.body.Journey_id
         };
 
         // update DB
@@ -36,8 +38,10 @@ QuizJourney.post("/", async (request, response) => {
 // Read All / get Journey
 QuizJourney.get("/", async (request, response) => {
     try {
-        const journey = await QuizJourneyModel.find({})
+        const { Journey_id } = request.query;
+        const journey = await QuizJourneyModel.find({Journey_id: Journey_id})
             .sort({ QuizID: "asc" });
+
         return response.status(200).json(journey); // problems w/ wrapper'?
     } catch (error) {
         console.log(error.Message);
