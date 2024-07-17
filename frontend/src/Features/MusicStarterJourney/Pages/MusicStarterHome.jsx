@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import WholePageSpinner from '../../../components/Utility/WholePageSpinner'
+import axios from 'axios'
 
 const MusicStarterHome = () => {
     // using visual answer card doesn't make sense here, just use a normal card
+
+    // only map and get the available journeys here
+
     return (
         <Container className='h-100'>
             <div style={{ height: "92%", overflowX: "hidden", overflowY: "auto" }}>

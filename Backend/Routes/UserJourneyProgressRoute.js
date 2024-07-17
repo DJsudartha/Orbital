@@ -39,7 +39,13 @@ UserJourneyProgress.post("/", async (request, response) => {
 UserJourneyProgress.get("/", async (request, response) => {
     try {
         const { User_id } = request.query;
-        const userJourneyProgress = await UserJourneyProgressModel.find({User_id: User_id});
+        const userJourneyProgress = await UserJourneyProgressModel.find({ User_id: User_id });
+
+        if (!userJourneyProgress) {
+            return response
+                .status(404)
+                .send({ User_id: "missing" });
+        }
 
         return response.status(200).json(userJourneyProgress); // problems w/ wrapper'?
     } catch (error) {

@@ -6,6 +6,7 @@ import Hearts from '../../../components/MusicStarterJourney/Hearts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../..';
+import { useUser } from '../../../UserContext';
 
 const Journey = () => {
   const navigate = useNavigate();
@@ -15,6 +16,30 @@ const Journey = () => {
 
   const [journey, setJourney] = useState([]);
 
+  const User_id = useUser();
+
+  // get the current userProgressJourney, if not found create a new instance
+  useEffect(() => {
+    setLoading(true)
+    axios.get(`${baseURL}/userJourneyProgress`, { // this might not work
+      params: {
+        User_id: User_id
+      }
+    })
+      .then((response) => {
+        if (response === "missing") {
+          const newUserJourney = {
+
+          }
+          axios.post(newUserJourney);
+        } else {
+          // save 
+        }
+      })
+  }, []);
+
+  /** need to change this so that it finds according to the journey ID, passed
+   * down as props from MusicStarterHome*/ 
   useEffect(() => {
     setLoading(true);
     axios.get(`${baseURL}/musicJourney`)
@@ -28,6 +53,7 @@ const Journey = () => {
       });
   }, []);
 
+  /** need to change this to rely on the database to track progress instead */
   const [progress, setProgress] = useState(1);
 
   useEffect(() => {
