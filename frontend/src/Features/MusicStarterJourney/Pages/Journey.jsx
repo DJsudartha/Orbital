@@ -29,13 +29,24 @@ const Journey = () => {
       }
     })
       .then((response) => {
-        if (response.data.User_id != "missing") {
+        if (!User_id) {
+          console.log("error: not logged in");
           setLoading(false);
           return;
         }
 
-        if (!User_id) {
-          console.log("error: not logged in");
+        if (response.data.User_id != "missing") {
+          axios.put(`${baseURL}/userJourneyProgress`, 
+            {
+              ...response.data,
+              CurrJourney: Journey_id
+            },
+            {
+              params: {
+                User_id: User_id
+              }
+            }
+          ); // need to update the journey location only really
           setLoading(false);
           return;
         }

@@ -55,7 +55,7 @@ UserJourneyProgress.get("/", async (request, response) => {
 );
 
 // Update
-UserJourneyProgress.put("/:id", async (request, response) => {
+UserJourneyProgress.put("/", async (request, response) => {
     try {
         if (!(request.body.CurrJourney && request.body.Hearts &&
             request.body.LastLoggedTime && request.body.Progress &&
@@ -65,8 +65,9 @@ UserJourneyProgress.put("/:id", async (request, response) => {
                 .send({ message: "Incomplete data" });
         }
 
-        const { id } = request.params;
-        const userJourneyProgressFound = await UserJourneyProgressModel.findByIdAndUpdate(id, request.body);
+        const { User_id } = request.query;
+        const userJourneyProgressFound = 
+        await UserJourneyProgressModel.findOneAndUpdate({ User_id: User_id }, request.body);
 
         if (!userJourneyProgressFound) {
             return response
