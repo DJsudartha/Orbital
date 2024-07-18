@@ -2,7 +2,10 @@ import React from 'react'
 import { Container, Col, Row, Button, Modal } from 'react-bootstrap'
 import { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../UserContext';
+import WholePageSpinner from '../Utility/WholePageSpinner';
 import axios from 'axios'
+import { baseURL } from '../..';
 
 // modal to inform user u ran out of hearts
 function MyVerticallyCenteredModal(props) {
@@ -34,16 +37,15 @@ function MyVerticallyCenteredModal(props) {
 
 const Hearts = (props, ref) => {
     // props: hearts and time.
+    const { user } = props;
+    const User_id = useUser();
     const navigate = useNavigate();
 
     const [modalShow, setModalShow] = React.useState(false);
 
-    const [hearts, setHearts] = useState(3); // axios.get in journey, pass it into testInterface, pass it here, testInterface calls the function here cus idw to clutter
+    const [hearts, setHearts] = useState(user.Hearts); // axios.get in journey, pass it into testInterface, pass it here, testInterface calls the function here cus idw to clutter
 
-    /** const lastLoggedTime = props.whatever // passed down from journey 
-     * const hearts = props.hearts // passed down from journey
-    */
-
+    const [isLoading, setIsLoading] = useState(false);
 
     /** on umnount, use useEffect to axios.put() the new heart count, make it a 
      * "feature" that hearts will be shared throughout journeys so u can't spam
@@ -103,28 +105,37 @@ const Hearts = (props, ref) => {
     // updates hearts based on x amount of time difference from db with local time
     // for now only run this during first render (in journey), if that works u
     // can think of keeping a lastUpdated local state (confusing)
-    // useEffect(() => {
-    //     const localDate = new Date();
-    //     /**if (localDate.getTime() - lastLoggedDate > x) {
-    //      * regenerate 3 hearts 
-    //     }  else if (localDate - lastLoggedDate > x - y) {
-    //       regenerate 2 hearts
-    //       } else if (localDate - lastLoggedDate > x - y) {
-    //        regenerate 1 heart
-    //        }
-    //          
-    //      if (hearts >= 3) {
-    // setHearts(3);
-    //          }
-
-    //        at the very end update the lastLoggedDate to when this was called
-    //     */
-    // }, [])
+    useEffect(() => {
+        const localDate = new Date();
+        const lastLoggedDate = new Date(user.LastLoggedDate)
+        if (localDate.getTime() - lastLoggedDate.getTime() >= 3 * 60 * 1000) {
+            setHearts(3);
+        } else if (localDate.getTime() - lastLoggedDate.getTime() >= 2 * 60 * 1000) {
+            setHearts((prev) => prev + 2 >= 3 ? 3 : prev + 2);
+        } else if (localDate.getTime() - lastLoggedDate.getTime() >= 1 * 60 * 1000) {
+            setHearts((prev) => prev + 1 >= 3 ? 3 : prev + 1);
+        }
+    }, [])
 
 
     // updates the DB whenever hearts changes, update time and hearts
     useEffect(() => {
-        console.log("DB updated" + hearts);
+        const newDate = new Date();
+        const updateUserJourneyProgress = {
+            ...user,
+            Hearts: hearts,
+            LastLoggedTime: newDate
+        }
+        console.log(updateUserJourneyProgress)
+        setIsLoading(true);
+        axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
+            {
+                params: {
+                    User_id: User_id
+                }
+            }
+        ).then(setIsLoading(false));
+
         if (hearts === 0) {
             setModalShow(true);
         }
@@ -134,39 +145,55 @@ const Hearts = (props, ref) => {
     const onUnmount = useRef();
 
     onUnmount.current = () => {
-        console.log("Cleanup: DB updated!" + hearts);
+        setIsLoading(true);
+        const updateUserJourneyProgress = {
+            ...user,
+            Hearts: hearts,
+        }
+        console.log(updateUserJourneyProgress)
+        axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
+            {
+                params: {
+                    User_id: User_id
+                }
+            }
+        ).then(setIsLoading(false));
     };
 
     useEffect(() => {
         return () => onUnmount.current();
     }, [])
 
-    return (
-        <Container ref={ref}>
-            <Row className='d-flex justify-content-end pt-1'>
-                <Col className='d-flex justify-content-center' xs={3}>
-                    {hearts <= 2 ?
-                        <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :
-                        <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
-                </Col>
-                <Col className='d-flex justify-content-center' xs={3}>
-                    {hearts <= 1 ?
-                        <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :
-                        <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
-                </Col>
-                <Col className='d-flex justify-content-center' xs={3}>
-                    {hearts <= 0 ?
-                        <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :
-                        <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
-                </Col>
-            </Row>
+    {
+        return isLoading ?
+             (<Container className='h-100'>
+                <WholePageSpinner />
+            </Container>) :
+            (<Container ref={ref}>
+                <Row className='d-flex justify-content-end pt-1'>
+                    <Col className='d-flex justify-content-center' xs={3}>
+                        {hearts <= 2 ?
+                            <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :
+                            <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
+                    </Col>
+                    <Col className='d-flex justify-content-center' xs={3}>
+                        {hearts <= 1 ?
+                            <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :
+                            <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
+                    </Col>
+                    <Col className='d-flex justify-content-center' xs={3}>
+                        {hearts <= 0 ?
+                            <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :
+                            <i className='bi bi-heart-fill h1' style={{ color: 'red' }} />}
+                    </Col>
+                </Row>
 
-            <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => navigate("/MusicStarterJourney/Journey")}
-            />
-        </Container>
-    )
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => navigate(`/MusicStarterJourney/${user.CurrJourney}`)}
+                />
+            </Container>)
+    }
 }
 
 export default forwardRef(Hearts)

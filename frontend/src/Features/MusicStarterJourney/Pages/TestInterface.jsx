@@ -4,6 +4,9 @@ import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import Hearts from '../../../components/MusicStarterJourney/Hearts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TestModal from '../../../components/MusicStarterJourney/TestModal'
+import WholePageSpinner from '../../../components/Utility/WholePageSpinner';
+import { useUser } from '../../../UserContext'
+import axios from 'axios'
 
 // Question portion concrete module
 import AudioQuestion from '../../../components/MusicStarterJourney/Questions/AudioQuestion'
@@ -23,10 +26,9 @@ import RhythmAnswerCard from '../../../components/MusicStarterJourney/AnswerColl
 
 const TestInterface = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const heartsRef = useRef();
   const props = location.state;
-  const { Correct, Question, Answers, QuizID } = props;
+  const { Correct, Question, Answers, QuizID, user } = props;
 
   const questionType = Question.Var;
   const answerType = Answers.Var;
@@ -80,7 +82,7 @@ const TestInterface = () => {
       setShowModal(true);
     } else {
       setShowModal(true); // might be a bit weird, will it just nav or show then nav, test 
-      heartsRef.current.crementHearts(-1);
+      heartsRef.current.crementHearts(-1); // the potential problem i can think of here is the user crementing the hearts too fast
     }
   }
 
@@ -92,7 +94,7 @@ const TestInterface = () => {
             <h2>Journey</h2>
           </Col>
           <Col>
-            <Hearts ref={heartsRef}/>
+            <Hearts ref={heartsRef} user={user} />
           </Col>
         </Row>
         <Row className='pt-3'>
@@ -115,10 +117,10 @@ const TestInterface = () => {
       </Row>
 
       <TestModal show={showModal} onHide={() => setShowModal(false)}
-        result={Correct == selected} quizID={QuizID} />
+        result={Correct == selected} quizID={QuizID}
+        user={user} />
 
     </Container>
-
   )
 }
 

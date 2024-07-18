@@ -1,12 +1,27 @@
 import React from 'react'
 import { Button, Modal, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './MusicStarterJourney.css';
+import { baseURL } from '../..';
+import { useUser } from '../../UserContext';
 
 const TestModal = (props) => {
-    const { result, quizID } = props;
+    const { result, quizID, user } = props;
     const navigate = useNavigate();
+    const User_id = useUser();
 
+    const updateUserJourneyProgress = {
+        ...user,
+        Progress: quizID + 1
+    }
+    axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
+        {
+            params: {
+                User_id: User_id
+            }
+        }
+    )
     return (
         <Modal
             {...props}
@@ -23,9 +38,9 @@ const TestModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <Col className='d-flex justify-content-center'>
-                    {result ? 
-                    <img src='/rightAnswer.png' alt="right answer" /> :
-                    <i className='bi bi-heartbreak-fill h1' style={{color: 'red'}}/>}
+                    {result ?
+                        <img src='/rightAnswer.png' alt="right answer" /> :
+                        <i className='bi bi-heartbreak-fill h1' style={{ color: 'red' }} />}
                 </Col>
             </Modal.Body>
             <Modal.Footer style={{ background: '#313338' }}>
@@ -33,7 +48,7 @@ const TestModal = (props) => {
                     <Button onClick={props.onHide}>Return</Button>
                 </Col>
                 {result && <Col className='d-flex justify-content-center'>
-                    <Button onClick={() => navigate("/MusicStarterJourney/Journey", { state: quizID + 1 })}>Continue</Button>
+                    <Button onClick={() => navigate(`/MusicStarterJourney/${user.CurrJourney}`)}>Continue</Button>
                 </Col>}
             </Modal.Footer>
         </Modal>
