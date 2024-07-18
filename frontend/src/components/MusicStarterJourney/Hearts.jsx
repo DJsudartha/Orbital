@@ -133,7 +133,8 @@ const Hearts = (props, ref) => {
                     User_id: User_id
                 }
             }
-        ).then(setIsLoading(false));
+        )
+        .then(setIsLoading(false));
 
         if (hearts === 0) {
             setModalShow(true);
@@ -166,7 +167,7 @@ const Hearts = (props, ref) => {
 
                 <MyVerticallyCenteredModal
                     show={modalShow}
-                    onHide={() => navigate(`/MusicStarterJourney/${user.CurrJourney}`)}
+                    onHide={() => navigate('/')}
                 />
             </Container>)
     }

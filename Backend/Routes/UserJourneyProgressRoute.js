@@ -6,7 +6,7 @@ const UserJourneyProgress = express.Router();
 //Save a new Quiz Collection
 UserJourneyProgress.post("/", async (request, response) => {
     try {
-        if (!(request.body.CurrJourney && request.body.Hearts &&
+        if (!(request.body.CurrJourney && 
             request.body.LastLoggedTime && request.body.Progress &&
             request.body.User_id)) {
             return response
@@ -57,7 +57,7 @@ UserJourneyProgress.get("/", async (request, response) => {
 // Update
 UserJourneyProgress.put("/", async (request, response) => {
     try {
-        if (!(request.body.CurrJourney && request.body.Hearts &&
+        if (!(request.body.CurrJourney &&  
             request.body.LastLoggedTime && request.body.Progress &&
             request.body.User_id)) {
             return response
