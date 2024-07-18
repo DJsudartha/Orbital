@@ -3,7 +3,7 @@ import { Container, Col, Row, Button } from 'react-bootstrap';
 import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import WholePageSpinner from '../../../components/Utility/WholePageSpinner';
 import Hearts from '../../../components/MusicStarterJourney/Hearts';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../..';
 import { useUser } from '../../../UserContext';
@@ -11,6 +11,8 @@ import { useUser } from '../../../UserContext';
 const Journey = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const Journey_id = useParams().id;
 
   const [isLoading, setLoading] = useState(false);
 
@@ -27,22 +29,38 @@ const Journey = () => {
       }
     })
       .then((response) => {
-        if (response === "missing") {
-          const newUserJourney = {
-
-          }
-          axios.post(newUserJourney);
-        } else {
-          // save 
+        if (response.data.User_id != "missing") {
+          setLoading(false);
+          return;
         }
+
+        if (!User_id) {
+          console.log("error: not logged in");
+          setLoading(false);
+          return;
+        }
+
+        const newUserJourney = {
+          CurrJourney: Journey_id, // need to change implementation of this depending on how david does his profile page
+          Progress: 1,
+          Hearts: 3,
+          LastLoggedTime: new Date(),
+          User_id: User_id
+        }
+        axios.post(`${baseURL}/userJourneyProgress`, newUserJourney)
+          .then(setLoading(false));
       })
   }, []);
 
   /** need to change this so that it finds according to the journey ID, passed
-   * down as props from MusicStarterHome*/ 
+   * down as props from MusicStarterHome*/
   useEffect(() => {
     setLoading(true);
-    axios.get(`${baseURL}/musicJourney`)
+    axios.get(`${baseURL}/musicJourney`, {
+      params: {
+        Journey_id: Journey_id
+      }
+    })
       .then((response) => {
         setJourney(response.data);
         setLoading(false);

@@ -43,7 +43,7 @@ function App() {
         <Route path='/metronome/songList/deleteSong/:id' element={<DeleteSong />} />
 
         <Route path='/MusicStarterJourney' element={<MusicStarterHome />} />
-        <Route path='/MusicStarterJourney/Journey' element={<Journey />}> </Route>
+        <Route path='/MusicStarterJourney/:id' element={<Journey />}> </Route>
         <Route path='/MusicStarterJourney/Journey/Unit/:id' element={<TestInterface />} />
 
         <Route path='/register' element={<Signup />}></Route>

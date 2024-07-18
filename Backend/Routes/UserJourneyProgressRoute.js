@@ -35,15 +35,14 @@ UserJourneyProgress.post("/", async (request, response) => {
 }
 );
 
-// update so that u filter to only get the matching one
+// update so that u singly filter according to userID
 UserJourneyProgress.get("/", async (request, response) => {
     try {
         const { User_id } = request.query;
-        const userJourneyProgress = await UserJourneyProgressModel.find({ User_id: User_id });
+        const userJourneyProgress = await UserJourneyProgressModel.findOne({ User_id: User_id });
 
         if (!userJourneyProgress) {
             return response
-                .status(404)
                 .send({ User_id: "missing" });
         }
 

@@ -6,7 +6,7 @@ const QuizCollection = express.Router();
 //Save a new Quiz Collection
 QuizCollection.post("/", async (request, response) => {
     try {
-        if (!request.body.Name) {
+        if (!request.body.Name && !request.body.Image) {
             return response
                 .status(400)
                 .send({ message: "Incomplete data" });
@@ -14,7 +14,8 @@ QuizCollection.post("/", async (request, response) => {
 
         // else if working
         const newQuizCollection = {
-            Name: request.body.Name
+            Name: request.body.Name,
+            Image: request.body.Image
         };
 
         // update DB
@@ -66,7 +67,7 @@ QuizCollection.get("/:id", async (request, response) => {
 // Update
 QuizCollection.put("/:id", async (request, response) => {
     try {
-        if (!request.body.Name) {
+        if (!request.body.Name && !request.body.Image) {
             return response
                 .status(400)
                 .send({ message: "Incomplete data" });
