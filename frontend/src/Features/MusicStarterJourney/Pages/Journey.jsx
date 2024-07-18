@@ -42,15 +42,16 @@ const Journey = () => {
             ...response.data,
             CurrJourney: Journey_id
           }
+          console.log(updateUserJourneyProgress);
           axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
             {
               params: {
                 User_id: User_id
               }
             }
-          ); // need to update the journey location only really
+          )
+          .then(setLoading1(false)); // need to update the journey location only really
           setUserJourneyProgress(updateUserJourneyProgress);
-          setLoading1(false);
           return;
         }
 
@@ -62,8 +63,8 @@ const Journey = () => {
           User_id: User_id
         }
         axios.post(`${baseURL}/userJourneyProgress`, newUserJourney)
-        setUserJourneyProgress(newUserJourney)
-        setLoading1(false)
+        .then(setUserJourneyProgress(newUserJourney));
+        setLoading1(false);
       })
   }, []);
 

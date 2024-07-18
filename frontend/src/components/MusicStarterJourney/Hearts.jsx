@@ -126,7 +126,6 @@ const Hearts = (props, ref) => {
             Hearts: hearts,
             LastLoggedTime: newDate
         }
-        console.log(updateUserJourneyProgress)
         setIsLoading(true);
         axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
             {
@@ -166,7 +165,7 @@ const Hearts = (props, ref) => {
 
     {
         return isLoading ?
-             (<Container className='h-100'>
+             (<Container className='vh-100'>
                 <WholePageSpinner />
             </Container>) :
             (<Container ref={ref}>

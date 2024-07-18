@@ -4,9 +4,6 @@ import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import Hearts from '../../../components/MusicStarterJourney/Hearts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import TestModal from '../../../components/MusicStarterJourney/TestModal'
-import WholePageSpinner from '../../../components/Utility/WholePageSpinner';
-import { useUser } from '../../../UserContext'
-import axios from 'axios'
 
 // Question portion concrete module
 import AudioQuestion from '../../../components/MusicStarterJourney/Questions/AudioQuestion'
