@@ -19,7 +19,7 @@ const TestModal = (props) => {
         const updated = quizID + 1;
         const updateUserJourneyProgress = {
             ...user,
-            Progress: 3
+            Progress: updated
         }
         axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
             {
@@ -29,6 +29,7 @@ const TestModal = (props) => {
             })
             .then((response) => console.log("progress updated " + response.data.Progress))
             .then(setIsLoading(false))
+            .then(navigate(`/MusicStarterJourney/${user.CurrJourney}`))
             .catch(error => console.log(error));
     }
 

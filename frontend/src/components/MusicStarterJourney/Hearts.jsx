@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Col, Row, Button, Modal } from 'react-bootstrap'
-import { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react'
+import { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../UserContext';
 import WholePageSpinner from '../Utility/WholePageSpinner';
@@ -139,29 +139,6 @@ const Hearts = (props, ref) => {
             setModalShow(true);
         }
     }, [hearts]);
-
-    // when unmounted
-    const onUnmount = useRef();
-
-    onUnmount.current = () => {
-        setIsLoading(true);
-        const updateUserJourneyProgress = {
-            ...user,
-            Hearts: hearts,
-        }
-        console.log(updateUserJourneyProgress)
-        axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
-            {
-                params: {
-                    User_id: User_id
-                }
-            }
-        ).then(setIsLoading(false));
-    };
-
-    useEffect(() => {
-        return () => onUnmount.current();
-    }, [])
 
     {
         return isLoading ?
