@@ -163,8 +163,10 @@ const Hearts = (props, ref) => {
 
 
 
+    // this loading state doesn't really really work, need to pass it in as 
+    // state to parent
     {
-        return isLoading ?
+        return true ?
             (<Container className='vh-100'>
                 <WholePageSpinner />
             </Container>) :
