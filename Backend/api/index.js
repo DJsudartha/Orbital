@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import { MetronomeDBURL } from "../Port.js";
 import Metronome from "../Routes/MetronomeRoute.js";
 import QuizJourney from "../Routes/QuizRoute.js";
-import LoginPage from "../Routes/LoginPage.js";
 import cors from 'cors';
 import UserModel from '../Models/LoginDetails.js'
 import bcrypt from 'bcrypt'

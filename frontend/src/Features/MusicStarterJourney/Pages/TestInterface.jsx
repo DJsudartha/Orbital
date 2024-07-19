@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import NavFooter from '../../../components/MusicStarterJourney/NavFooter'
 import Hearts from '../../../components/MusicStarterJourney/Hearts'
 import { useLocation, useNavigate } from 'react-router-dom'
+import TestModal from '../../../components/MusicStarterJourney/TestModal'
 
 // Question portion concrete module
 import AudioQuestion from '../../../components/MusicStarterJourney/Questions/AudioQuestion'
@@ -55,17 +56,17 @@ const TestInterface = () => {
   if (answerType === "Audio") {
     answerOutCards = answerCollection.map((answer, index) =>
       <Col className='d-flex justify-content-center' key={index + 1}>
-        <AudioAnswerCard data={answer} what={index + 1} foo={setSelected} />
+        <AudioAnswerCard data={answer} token={index + 1} foo={setSelected} curr={selected} />
       </Col>);
   } else if (answerType === "Visual") {
     answerOutCards = answerCollection.map((answer, index) =>
       <Col className='d-flex justify-content-center' key={index + 1}>
-        <VisualAnswerCard data={answer} what={index + 1} foo={setSelected} />
+        <VisualAnswerCard data={answer} token={index + 1} foo={setSelected} curr={selected} />
       </Col>);
   } else if (answerType === "Rhythm") {
     answerOutCards = answerCollection.map((answer, index) =>
       <Col className='d-flex justify-content-center' key={index + 1}>
-        <RhythmAnswerCard data={answer} what={index + 1} foo={setSelected} />
+        <RhythmAnswerCard data={answer} token={index + 1} foo={setSelected} curr={selected} />
       </Col>);
   }
 
@@ -116,7 +117,7 @@ const TestInterface = () => {
         result={Correct == selected} quizID={QuizID}
         user={user} />
 
-    </Container >
+    </Container>
   )
 }
 
