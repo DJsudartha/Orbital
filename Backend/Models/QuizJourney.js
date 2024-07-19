@@ -7,7 +7,8 @@ const QuizJourneySchema = mongoose.Schema(
         QuizID: Number,
         Correct: Number,
         Question: QuestionJourneySchema,
-        Answers: AnswerCollectionJourneySchema
+        Answers: AnswerCollectionJourneySchema,
+        Journey_id: String
     }
 );
 

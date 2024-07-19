@@ -11,7 +11,7 @@ function ProfileMaker() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/register`, {name, email, password})
+        axios.post(`${baseURL}/verification/register`, {name, email, password})
         .then(y => {console.log(y)
         navigate("/profilePage")
         })

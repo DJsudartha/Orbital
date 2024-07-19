@@ -4,9 +4,13 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import FormRange from 'react-bootstrap/esm/FormRange'
 import Metronome from '../../../components/Metronome/Metronome'
+import { useUser } from '../../../UserContext'
 
 const Home = () => {
   // I know this code is shit ;_;
+  // get the userID to identif what songs belong to what user
+  const User_id = useUser();
+  console.log(User_id);
 
   /* checks if props are passed from other components, if there are props
       update, if not stay with the default, sort of shit and I think the only
@@ -16,7 +20,8 @@ const Home = () => {
       Title: "",
       Artist: "",
       Tempo: 130,
-      TimeSignature: "4/4"
+      TimeSignature: "4/4",
+      User_id: User_id
     }
     : useLocation().state
   );

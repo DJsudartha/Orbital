@@ -12,7 +12,7 @@ function ResetPassword() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`${baseURL}/reset-password/${id}/${token}`, {password})
+        axios.post(`${baseURL}/verification/reset-password/${id}/${token}`, {password})
         .then(navigate('/login'))
         .catch(err => console.log(err))
     }
