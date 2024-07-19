@@ -47,6 +47,8 @@ const Hearts = (props, ref) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [isEffectFinished, setEffectFinished] = useState(false);
+
     /** on umnount, use useEffect to axios.put() the new heart count, make it a 
      * "feature" that hearts will be shared throughout journeys so u can't spam
      * ways to earn bacck hearts? wait x minutes to get 1 heart, make it quick 
@@ -105,16 +107,28 @@ const Hearts = (props, ref) => {
     // updates hearts based on x amount of time difference from db with local time
     // for now only run this during first render (in journey), if that works u
     // can think of keeping a lastUpdated local state (confusing)
-    useEffect(() => {
-        const localDate = new Date();
-        const lastLoggedDate = new Date(user.LastLoggedDate)
-        if (localDate.getTime() - lastLoggedDate.getTime() >= 3 * 60 * 1000) {
+
+    const updateHeartsTime = () => {
+        const localTime = new Date();
+        console.log(localTime);
+        const lastLoggedTime = new Date(user.LastLoggedTime);
+        console.log(lastLoggedTime);
+        if (localTime.getTime() - lastLoggedTime.getTime() >= 3 * 60 * 1000) {
             setHearts(3);
-        } else if (localDate.getTime() - lastLoggedDate.getTime() >= 2 * 60 * 1000) {
+        } else if (localTime.getTime() - lastLoggedTime.getTime() >= 2 * 60 * 1000) {
             setHearts((prev) => prev + 2 >= 3 ? 3 : prev + 2);
-        } else if (localDate.getTime() - lastLoggedDate.getTime() >= 1 * 60 * 1000) {
+        } else if (localTime.getTime() - lastLoggedTime.getTime() >= 1 * 60 * 1000) {
             setHearts((prev) => prev + 1 >= 3 ? 3 : prev + 1);
         }
+        console.log("first useEffect reached " + hearts);
+        setModalShow(false);
+        setEffectFinished(true);
+    };
+
+    console.log("hearts after update? " + hearts);
+
+    useEffect(() => {
+        updateHeartsTime();
     }, [])
 
 
@@ -134,16 +148,24 @@ const Hearts = (props, ref) => {
                 }
             }
         )
-        .then(setIsLoading(false));
+            .then(setIsLoading(false))
 
-        if (hearts === 0) {
+    }, [hearts]);
+
+    useEffect(() => {
+        // what if i just bring this out
+        if (isEffectFinished && hearts === 0) {
+            console.log("second useEffect reached" + hearts);
             setModalShow(true);
         }
-    }, [hearts]);
+
+    }, [isEffectFinished, hearts])
+
+
 
     {
         return isLoading ?
-             (<Container className='vh-100'>
+            (<Container className='vh-100'>
                 <WholePageSpinner />
             </Container>) :
             (<Container ref={ref}>
