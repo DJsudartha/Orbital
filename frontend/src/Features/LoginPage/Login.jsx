@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { baseURL } from '../..';
-import { useUserUpdate } from '../../UserContext';
 
 
 function Login() {
@@ -11,15 +10,12 @@ function Login() {
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
-    const setUser = useUserUpdate();
-
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/verification/login`, {email, password})
+        axios.post(`${baseURL}/login`, {email, password})
         .then(y => {
             console.log(y)
-            if(y.data.Success === "Success") {
-                setUser(y.data._id)
+            if(y.data === "Success") {
                 navigate('/profile-page')
             }
         })
@@ -68,6 +64,5 @@ function Login() {
     );
 
 }
-
 
 export default Login;

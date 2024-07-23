@@ -123,6 +123,38 @@ LoginPage.post("/reset-password/:id/:token", (req, res) => {
     })
 })
 
+LoginPage.post("/profile-maker/:id", async (req, res) => {
+    const { id } = req.params
+    const { username, description, pfp } = req.body
+    try {
+        UserModel.findByIdAndUpdate(id, { username, description, pfp }, { new: true })
+       .then(user => {
+            if (!user) {
+                return res.send({ Status: "User not found" })
+            }
+            return res.json(user)
+        })
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
+})
+
+LoginPage.get("/profile-page/:id", async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await UserModel.findById(id).select('profileData name email').exec();
+        
+        if (!user) {
+            return res.send({ Status: "User not found" })
+        }
+        return res.json(user.profileData)
+    } catch {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
+})
+
 LoginPage.get("/getter", async (request, response) => {
     try {
         const UserData = await UserModel.find({});

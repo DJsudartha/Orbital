@@ -1,4 +1,7 @@
-import React from 'react';
+import {React, useEffect, useState} from 'react';
+import axios from 'axios';
+import {baseURL} from '../..'
+import profilePictures from '../../../public/ProfilePicture'
 import {
   MDBCol,
   MDBContainer,
@@ -9,14 +12,31 @@ import {
   MDBCardImage,
   MDBBreadcrumb,
   MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
   MDBIcon,
   MDBListGroup,
-  MDBListGroupItem
+  MDBListGroupItem,
+  MDBBadge,
+  MDBBtn,
 } from 'mdb-react-ui-kit';
 
 function ProfilePage() {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`${baseURL}/verification/profile-page/:id`);
+
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   return (
     <section style={{ backgroundColor: '#eee' }}>
       <MDBContainer className="py-5">
@@ -26,6 +46,9 @@ function ProfilePage() {
               <MDBBreadcrumbItem active style={{ color: '#fff' }}>User Profile</MDBBreadcrumbItem>
             </MDBBreadcrumb>
           </MDBCol>
+          <MDBCol md="4" className="d-flex justify-content-end align-items-center">
+            <MDBBtn href="/main-menu" color="primary" className="text-white">Main Menu</MDBBtn>
+          </MDBCol>
         </MDBRow>
 
         <MDBRow>
@@ -33,16 +56,12 @@ function ProfilePage() {
             <MDBCard className="mb-4 bg-dark">
               <MDBCardBody className="text-center">
                 <MDBCardImage
-                  src="https://th.bing.com/th/id/OIP.tQYFfqM9HEki3rZPgBodgQAAAA?rs=1&pid=ImgDetMain"
+                  src= {user.profileData.avatar}
                   alt="avatar"
                   className="rounded-circle"
                   style={{ width: '150px' }}
                   fluid />
-                <p className="text-white mb-1">Username</p>
-                <p className="text-white mb-2 ">Level XX</p>
-                <div className="d-flex justify-content-center mb-2">
-                  <button style={{ backgroundColor: '#fff', color: '#212121' }}>Follow</button>
-                </div>
+                <p className="text-white mb-1">{profilePictures[user.profileData.username]}</p>
               </MDBCardBody>
             </MDBCard>
 
@@ -81,43 +100,16 @@ function ProfilePage() {
                     <MDBCardText>Name</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-white">FirstName LastName</MDBCardText>
+                    <MDBCardText className="text-white">{user.name}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Followers</MDBCardText>
+                    <MDBCardText>Description</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-white">100000000</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Following</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-white">923927</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Mobile</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-white">(098) 765-4321</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Address</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-white">Bay Area, San Francisco, CA</MDBCardText>
+                    <MDBCardText className="text-white">{user.profileData.description}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
@@ -128,62 +120,44 @@ function ProfilePage() {
                 <MDBCard className="mb-4 mb-md-0 bg-dark text-white">
                   <MDBCardBody>
                     <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Music Journey</span>Progress</MDBCardText>
-                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Level 1</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={80} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Level 2</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={72} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Level 3</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Level 4</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Level 5</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
-                    </MDBProgress>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 1
+                        <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                    </MDBCardText>
+                    <hr />
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 2
+                        <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                    </MDBCardText>
+                    <hr />
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 3
+                        <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                    </MDBCardText>
+                    <hr />
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 4
+                        <MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>
+                    </MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
 
               <MDBCol md="6">
                 <MDBCard className = "mb-4 mb-md-0 bg-dark text-white">
-                  <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Play Along</span>Progress</MDBCardText>
-                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>World 1</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={80} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>World 2</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={72} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>World 3</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>World 4</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>World 5</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
-                    </MDBProgress>
+                <MDBCardBody>
+                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Music Journey</span>Progress</MDBCardText>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 1
+                        <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                    </MDBCardText>
+                    <hr />
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 2
+                        <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                    </MDBCardText>
+                    <hr />
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 3
+                        <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                    </MDBCardText>
+                    <hr />
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 4
+                        <MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>
+                    </MDBCardText>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>

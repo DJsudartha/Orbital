@@ -11,7 +11,7 @@ function ForgotPassword() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/verification/forgot-password`, {email})
+        axios.post(`${baseURL}/forgot-password`, {email})
         .then(y => {
             console.log(y)
             if(y.data === "Success") {
@@ -47,6 +47,4 @@ function ForgotPassword() {
     );
 
 }
-
-
 export default ForgotPassword;

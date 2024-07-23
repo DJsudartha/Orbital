@@ -21,7 +21,6 @@ import TestInterface from './Features/MusicStarterJourney/Pages/TestInterface.js
 // from Login Page
 import Signup from './Features/LoginPage/Signup.jsx'
 import Login from './Features/LoginPage/Login.jsx'
-import Homepage from './Features/LoginPage/Homepage.jsx'
 import ForgotPassword from './Features/LoginPage/ForgotPassword.jsx'
 import ResetPassword from './Features/LoginPage/ResetPassword.jsx'
 import ProfileMaker from './Features/LoginPage/ProfileMaker.jsx'
@@ -36,7 +35,8 @@ function App() {
     <UserProvider>
       <UserJourneyProvider>
         <Routes>
-          <Route path='/' element={<MainMenu />} />
+          <Route path='/main-menu' element={<MainMenu />} />
+          <Route path= '/' element={<Signup />} />
 
           <Route path='/metronome' element={<Home />} />
           <Route path='/metronome/addSong' element={<AddSong />} />
@@ -50,7 +50,6 @@ function App() {
 
           <Route path='/register' element={<Signup />}></Route>
           <Route path='/login' element={<Login />}></Route>
-          <Route path='/home' element={<Homepage />}></Route>
           <Route path='/forgot-password' element={<ForgotPassword />}></Route>
           <Route path='/reset-password/:id/:token' element={<ResetPassword />}></Route>
           <Route path='/profile-maker' element={<ProfileMaker />}></Route>
