@@ -25,7 +25,6 @@ import ForgotPassword from './Features/LoginPage/ForgotPassword.jsx'
 import ResetPassword from './Features/LoginPage/ResetPassword.jsx'
 import ProfileMaker from './Features/LoginPage/ProfileMaker.jsx'
 import ProfilePage from './Features/LoginPage/ProfilePage.jsx'
-import MyProfilePage from './Features/LoginPage/MyProfilePage.jsx'
 
 // editing the loading spinner
 import WholePageSpinner from './components/Utility/WholePageSpinner.jsx'
@@ -54,7 +53,6 @@ function App() {
           <Route path='/reset-password/:id/:token' element={<ResetPassword />}></Route>
           <Route path='/profile-maker' element={<ProfileMaker />}></Route>
           <Route path='/profile-page' element={<ProfilePage />}></Route>
-          <Route path='/my-profile-page' element={<MyProfilePage />}></Route>
 
           <Route path='/dev' element={<WholePageSpinner />}></Route>
 
