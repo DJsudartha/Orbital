@@ -37,6 +37,7 @@ const TestModal = (props) => {
             .then((response) => console.log("progress updated " + (response.data.Progress + 1)))
             .then(setUserJourney(updateUserJourneyProgress))
             .then(setIsLoading(false))
+            .then(navigate(`/MusicStarterJourney/${userJourney.CurrJourney}`))
             .catch(error => console.log(error));
     }
 
