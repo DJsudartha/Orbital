@@ -7,6 +7,8 @@ import WholePageSpinner from '../Utility/WholePageSpinner';
 import axios from 'axios'
 import { baseURL } from '../..';
 
+import { useUserJourney, useUserJourneyUpdate } from '../../Features/MusicStarterJourney/UserJourneyContext';
+
 // modal to inform user u ran out of hearts
 function MyVerticallyCenteredModal(props) {
 
@@ -36,14 +38,17 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const Hearts = (props, ref) => {
-    // props: hearts and time.
-    const { user } = props;
+
+    const userJourney = useUserJourney();
+    const setUserJourney = useUserJourneyUpdate();
+
     const User_id = useUser();
     const navigate = useNavigate();
 
     const [modalShow, setModalShow] = React.useState(false);
 
-    const [hearts, setHearts] = useState(user.Hearts); // axios.get in journey, pass it into testInterface, pass it here, testInterface calls the function here cus idw to clutter
+    const [hearts, setHearts] = useState(userJourney.Hearts); // axios.get in journey, pass it into testInterface, pass it here, testInterface calls the function here cus idw to clutter
+    // some weird shit might happen since we're sepearing true state with userJourney.hearts and hearts, test this out
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -110,7 +115,7 @@ const Hearts = (props, ref) => {
 
     const updateHeartsTime = () => {
         const localTime = new Date();
-        const lastLoggedTime = new Date(user.LastLoggedTime);
+        const lastLoggedTime = new Date(userJourney.LastLoggedTime);
         if (localTime.getTime() - lastLoggedTime.getTime() >= 3 * 60 * 1000) {
             setHearts(3);
         } else if (localTime.getTime() - lastLoggedTime.getTime() >= 2 * 60 * 1000) {
@@ -130,9 +135,10 @@ const Hearts = (props, ref) => {
 
     // updates the DB whenever hearts changes, update time and hearts
     useEffect(() => {
+        console.log("hearts: " + hearts)
         const newDate = new Date();
         const updateUserJourneyProgress = {
-            ...user,
+            ...userJourney,
             Hearts: hearts,
             LastLoggedTime: newDate
         }
@@ -144,7 +150,9 @@ const Hearts = (props, ref) => {
                 }
             }
         )
+            .then(setUserJourney(updateUserJourneyProgress))
             .then(setIsLoading(false))
+            .then(console.log("main state updated " + userJourney.Hearts));
 
     }, [hearts]);
 

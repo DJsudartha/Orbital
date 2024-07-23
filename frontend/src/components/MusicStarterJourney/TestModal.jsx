@@ -7,8 +7,14 @@ import { baseURL } from '../..';
 import { useUser } from '../../UserContext';
 import WholePageSpinner from '../Utility/WholePageSpinner';
 
+import { useUserJourney, useUserJourneyUpdate } from '../../Features/MusicStarterJourney/UserJourneyContext';
+
 const TestModal = (props) => {
-    const { result, quizID, user } = props;
+
+    const userJourney = useUserJourney();
+    const setUserJourney = useUserJourneyUpdate();
+
+    const { result, quizID } = props;
     const navigate = useNavigate();
     const User_id = useUser();
 
@@ -18,18 +24,19 @@ const TestModal = (props) => {
         setIsLoading(true);
         const updated = quizID + 1;
         const updateUserJourneyProgress = {
-            ...user,
+            ...userJourney,
             Progress: updated
         }
+        // theres some async bullshit going on here regarding the update and the navigate
         axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
             {
                 params: {
                     User_id: User_id
                 }
             })
-            .then((response) => console.log("progress updated " + response.data.Progress))
+            .then((response) => console.log("progress updated " + (response.data.Progress + 1)))
+            .then(setUserJourney(updateUserJourneyProgress))
             .then(setIsLoading(false))
-            .then(navigate(`/MusicStarterJourney/${user.CurrJourney}`))
             .catch(error => console.log(error));
     }
 

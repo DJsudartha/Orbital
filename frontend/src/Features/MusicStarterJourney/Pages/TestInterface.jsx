@@ -25,7 +25,7 @@ const TestInterface = () => {
   const location = useLocation();
   const heartsRef = useRef();
   const props = location.state;
-  const { Correct, Question, Answers, QuizID, user } = props;
+  const { Correct, Question, Answers, QuizID } = props;
 
   const questionType = Question.Var;
   const answerType = Answers.Var;
@@ -91,7 +91,7 @@ const TestInterface = () => {
             <h2>Journey</h2>
           </Col>
           <Col>
-            <Hearts ref={heartsRef} user={user} />
+            <Hearts ref={heartsRef} />
           </Col>
         </Row>
         <Row className='pt-3'>
@@ -114,8 +114,7 @@ const TestInterface = () => {
       </Row>
 
       <TestModal show={showModal} onHide={() => setShowModal(false)}
-        result={Correct == selected} quizID={QuizID}
-        user={user} />
+        result={Correct == selected} quizID={QuizID} />
 
     </Container>
   )

@@ -7,8 +7,12 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from '../../..';
 import { useUser } from '../../../UserContext';
+import { useUserJourney, useUserJourneyUpdate } from '../UserJourneyContext';
 
 const Journey = () => {
+  const userJourney = useUserJourney();
+  const setUserJourney = useUserJourneyUpdate();
+
   const navigate = useNavigate();
 
   const Journey_id = useParams().id;
@@ -19,8 +23,6 @@ const Journey = () => {
   const [journey, setJourney] = useState([]);
 
   const User_id = useUser();
-
-  const [userJourneyProgress, setUserJourneyProgress] = useState({});
 
   // get the current userProgressJourney, if not found create a new instance
   useEffect(() => {
@@ -47,12 +49,12 @@ const Journey = () => {
             User_id: User_id
           }
           axios.post(`${baseURL}/userJourneyProgress`, newUserJourney)
-            .then(setUserJourneyProgress(newUserJourney));
+            .then(setUserJourney(newUserJourney));
           setLoading1(false);
         } else {
           if (response.data.CurrJourney == Journey_id) {
             console.log("obtained from database if same journey: " + response.data.Progress);
-            setUserJourneyProgress(response.data);
+            setUserJourney(response.data);
             setLoading1(false);
           } else {
             console.log("different journey reached")
@@ -69,7 +71,7 @@ const Journey = () => {
               }
             )
               .then(setLoading1(false)); // need to update the journey location only really
-            setUserJourneyProgress(updateUserJourneyProgress);
+            setUserJourney(updateUserJourneyProgress);
           }
         }
       })
@@ -107,7 +109,7 @@ const Journey = () => {
                 <h1></h1>
               </Col>
               <Col>
-                <Hearts user={userJourneyProgress} />
+                <Hearts />
               </Col>
             </Row>
 
@@ -116,7 +118,7 @@ const Journey = () => {
                 <Row className='py-5' key={quiz.QuizID}>
                   <Col className='d-flex justify-content-center'>
                     <Button size='lg'
-                      onClick={quiz.QuizID <= userJourneyProgress.Progress ? () =>
+                      onClick={quiz.QuizID <= userJourney.Progress ? () =>
                         navigate(`/MusicStarterJourney/Journey/Unit/${quiz._id}`, {
                           state:
                           {
@@ -124,11 +126,10 @@ const Journey = () => {
                             Question: quiz.Question,
                             Answers: quiz.Answers,
                             QuizID: quiz.QuizID,
-                            user: userJourneyProgress
                           }
                         }) : null
                       }
-                      disabled={quiz.QuizID > userJourneyProgress.Progress}>
+                      disabled={quiz.QuizID > userJourney.Progress}>
                       {quiz.QuizID}
                     </Button>
                   </Col>
@@ -136,7 +137,7 @@ const Journey = () => {
               ))
             }
 
-            {userJourneyProgress.Progress >= (journey.length + 1) &&
+            {userJourney.Progress >= (journey.length + 1) &&
               <Col className='d-flex justify-content-center pt-5'>
                 <Row>
                   <h1>Journey Complete!</h1>
