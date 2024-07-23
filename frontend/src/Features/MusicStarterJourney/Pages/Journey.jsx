@@ -25,6 +25,7 @@ const Journey = () => {
   // get the current userProgressJourney, if not found create a new instance
   useEffect(() => {
     setLoading1(true)
+
     axios.get(`${baseURL}/userJourneyProgress`, { // this might not work
       params: {
         User_id: User_id
@@ -37,34 +38,40 @@ const Journey = () => {
           return;
         }
 
-        if (response.data.User_id != "missing") {
-          const updateUserJourneyProgress = {
-            ...response.data,
-            CurrJourney: Journey_id
+        if (response.data.User_id == "missing") {
+          const newUserJourney = {
+            CurrJourney: Journey_id, // need to change implementation of this depending on how david does his profile page
+            Progress: 1,
+            Hearts: 3,
+            LastLoggedTime: new Date(),
+            User_id: User_id
           }
-          console.log(updateUserJourneyProgress);
-          axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
-            {
-              params: {
-                User_id: User_id
-              }
+          axios.post(`${baseURL}/userJourneyProgress`, newUserJourney)
+            .then(setUserJourneyProgress(newUserJourney));
+          setLoading1(false);
+        } else {
+          if (response.data.CurrJourney == Journey_id) {
+            console.log("obtained from database if same journey: " + response.data.Progress);
+            setUserJourneyProgress(response.data);
+            setLoading1(false);
+          } else {
+            console.log("different journey reached")
+            const updateUserJourneyProgress = {
+              ...response.data,
+              CurrJourney: Journey_id,
+              Progress: 1
             }
-          )
-          .then(setLoading1(false)); // need to update the journey location only really
-          setUserJourneyProgress(updateUserJourneyProgress);
-          return;
+            axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
+              {
+                params: {
+                  User_id: User_id
+                }
+              }
+            )
+              .then(setLoading1(false)); // need to update the journey location only really
+            setUserJourneyProgress(updateUserJourneyProgress);
+          }
         }
-
-        const newUserJourney = {
-          CurrJourney: Journey_id, // need to change implementation of this depending on how david does his profile page
-          Progress: 1,
-          Hearts: 3,
-          LastLoggedTime: new Date(),
-          User_id: User_id
-        }
-        axios.post(`${baseURL}/userJourneyProgress`, newUserJourney)
-        .then(setUserJourneyProgress(newUserJourney));
-        setLoading1(false);
       })
   }, []);
 

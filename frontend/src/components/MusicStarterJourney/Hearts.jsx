@@ -110,9 +110,7 @@ const Hearts = (props, ref) => {
 
     const updateHeartsTime = () => {
         const localTime = new Date();
-        console.log(localTime);
         const lastLoggedTime = new Date(user.LastLoggedTime);
-        console.log(lastLoggedTime);
         if (localTime.getTime() - lastLoggedTime.getTime() >= 3 * 60 * 1000) {
             setHearts(3);
         } else if (localTime.getTime() - lastLoggedTime.getTime() >= 2 * 60 * 1000) {
@@ -120,12 +118,10 @@ const Hearts = (props, ref) => {
         } else if (localTime.getTime() - lastLoggedTime.getTime() >= 1 * 60 * 1000) {
             setHearts((prev) => prev + 1 >= 3 ? 3 : prev + 1);
         }
-        console.log("first useEffect reached " + hearts);
         setModalShow(false);
         setEffectFinished(true);
     };
 
-    console.log("hearts after update? " + hearts);
 
     useEffect(() => {
         updateHeartsTime();
@@ -155,7 +151,6 @@ const Hearts = (props, ref) => {
     useEffect(() => {
         // what if i just bring this out
         if (isEffectFinished && hearts === 0) {
-            console.log("second useEffect reached" + hearts);
             setModalShow(true);
         }
 
