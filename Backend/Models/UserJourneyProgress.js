@@ -6,7 +6,8 @@ const UserJourneyProgressSchema = mongoose.Schema(
         Progress: Number,
         Hearts: Number,
         LastLoggedTime: Date,
-        User_id: String
+        User_id: String,
+        Completed: Array 
     }
 );
 

@@ -172,7 +172,7 @@ const Hearts = (props, ref) => {
                 <WholePageSpinner />
             </Container>) :
             (<Container ref={ref}>
-                <Row className='d-flex justify-content-end pt-1'>
+                <Row className='d-flex justify-content-center pt-1'>
                     <Col className='d-flex justify-content-center' xs={3}>
                         {hearts <= 2 ?
                             <i className='bi bi-heart-fill h1' style={{ color: 'gray' }} /> :

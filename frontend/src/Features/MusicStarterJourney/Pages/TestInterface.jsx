@@ -87,9 +87,6 @@ const TestInterface = () => {
     <Container className='h-100'>
       <div style={{ height: "92%", overflowY: 'auto', overflowX: 'hidden' }}>
         <Row className='pt-2'>
-          <Col className='d-flex justify-content-start'>
-            <h2>Journey</h2>
-          </Col>
           <Col>
             <Hearts ref={heartsRef} />
           </Col>

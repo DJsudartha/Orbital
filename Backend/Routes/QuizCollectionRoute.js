@@ -15,7 +15,8 @@ QuizCollection.post("/", async (request, response) => {
         // else if working
         const newQuizCollection = {
             Name: request.body.Name,
-            Image: request.body.Image
+            Image: request.body.Image,
+            Reference: request.body.Reference
         };
 
         // update DB

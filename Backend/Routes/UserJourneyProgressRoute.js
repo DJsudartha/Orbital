@@ -8,7 +8,7 @@ UserJourneyProgress.post("/", async (request, response) => {
     try {
         if (!(request.body.CurrJourney && 
             request.body.LastLoggedTime && request.body.Progress &&
-            request.body.User_id)) {
+            request.body.User_id && request.body.Completed)) {
             return response
                 .status(400)
                 .send({ message: "Incomplete data" });
@@ -20,7 +20,8 @@ UserJourneyProgress.post("/", async (request, response) => {
             Progress: request.body.Progress,
             Hearts: request.body.Hearts,
             LastLoggedTime: request.body.LastLoggedTime,
-            User_id: request.body.User_id
+            User_id: request.body.User_id,
+            Completed: request.body.Completed
         };
 
         // update DB

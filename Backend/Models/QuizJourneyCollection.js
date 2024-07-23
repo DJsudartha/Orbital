@@ -3,7 +3,8 @@ import mongoose, { mongo } from "mongoose";
 const QuizJourneyCollectionSchema = mongoose.Schema(
     {
         Name: String,
-        Image: String
+        Image: String,
+        Reference: Number
     }
 );
 

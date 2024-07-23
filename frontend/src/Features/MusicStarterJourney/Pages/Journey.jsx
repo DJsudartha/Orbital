@@ -46,7 +46,8 @@ const Journey = () => {
             Progress: 1,
             Hearts: 3,
             LastLoggedTime: new Date(),
-            User_id: User_id
+            User_id: User_id,
+            Completed: [false, false, false, false]
           }
           axios.post(`${baseURL}/userJourneyProgress`, newUserJourney)
             .then(setUserJourney(newUserJourney));
@@ -97,6 +98,42 @@ const Journey = () => {
       });
   }, []);
 
+  // if journey complete (get rid of this if super iffy)
+  useEffect(() => {
+    if (userJourney.Progress >= journey.length + 1) {
+      axios.get(`${baseURL}/musicJourneyCollection/${Journey_id}`)
+        .then(response => {
+          const ref = response.data.collection.Reference;
+          console.log("ref obtained " + ref);
+
+          axios.get(`${baseURL}/userJourneyProgress`, {
+            params: {
+              User_id: User_id
+            }
+          })
+            .then(response => {
+              const arrayCompleted = response.data.Completed;
+              arrayCompleted[ref] = true;
+
+              const updateUserJourneyProgress = {
+                ...response.data,
+                Completed: arrayCompleted
+              }
+              axios.put(`${baseURL}/userJourneyProgress`, updateUserJourneyProgress,
+                {
+                  params: {
+                    User_id: User_id
+                  }
+                }
+              )
+
+            });
+
+        })
+    }
+
+  }, [])
+
   return (
     <Container className='h-100'>
       {isLoading1 || isLoading2 ? (
@@ -104,10 +141,7 @@ const Journey = () => {
       ) : (
         <Container className='h-100'>
           <div style={{ height: "92%", overflowX: "hidden", overflowY: "auto" }}>
-            <Row className='pt-2 '>
-              <Col className='d-flex justify-content-start'>
-                <h1></h1>
-              </Col>
+            <Row className='pt-2'>
               <Col>
                 <Hearts />
               </Col>
