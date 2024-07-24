@@ -8,8 +8,6 @@ const NavBar = () => {
     return (
         <Navbar bg="info" data-bs-theme="dark" style={{ height: '100px' }}>
             <Container fluid style={{ backgroundColor: 'transparent' }}>
-                <Navbar.Brand href="/"
-                    style={{ backgroundColor: 'transparent' }}>ReVerb</Navbar.Brand>
                 <Nav className="me-auto" style={{ backgroundColor: 'transparent' }}>
                     <Nav.Link>
                         <Link to="/main-menu" style= {{color: 'white'}}>Home</Link>

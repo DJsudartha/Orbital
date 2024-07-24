@@ -4,6 +4,7 @@ import axios from 'axios'
 import { baseURL } from '../..'
 import { MDBCardImage } from 'mdb-react-ui-kit'
 import profilePictures from '../../../public/ProfilePicture'
+import { useUser } from '../../UserContext'
 
 function ProfileMaker() {
     const [username, setUsername] = useState("")
@@ -12,6 +13,9 @@ function ProfileMaker() {
     const navigate = useNavigate()
     const { id } = useParams();
     console.log(id);
+
+    const user = useUser();
+    console.log(user)
 
     const handleSubmit = (x) => {
         x.preventDefault()

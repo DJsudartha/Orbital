@@ -1,21 +1,17 @@
 import React from 'react'
 import { Col, Container, Row, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useUser } from '../../UserContext'
 
 const Menu = () => {
+    const id = useUser();
+
     return (
         <Container fluid style={{ height: '80vh' }}>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
-                <Link to="/login">
+                <Link to={`/profile-page/${id}`}>
                     <Button variant='info' size='lg' style={{ color: 'white' }}>
-                        Log In
-                    </Button>
-                </Link>
-            </Col>
-            <Col className='h-25 d-flex align-items-center justify-content-center'>
-                <Link to="/">
-                    <Button variant='info' size='lg' style={{ color: 'white' }}>
-                        Sign Up
+                        Profile Page
                     </Button>
                 </Link>
             </Col>
@@ -25,11 +21,6 @@ const Menu = () => {
                         Metronome
                     </Button>
                 </Link>
-            </Col>
-            <Col className='h-25 d-flex align-items-center justify-content-center'>
-                <Button variant='info' size='lg' style={{ color: 'white' }}>
-                    Tuner
-                </Button>
             </Col>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
                 <Link to="/MusicStarterJourney">

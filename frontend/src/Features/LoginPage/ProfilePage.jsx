@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseURL } from '../..'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import profilePictures from '../../../public/ProfilePicture'
 import {
   MDBCol,
@@ -20,8 +20,18 @@ import {
   MDBBtn,
 } from 'mdb-react-ui-kit';
 import WholePageSpinner from '../../components/Utility/WholePageSpinner';
+import { useUser } from '../../UserContext';
+import Button from 'react-bootstrap/Button';
 
 function ProfilePage() {
+
+  const navigate = useNavigate();
+  const test = useUser()
+  console.log("use User: " + test);
+
+  const onClick = () => {
+    navigate("/main-menu");
+  }
 
   const [user, setUser] = useState({});
   const [progress, setProgress] = useState(null);
@@ -63,7 +73,7 @@ function ProfilePage() {
             <section style={{ backgroundColor: '#eee' }}>
               <div className="bg-dark rounded-3 p-3 mb-4 w-100 d-flex justify-content-between align-items-center">
                 <span style={{ color: '#fff' }}>User Profile</span>
-                <MDBBtn href="/main-menu" color="primary" className="text-white">Main Menu</MDBBtn>
+                <Button onClick={onClick}>Main Menu</Button>
               </div>
               <MDBContainer className="py-5">
 
