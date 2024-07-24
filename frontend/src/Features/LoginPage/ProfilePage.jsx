@@ -32,27 +32,24 @@ function ProfilePage() {
   console.log("reached profile page: " + id)
 
   useEffect(() => {
-    console.log("reached useEffect")
-    setLoading(true);
-    console.log(isLoading);
+    const fetchUserData = async () => {
+      try {
+        const userResponse = await axios.get(`${baseURL}/verification/profile-page/${id}`);
+        setUser(userResponse.data);
 
-    axios.get(`${baseURL}/verification/profile-page/${id}`)
-      .then(response => {
-        console.log(response.data);
-        setUser(response.data);
+        const progressResponse = await axios.get(`${baseURL}/userJourneyProgress`, {
+          params: { User_id: id }
+        });
+        setProgress(progressResponse.data);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        axios.get(`${baseURL}/userJourneyProgress`, {
-          params: {
-            User_id: id 
-          }
-        })
-          .then(response => {
-            console.log(response.data);
-            setProgress(response.data)
-          })
-      })
-      .then(setLoading(false));
-  }, []);
+    fetchUserData();
+  }, [id])
 
   return (
     <>
@@ -80,12 +77,12 @@ function ProfilePage() {
                     <MDBCard className="mb-4 bg-dark">
                       <MDBCardBody className="text-center">
                         <MDBCardImage
-                          src={user.profileData.avatar}
+                          src={profilePictures[user.profileData.avatar]}
                           alt="avatar"
                           className="rounded-circle"
                           style={{ width: '150px' }}
                           fluid />
-                        <p className="text-white mb-1">{profilePictures[user.profileData.username]}</p>
+                        <p className="text-white mb-1">{user.profileData.username}</p>
                       </MDBCardBody>
                     </MDBCard>
 
