@@ -162,8 +162,12 @@ LoginPage.get("/profile-page/:id", async (req, res) => {
         if (!user) {
             return res.send({ Status: "User not found" })
         }
-        return res.json(user.profileData)
-    } catch {
+        return res.json({
+            profileData: user.profileData,
+            name: user.name,
+            email: user.email
+        });
+    } catch (error){
         console.log(error.message);
         res.status(500).send({ message: error.message });
     }

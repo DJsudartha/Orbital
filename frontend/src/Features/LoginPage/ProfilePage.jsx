@@ -3,6 +3,7 @@ import axios from 'axios';
 import {baseURL} from '../..'
 import {useParams} from 'react-router-dom'
 import profilePictures from '../../../public/ProfilePicture'
+import WholePageSpinner from '../../components/Utility/WholePageSpinner';
 import {
   MDBCol,
   MDBContainer,
@@ -22,32 +23,50 @@ import {
 
 function ProfilePage() {
 
-  const [user, setUser] = useState(null);
-  const [progress, setProgress] = useState(null);
+  const [user, setUser] = useState({});
+  const [progress, setProgress] = useState({});
+  const [isLoading1, setLoading1] = useState(false);
+  const [isLoading2, setLoading2] = useState(false);
   const { User_id }= useParams()
 
   useEffect(() => {
     const fetchUser = async () => {
-      try {
-        const response = await axios.get(`${baseURL}/verification/profile-page/:id`);
-        setUser(response.data);
-
-        const helper = await axios.get(`${baseURL}/userJourneyProgress`, {
-          params: {
-            User_id: User_id
-          }
-      })
-        setProgress(helper.data)
-
-      } catch (error) {
-        console.error('Error fetching user:', error);
+      setLoading1(true);
+      axios.get(`${baseURL}/verification/profile-page/:id`).
+      then((res) => {
+        setUser(res.data);
+        setLoading1(false);
+      }).catch((err) => {
+        console.error('Error fetching user:', err);
+        setLoading1(false);
       }
+      )
+    };
+
+    const fetchProgress = async () => {
+      setLoading2(true);
+      axios.get(`${baseURL}/userJourneyProgress`, {
+        params: {
+          User_id: User_id
+        }
+      }).then((res) => {
+        setProgress(res.data);
+        setLoading2(false);
+      }).catch((err) => {
+        console.error('Error fetching progress:', err);
+        setLoading2(false);
+      }
+      )
     };
 
     fetchUser();
+    fetchProgress();
   }, [User_id]);
 
   return (
+    <div>
+    {isLoading1 || isLoading2 ? (<WholePageSpinner/>)
+    : (
     <section style={{ backgroundColor: '#eee' }}>
       <MDBContainer className="py-5">
         <MDBRow>
@@ -66,12 +85,12 @@ function ProfilePage() {
             <MDBCard className="mb-4 bg-dark">
               <MDBCardBody className="text-center">
                 <MDBCardImage
-                  src= {user.profileData.avatar}
+                  src= {user ? profilePictures[user.profileData.avatar] : "../public/Default.jpeg"}
                   alt="avatar"
                   className="rounded-circle"
                   style={{ width: '150px' }}
                   fluid />
-                <p className="text-white mb-1">{profilePictures[user.profileData.username]}</p>
+                <p className="text-white mb-1">{user ? user.profileData.username : "Loading..." }</p>
               </MDBCardBody>
             </MDBCard>
 
@@ -110,7 +129,7 @@ function ProfilePage() {
                     <MDBCardText>Name</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-white">{user.name}</MDBCardText>
+                    <MDBCardText className="text-white">{user ? user.name : 'Loading...'}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -119,7 +138,7 @@ function ProfilePage() {
                     <MDBCardText>Description</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-white">{user.profileData.description}</MDBCardText>
+                    <MDBCardText className="text-white">{user ? user.profileData.description : 'Loading...'}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
@@ -185,7 +204,11 @@ function ProfilePage() {
         </MDBRow>
       </MDBContainer>
     </section>
+    
+  )}
+  </div>
   );
+
 }
 
 export default ProfilePage;
