@@ -57,9 +57,14 @@ LoginPage.post('/register', async (req, res) => {
         }
 
         const { name, email, password } = req.body;
+        const temporaryProfileData = {
+            description: "Null",
+            username: "NoName",
+            avatar: "Default"
+        }
         bcrypt.hash(password, 10)
             .then(hash => {
-                UserModel.create({ name, email, password: hash })
+                UserModel.create({ name, email, password: hash, profileData: temporaryProfileData})
                     .then(Data => res.json(Data))
                     .catch(error => res.json(error.message))
             })
@@ -124,16 +129,23 @@ LoginPage.post("/reset-password/:id/:token", (req, res) => {
 })
 
 LoginPage.post("/profile-maker/:id", async (req, res) => {
-    const { id } = req.params
-    const { username, description, pfp } = req.body
+    const { id } = req.params;
+    const { username, description, avatar } = req.body;
+
     try {
-        UserModel.findByIdAndUpdate(id, { username, description, pfp }, { new: true })
-       .then(user => {
-            if (!user) {
-                return res.send({ Status: "User not found" })
-            }
-            return res.json(user)
-        })
+        const user = await UserModel.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ status: "User not found" });
+        }
+    
+        user.profileData.username = username;
+        user.profileData.description = description;
+        user.profileData.avatar = avatar;
+
+        const updatedUser = await user.save();
+
+        return res.json(updatedUser);
     } catch (error) {
         console.log(error.message);
         res.status(500).send({ message: error.message });
@@ -148,8 +160,12 @@ LoginPage.get("/profile-page/:id", async (req, res) => {
         if (!user) {
             return res.send({ Status: "User not found" })
         }
-        return res.json(user.profileData)
-    } catch {
+        return res.json({
+            profileData: user.profileData,
+            name: user.name,
+            email: user.email
+        });
+    } catch (error) {
         console.log(error.message);
         res.status(500).send({ message: error.message });
     }
