@@ -24,7 +24,7 @@ import WholePageSpinner from '../../components/Utility/WholePageSpinner';
 function ProfilePage() {
 
   const [user, setUser] = useState({});
-  const [progress, setProgress] = useState({});
+  const [progress, setProgress] = useState(null);
   const { id } = useParams();
 
   const [isLoading, setLoading] = useState(true);
@@ -40,6 +40,7 @@ function ProfilePage() {
         const progressResponse = await axios.get(`${baseURL}/userJourneyProgress`, {
           params: { User_id: id }
         });
+        console.log(progressResponse)
         setProgress(progressResponse.data);
       } catch (error) {
         console.error("Error fetching data", error);
@@ -60,17 +61,11 @@ function ProfilePage() {
           ) :
           (
             <section style={{ backgroundColor: '#eee' }}>
+              <div className="bg-dark rounded-3 p-3 mb-4 w-100 d-flex justify-content-between align-items-center">
+                <span style={{ color: '#fff' }}>User Profile</span>
+                <MDBBtn href="/main-menu" color="primary" className="text-white">Main Menu</MDBBtn>
+              </div>
               <MDBContainer className="py-5">
-                <MDBRow>
-                  <MDBCol>
-                    <MDBBreadcrumb className="bg-dark rounded-3 p-3 mb-4">
-                      <MDBBreadcrumbItem active style={{ color: '#fff' }}>User Profile</MDBBreadcrumbItem>
-                    </MDBBreadcrumb>
-                  </MDBCol>
-                  <MDBCol md="4" className="d-flex justify-content-end align-items-center">
-                    <MDBBtn href="/main-menu" color="primary" className="text-white">Main Menu</MDBBtn>
-                  </MDBCol>
-                </MDBRow>
 
                 <MDBRow>
                   <MDBCol lg="4">
@@ -142,28 +137,44 @@ function ProfilePage() {
                           <MDBCardBody>
                             <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Music Journey</span>Progress</MDBCardText>
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 1
-                              {/* {progress.Completed[0] ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
+                              {
+                              progress.User_id === 'missing'
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : progress.Completed[0] 
+                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
                                 : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              } */}
+                              }
                               <MDBBadge ></MDBBadge>
                             </MDBCardText>
                             <hr />
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 2
-                              {/* {progress.Completed[1] ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
+                              {
+                              progress.User_id === 'missing'
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : progress.Completed[1] 
+                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
                                 : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              } */}
+                              }
                             </MDBCardText>
                             <hr />
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 3
-                              {/* {progress.Completed[2] ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
+                              {
+                              progress.User_id === 'missing'
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : progress.Completed[2] 
+                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
                                 : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              } */}
+                              }
                             </MDBCardText>
                             <hr />
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 4
-                              {/* {progress.Completed[3] ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
+                              {
+                              progress.User_id === 'missing'
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : progress.Completed[3] 
+                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
                                 : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              } */}
+                              }
                             </MDBCardText>
                           </MDBCardBody>
                         </MDBCard>

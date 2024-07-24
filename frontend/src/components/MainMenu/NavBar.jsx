@@ -12,13 +12,13 @@ const NavBar = () => {
                     style={{ backgroundColor: 'transparent' }}>ReVerb</Navbar.Brand>
                 <Nav className="me-auto" style={{ backgroundColor: 'transparent' }}>
                     <Nav.Link>
-                        <Link to="/main-menu">Home</Link>
+                        <Link to="/main-menu" style= {{color: 'white'}}>Home</Link>
                     </Nav.Link>
                     <Nav.Link>
-                        <Link to="/login">Log In</Link>
+                        <Link to="/login" style= {{color: 'white'}}>Log In</Link>
                     </Nav.Link>
                     <Nav.Link>
-                        <Link to="/">Sign Up</Link>
+                        <Link to="/" style= {{color: 'white'}}>Sign Up</Link>
                     </Nav.Link>
                 </Nav>
             </Container>
