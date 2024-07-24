@@ -13,7 +13,7 @@ const Menu = () => {
                 </Link>
             </Col>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
-                <Link to="/register">
+                <Link to="/">
                     <Button variant='info' size='lg' style={{ color: 'white' }}>
                         Sign Up
                     </Button>

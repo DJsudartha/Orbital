@@ -192,7 +192,7 @@ const Hearts = (props, ref) => {
 
                 <MyVerticallyCenteredModal
                     show={modalShow}
-                    onHide={() => navigate('/')}
+                    onHide={() => navigate('/main-menu')}
                 />
             </Container>)
     }

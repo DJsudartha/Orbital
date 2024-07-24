@@ -61,7 +61,7 @@ const MusicStarterHome = () => {
 
                     <Row className='pt-3'>
                         <Col className='d-flex justify-content-center'>
-                            <Link to="/">
+                            <Link to="/main-menu">
                                 <i className='bi bi-house-fill h1' />
                             </Link>
                         </Col>

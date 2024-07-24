@@ -76,7 +76,7 @@ const Home = () => {
 
       <div className='row pt-3'>
         <div className='col d-flex align-items-center justify-content-center'>
-          <Link to='/'>
+          <Link to='/main-menu'>
             <i className="bi bi-house-fill h1" />
           </Link>
         </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { baseURL } from '../..';
+import { useUser, useUserUpdate } from '../../UserContext';
 
 
 function Login() {
@@ -10,16 +11,22 @@ function Login() {
     const [password, setPassword] = useState("")
     const navigate = useNavigate()
 
+    const setUser = useUserUpdate();
+    const user = useUser();
+
     const handleSubmit = (x) => {
         x.preventDefault()
         axios.post(`${baseURL}/verification/login`, {email, password})
         .then(y => {
-            console.log(y.data)
+            console.log(y.data._id)
             if(y.data.Success === "Success") {
+                setUser(y.data._id)
                 navigate(`/profile-maker/${y.data._id}`)
             }
         })
         .catch(err => console.log(err))
+
+        console.log("user: " + user);
     }
     return (
         <div className = "d-flex justify-content-center align-items-center bg-dark vh-100">
