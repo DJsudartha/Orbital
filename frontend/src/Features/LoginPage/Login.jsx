@@ -12,11 +12,11 @@ function Login() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/login`, {email, password})
+        axios.post(`${baseURL}/verification/login`, {email, password})
         .then(y => {
-            console.log(y)
-            if(y.data === "Success") {
-                navigate('/profile-page')
+            console.log(y.data)
+            if(y.data.Success === "Success") {
+                navigate(`/profile-maker/${y.data._id}`)
             }
         })
         .catch(err => console.log(err))

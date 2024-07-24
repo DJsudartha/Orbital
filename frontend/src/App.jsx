@@ -51,8 +51,8 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/forgot-password' element={<ForgotPassword />}></Route>
           <Route path='/reset-password/:id/:token' element={<ResetPassword />}></Route>
-          <Route path='/profile-maker' element={<ProfileMaker />}></Route>
-          <Route path='/profile-page' element={<ProfilePage />}></Route>
+          <Route path='/profile-maker/:id' element={<ProfileMaker />}></Route>
+          <Route path='/profile-page/:id' element={<ProfilePage />}></Route>
 
           <Route path='/dev' element={<WholePageSpinner />}></Route>
 

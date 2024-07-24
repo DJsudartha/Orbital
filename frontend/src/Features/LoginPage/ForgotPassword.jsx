@@ -11,10 +11,10 @@ function ForgotPassword() {
 
     const handleSubmit = (x) => {
         x.preventDefault()
-        axios.post(`${baseURL}/forgot-password`, {email})
+        axios.post(`${baseURL}/verification/forgot-password`, {email})
         .then(y => {
             console.log(y)
-            if(y.data === "Success") {
+            if(y.data.Success === "Success") {
                 navigate('/login')
             }
         })

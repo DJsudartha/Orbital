@@ -24,7 +24,7 @@ function ProfilePage() {
 
   const [user, setUser] = useState(null);
   const [progress, setProgress] = useState(null);
-  const User_id = useParams()
+  const { User_id }= useParams()
 
   useEffect(() => {
     const fetchUser = async () => {
