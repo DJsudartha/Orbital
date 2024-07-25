@@ -56,4 +56,5 @@ ReVerb was built on the MERN stack!
 ## Find us Here!
 
 [Kea](https://github.com/kea-S)
+
 [David](https://github.com/DJsudartha)
