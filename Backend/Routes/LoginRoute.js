@@ -34,7 +34,8 @@ LoginPage.post('/login', (req, res) => {
                         res.cookie("token", token)
                         return res.json({
                             "Success": "Success", 
-                            "_id": user._id
+                            "_id": user._id,
+                            "newAccount": user.newAccount
                         })
                     }
                     else {
@@ -64,7 +65,7 @@ LoginPage.post('/register', async (req, res) => {
         }
         bcrypt.hash(password, 10)
             .then(hash => {
-                UserModel.create({ name, email, password: hash, profileData: temporaryProfileData})
+                UserModel.create({ name, email, password: hash, profileData: temporaryProfileData, newAccount: true})
                     .then(Data => res.json(Data))
                     .catch(error => res.json(error.message))
             })
@@ -142,6 +143,7 @@ LoginPage.post("/profile-maker/:id", async (req, res) => {
         user.profileData.username = username;
         user.profileData.description = description;
         user.profileData.avatar = avatar;
+        user.newAccount = false;
 
         const updatedUser = await user.save();
 

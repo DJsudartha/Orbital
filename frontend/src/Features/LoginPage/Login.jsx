@@ -20,8 +20,14 @@ function Login() {
         .then(y => {
             console.log(y.data._id)
             if(y.data.Success === "Success") {
+                console.log(y.data.newAccount)
+                if(y.data.newAccount === true) {
                 setUser(y.data._id)
                 navigate(`/profile-maker/${y.data._id}`)
+                } else {
+                setUser(y.data._id)
+                navigate(`/main-menu`)
+                }
             }
         })
         .catch(err => console.log(err))
