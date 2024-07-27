@@ -160,21 +160,29 @@ function ProfilePage() {
                       <MDBCol md="6">
                         <MDBCard className="mb-4 mb-md-0 bg-dark text-white">
                           <MDBCardBody>
-                            <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Music Journey</span>Progress</MDBCardText>
-                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 1
-                              <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                            <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Rhythm Game</span>Progress</MDBCardText>
+                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Easy
+                              {
+                                user.highscores.easy == -1
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Highscore: {user.highscores.easy}</MDBBadge>)
+                              }
                             </MDBCardText>
                             <hr />
-                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 2
-                              <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
+                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Medium
+                              {
+                                user.highscores.medium == -1
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Highscore: {user.highscores.medium}</MDBBadge>)
+                              }
                             </MDBCardText>
                             <hr />
-                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 3
-                              <MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>
-                            </MDBCardText>
-                            <hr />
-                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>World 4
-                              <MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>
+                            <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Hard
+                              {
+                                user.highscores.hard == -1
+                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
+                                : (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Highscore: {user.highscores.hard}</MDBBadge>)
+                              }
                             </MDBCardText>
                           </MDBCardBody>
                         </MDBCard>

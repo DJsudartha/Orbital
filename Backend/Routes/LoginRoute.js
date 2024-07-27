@@ -63,9 +63,16 @@ LoginPage.post('/register', async (req, res) => {
             username: "NoName",
             avatar: "Default"
         }
+
+        const temporaryHighscores = {
+            easy: -1,
+            medium: -1,
+            hard: -1
+        }
+
         bcrypt.hash(password, 10)
             .then(hash => {
-                UserModel.create({ name, email, password: hash, profileData: temporaryProfileData, newAccount: true})
+                UserModel.create({ name, email, password: hash, profileData: temporaryProfileData, newAccount: true, highscores: temporaryHighscores})
                     .then(Data => res.json(Data))
                     .catch(error => res.json(error.message))
             })
@@ -157,7 +164,7 @@ LoginPage.post("/profile-maker/:id", async (req, res) => {
 LoginPage.get("/profile-page/:id", async (req, res) => {
     try {
         const { id } = req.params
-        const user = await UserModel.findById(id).select('profileData name email').exec();
+        const user = await UserModel.findById(id).select('profileData name email highscores').exec();
         
         if (!user) {
             return res.send({ Status: "User not found" })
@@ -165,8 +172,29 @@ LoginPage.get("/profile-page/:id", async (req, res) => {
         return res.json({
             profileData: user.profileData,
             name: user.name,
-            email: user.email
+            email: user.email,
+            highscores: user.highscores
         });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
+})
+
+LoginPage.post("/game-easy", async (req, res) => {
+    const {score, id} = req.body;
+
+    try {
+        const user = await UserModel.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ status: "User not found" });
+        }
+
+        user.highscores.easy = Math.max(user.highscores.easy, score);
+
+        const updatedUser = await user.save();
+        return res.json(updatedUser);
     } catch (error) {
         console.log(error.message);
         res.status(500).send({ message: error.message });

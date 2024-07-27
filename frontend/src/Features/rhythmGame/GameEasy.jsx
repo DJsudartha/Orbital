@@ -2,6 +2,9 @@ import {React, useEffect, useState} from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../UserContext'
+import axios from 'axios'
+import { baseURL } from '../..'
+
 
 function GameEasy() {
   const id = useUser();
@@ -47,12 +50,12 @@ function GameEasy() {
       console.log(msg);
       setMessage(msg);
       console.log(message)
-      // axios.post(`${baseURL}/verification/profile-maker/${id}`, { username, description, avatar })
-      //       .then(y => {
-      //           console.log(y)
-      //           navigate(`/profile-page/${id}`)
-      //       })
-      //       .catch(err => console.log(err))
+      axios.post(`${baseURL}/verification/game-easy`, { msg, id })
+            .then(y => {
+                console.log(y)
+                navigate(`/profile-page/${id}`)
+            })
+            .catch(err => console.log(err))
     }
   },[])
 
