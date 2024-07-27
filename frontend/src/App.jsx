@@ -29,6 +29,9 @@ import ProfilePage from './Features/LoginPage/ProfilePage.jsx'
 // editing the loading spinner
 import WholePageSpinner from './components/Utility/WholePageSpinner.jsx'
 
+// from Game
+import GameEasy from './Features/rhythmGame/GameEasy.jsx'
+
 function App() {
   return (
     <UserProvider>
@@ -53,6 +56,8 @@ function App() {
           <Route path='/reset-password/:id/:token' element={<ResetPassword />}></Route>
           <Route path='/profile-maker/:id' element={<ProfileMaker />}></Route>
           <Route path='/profile-page/:id' element={<ProfilePage />}></Route>
+
+          <Route path='/game-easy' element={<GameEasy />}></Route>
 
           <Route path='/dev' element={<WholePageSpinner />}></Route>
 
