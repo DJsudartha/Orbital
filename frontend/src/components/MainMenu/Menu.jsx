@@ -16,6 +16,13 @@ const Menu = () => {
                 </Link>
             </Col>
             <Col className='h-25 d-flex align-items-center justify-content-center'>
+                <Link to={`/game-menu`}>
+                    <Button variant='info' size='lg' style={{ color: 'white' }}>
+                        Game Menu
+                    </Button>
+                </Link>
+            </Col>
+            <Col className='h-25 d-flex align-items-center justify-content-center'>
                 <Link to="/metronome">
                     <Button variant='info' size='lg' style={{ color: 'white' }}>
                         Metronome
