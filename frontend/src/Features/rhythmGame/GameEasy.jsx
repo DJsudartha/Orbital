@@ -1,13 +1,15 @@
-import {React, useEffect} from "react";
+import {React, useEffect, useState} from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from "react-router-dom";
+import { useUser } from '../../UserContext'
 
 function GameEasy() {
+  const id = useUser();
   const { unityProvider,unload } = useUnityContext({
-    loaderUrl: "./Game%20Unity%20Stuff/ReVerb%20Game.loader.js",
-    dataUrl: "./Game%20Unity%20Stuff/ReVerb%20Game.data.unityweb",
-    frameworkUrl: "./Game%20Unity%20Stuff/ReVerb%20Game.framework.js.unityweb",
-    codeUrl: "./Game%20Unity%20Stuff/ReVerb%20Game.wasm.unityweb",
+    loaderUrl: "./EasyGameBuild/Reverb%20Game%20Easy.loader.js",
+    dataUrl: "./EasyGameBuild/Reverb%20Game%20Easy.data.unityweb",
+    frameworkUrl: "./EasyGameBuild/Reverb%20Game%20Easy.framework.js.unityweb",
+    codeUrl: "./EasyGameBuild/Reverb%20Game%20Easy.wasm.unityweb",
   });
 
   const navigate = useNavigate();
@@ -32,11 +34,27 @@ function GameEasy() {
     color: 'white'
   };
 
+  const [message, setMessage] = useState("");
   useEffect(() => {
     return () => {
       unload();
     };
   }, [unload]);
+
+
+  useEffect(() => {
+    window.receiveMessageFromUnity = (msg) => {
+      console.log(msg);
+      setMessage(msg);
+      console.log(message)
+      // axios.post(`${baseURL}/verification/profile-maker/${id}`, { username, description, avatar })
+      //       .then(y => {
+      //           console.log(y)
+      //           navigate(`/profile-page/${id}`)
+      //       })
+      //       .catch(err => console.log(err))
+    }
+  },[])
 
   return (
     <div style={containerStyle}>

@@ -11,13 +11,7 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem,
   MDBBadge,
-  MDBBtn,
 } from 'mdb-react-ui-kit';
 import WholePageSpinner from '../../components/Utility/WholePageSpinner';
 import { useUser } from '../../UserContext';
@@ -88,33 +82,6 @@ function ProfilePage() {
                           style={{ width: '150px' }}
                           fluid />
                         <p className="text-white mb-1">{user.profileData.username}</p>
-                      </MDBCardBody>
-                    </MDBCard>
-
-                    <MDBCard className="mb-4 mb-lg-0 bg-dark">
-                      <MDBCardBody className="p-0">
-                        <MDBListGroup flush className="rounded-3">
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#333' }}>
-                            <MDBIcon fas icon="globe fa-lg text-warning" />
-                            <MDBCardText style={{ color: '#fff' }}>Achievement 1</MDBCardText>
-                          </MDBListGroupItem>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#333' }}>
-                            <MDBIcon fab icon="github fa-lg" style={{ color: '#333333' }} />
-                            <MDBCardText style={{ color: '#fff' }}>Achievement 2</MDBCardText>
-                          </MDBListGroupItem>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#333' }}>
-                            <MDBIcon fab icon="twitter fa-lg" style={{ color: '#55acee' }} />
-                            <MDBCardText style={{ color: '#fff' }}>Achievement 3</MDBCardText>
-                          </MDBListGroupItem>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#333' }}>
-                            <MDBIcon fab icon="instagram fa-lg" style={{ color: '#ac2bac' }} />
-                            <MDBCardText style={{ color: '#fff' }}>Achievement 4</MDBCardText>
-                          </MDBListGroupItem>
-                          <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3" style={{ backgroundColor: '#333' }}>
-                            <MDBIcon fab icon="facebook fa-lg" style={{ color: '#3b5998' }} />
-                            <MDBCardText style={{ color: '#fff' }}>Achievement 5</MDBCardText>
-                          </MDBListGroupItem>
-                        </MDBListGroup>
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>
