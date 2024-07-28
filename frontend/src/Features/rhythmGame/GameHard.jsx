@@ -6,7 +6,7 @@ import axios from 'axios'
 import { baseURL } from '../..'
 
 
-function GameEasy() {
+function GameHard() {
   const id = useUser();
   const { unityProvider,unload } = useUnityContext({
     loaderUrl: "./EasyGameBuild/Reverb%20Game%20Easy.loader.js",
@@ -48,7 +48,7 @@ function GameEasy() {
   useEffect(() => {
     window.receiveMessageFromUnity = (msg) => {
       setMessage(msg);
-      axios.post(`${baseURL}/verification/game-easy`, { msg, id })
+      axios.post(`${baseURL}/verification/game-hard`, { msg, id })
             .catch(err => console.log(err))
     }
   },[])
@@ -63,4 +63,4 @@ function GameEasy() {
   );
 }
 
-export default GameEasy;
+export default GameHard;

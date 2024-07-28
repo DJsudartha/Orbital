@@ -31,6 +31,8 @@ import WholePageSpinner from './components/Utility/WholePageSpinner.jsx'
 
 // from Game
 import GameEasy from './Features/rhythmGame/GameEasy.jsx'
+import GameMedium from './Features/rhythmGame/GameMedium.jsx'
+import GameHard from './Features/rhythmGame/GameHard.jsx'
 import GameMenu from './Features/rhythmGame/GameMenu.jsx'
 
 function App() {
@@ -59,6 +61,8 @@ function App() {
           <Route path='/profile-page/:id' element={<ProfilePage />}></Route>
 
           <Route path='/game-easy' element={<GameEasy />}></Route>
+          <Route path='/game-medium' element={<GameMedium />}></Route>
+          <Route path='/game-hard' element={<GameHard />}></Route>
           <Route path='/game-menu' element={<GameMenu />}></Route>
 
           <Route path='/dev' element={<WholePageSpinner />}></Route>

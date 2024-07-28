@@ -48,7 +48,7 @@ function GameEasy() {
   useEffect(() => {
     window.receiveMessageFromUnity = (msg) => {
       setMessage(msg);
-      axios.post(`${baseURL}/verification/game-easy`, { msg, id })
+      axios.post(`${baseURL}/verification/game-medium`, { msg, id })
             .catch(err => console.log(err))
     }
   },[])

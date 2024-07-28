@@ -201,6 +201,46 @@ LoginPage.post("/game-easy", async (req, res) => {
     }
 })
 
+LoginPage.post("/game-medium", async (req, res) => {
+    const {msg, id} = req.body;
+
+    try {
+        const user = await UserModel.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ status: "User not found" });
+        }
+
+        user.highscores.medium = Math.max(user.highscores.medium, msg);
+
+        const updatedUser = await user.save();
+        return res.json(updatedUser);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
+})
+
+LoginPage.post("/game-hard", async (req, res) => {
+    const {msg, id} = req.body;
+
+    try {
+        const user = await UserModel.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ status: "User not found" });
+        }
+
+        user.highscores.hard = Math.max(user.highscores.hard, msg);
+
+        const updatedUser = await user.save();
+        return res.json(updatedUser);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
+})
+
 LoginPage.get("/getter", async (request, response) => {
     try {
         const UserData = await UserModel.find({});
