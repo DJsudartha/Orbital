@@ -7,7 +7,7 @@ ReVerb was developed under the [Orbital Programme](https://orbital.comp.nus.edu.
 
 **Try ReVerb [here!](https://re-verb-app.vercel.app)**
 
-**Read further documentaion [here!](https://re-verb-app.vercel.app)** (need to update this when finished with the readme)
+**Read further documentaion [here!](https://docs.google.com/document/d/1gKgnDd0Yfb_41yTao3QqsYznnOvJkNQj0xYEvxHgn88/edit?usp=sharing)** (need to update this when finished with the readme)
 
 ![Poster](https://github.com/user-attachments/assets/1ada1492-737f-4085-8b79-dcc5b2f95471)
 
@@ -48,7 +48,16 @@ This feature aims to target general, novice, and amateur musicians with a custom
 - A profile page that can track a user’s progress on the website
 
 ### Rhythm Game
-This feature aims to target general, novice, and amateur musicians so that they can develop their understanding of music further in a fun and interesting way. This feature includes: 
+
+This feature aims to target general, novice, and amateur musicians with an interactive rhythm game. This feature allows users to develop and test their sense of rhythm in a fun way. This feature includes 
+
+- A unity developed game with custom songs and maps 
+
+- A score tracker for each individual game that varies according to performance 
+
+- The ability to accurately track a user's reaction time in real time 
+
+- Feedback according to that user's reaction to certain events
 
 ## Tech Stack
 
