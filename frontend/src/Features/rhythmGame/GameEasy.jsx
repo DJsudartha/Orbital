@@ -51,10 +51,6 @@ function GameEasy() {
       setMessage(msg);
       console.log(message)
       axios.post(`${baseURL}/verification/game-easy`, { msg, id })
-            .then(y => {
-                console.log(y)
-                navigate(`/profile-page/${id}`)
-            })
             .catch(err => console.log(err))
     }
   },[])

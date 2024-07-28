@@ -182,7 +182,7 @@ LoginPage.get("/profile-page/:id", async (req, res) => {
 })
 
 LoginPage.post("/game-easy", async (req, res) => {
-    const {score, id} = req.body;
+    const {msg, id} = req.body;
 
     try {
         const user = await UserModel.findById(id);
@@ -191,7 +191,7 @@ LoginPage.post("/game-easy", async (req, res) => {
             return res.status(404).json({ status: "User not found" });
         }
 
-        user.highscores.easy = Math.max(user.highscores.easy, score);
+        user.highscores.easy = Math.max(user.highscores.easy, msg);
 
         const updatedUser = await user.save();
         return res.json(updatedUser);
