@@ -36,7 +36,8 @@ This feature aims to target general, novice, amateur, and professional musicians
 ### User Authentication and Profile Page 
 
 This feature aims to target general, novice, and amateur musicians with a customisable Profile Page. This feature was motivated by our own experiences learning music, where we would be more motivated to learn when we could display our achievements along the way. This feature includes:
-The ability to register an account 
+
+- The ability to register an account 
 
 - Authentication during log in to check if credentials entered match with those during registration 
 
