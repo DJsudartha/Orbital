@@ -9,10 +9,10 @@ import { baseURL } from '../..'
 function GameEasy() {
   const id = useUser();
   const { unityProvider,unload } = useUnityContext({
-    loaderUrl: "./EasyGameBuild/Reverb%20Game%20Easy.loader.js",
-    dataUrl: "./EasyGameBuild/Reverb%20Game%20Easy.data.unityweb",
-    frameworkUrl: "./EasyGameBuild/Reverb%20Game%20Easy.framework.js.unityweb",
-    codeUrl: "./EasyGameBuild/Reverb%20Game%20Easy.wasm.unityweb",
+    loaderUrl: "./MediumGameBuild/ReverbGameMedium.loader.js",
+    dataUrl: "./MediumGameBuild/ReverbGameMedium.data.unityweb",
+    frameworkUrl: "./MediumGameBuild/ReverbGameMedium.framework.js.unityweb",
+    codeUrl: "./MediumGameBuild/ReverbGameMedium.wasm.unityweb",
   });
 
   const navigate = useNavigate();
