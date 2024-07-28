@@ -9,6 +9,8 @@ ReVerb was developed under the [Orbital Programme](https://orbital.comp.nus.edu.
 
 **Read further documentaion [here!](https://re-verb-app.vercel.app)** (need to update this when finished with the readme)
 
+![Poster](https://github.com/user-attachments/assets/1ada1492-737f-4085-8b79-dcc5b2f95471)
+
 ## Features
 
 ### Music Starter Journey 
@@ -43,6 +45,9 @@ The ability to register an account
 - A profile page maker to customise a user’s profile page 
 
 - A profile page that can track a user’s progress on the website
+
+### Rhythm Game
+This feature aims to target general, novice, and amateur musicians so that they can develop their understanding of music further in a fun and interesting way. This feature includes: 
 
 ## Tech Stack
 
