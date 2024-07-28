@@ -9,10 +9,10 @@ import { baseURL } from '../..'
 function GameHard() {
   const id = useUser();
   const { unityProvider,unload } = useUnityContext({
-    loaderUrl: "./EasyGameBuild/Reverb%20Game%20Easy.loader.js",
-    dataUrl: "./EasyGameBuild/Reverb%20Game%20Easy.data.unityweb",
-    frameworkUrl: "./EasyGameBuild/Reverb%20Game%20Easy.framework.js.unityweb",
-    codeUrl: "./EasyGameBuild/Reverb%20Game%20Easy.wasm.unityweb",
+    loaderUrl: "./HardGameBuild/ReverGameHard.loader.js",
+    dataUrl: "./HardGameBuild/ReverGameHard.data.unityweb",
+    frameworkUrl: "./HardGameBuild/ReverGameHard.framework.js.unityweb",
+    codeUrl: "./HardGameBuild/ReverGameHard.wasm.unityweb",
   });
 
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ function GameHard() {
     color: 'white'
   };
 
-  const [message, setMessage] = useState("");
   useEffect(() => {
     return () => {
       unload();
@@ -47,7 +46,6 @@ function GameHard() {
 
   useEffect(() => {
     window.receiveMessageFromUnity = (msg) => {
-      setMessage(msg);
       axios.post(`${baseURL}/verification/game-hard`, { msg, id })
             .catch(err => console.log(err))
     }

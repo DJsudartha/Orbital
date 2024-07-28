@@ -37,7 +37,6 @@ function GameEasy() {
     color: 'white'
   };
 
-  const [message, setMessage] = useState("");
   useEffect(() => {
     return () => {
       unload();
@@ -47,7 +46,6 @@ function GameEasy() {
 
   useEffect(() => {
     window.receiveMessageFromUnity = (msg) => {
-      setMessage(msg);
       axios.post(`${baseURL}/verification/game-medium`, { msg, id })
             .catch(err => console.log(err))
     }
