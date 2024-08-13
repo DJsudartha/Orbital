@@ -114,44 +114,19 @@ function ProfilePage() {
                           <MDBCardBody>
                             <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Music Journey</span>Progress</MDBCardText>
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 1
-                              {
-                              progress.User_id === 'missing'
-                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
-                                : progress.Completed[0] 
-                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
-                                : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              }
-                              <MDBBadge ></MDBBadge>
+                              <MDBBadge color='secondary' style={{ marginLeft: '65px' }}>W.I.P</MDBBadge>
                             </MDBCardText>
                             <hr />
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 2
-                              {
-                              progress.User_id === 'missing'
-                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
-                                : progress.Completed[1] 
-                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
-                                : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              }
+                            <MDBBadge color='secondary' style={{ marginLeft: '65px' }}>W.I.P</MDBBadge> 
                             </MDBCardText>
                             <hr />
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 3
-                              {
-                              progress.User_id === 'missing'
-                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
-                                : progress.Completed[2] 
-                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
-                                : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              }
+                            <MDBBadge color='secondary' style={{ marginLeft: '65px' }}>W.I.P</MDBBadge> 
                             </MDBCardText>
                             <hr />
                             <MDBCardText className="mt-4 mb-1" style={{ fontSize: '1.7rem' }}>Level 4
-                              {
-                              progress.User_id === 'missing'
-                                ? (<MDBBadge color='secondary' style={{ marginLeft: '65px' }}>Not Started</MDBBadge>)
-                                : progress.Completed[3] 
-                                ? (<MDBBadge color='success' style={{ marginLeft: '65px' }}>Completed</MDBBadge>)
-                                : (<MDBBadge color='danger' style={{ marginLeft: '65px' }}>Not Completed</MDBBadge>)
-                              }
+                              <MDBBadge color='secondary' style={{ marginLeft: '65px' }}>W.I.P</MDBBadge> 
                             </MDBCardText>
                           </MDBCardBody>
                         </MDBCard>

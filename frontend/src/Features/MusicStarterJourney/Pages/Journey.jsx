@@ -114,6 +114,7 @@ const Journey = () => {
             .then(response => {
               const arrayCompleted = response.data.Completed;
               arrayCompleted[ref] = true;
+              console.log("CHECK HERE: " + arrayCompleted[ref])
 
               const updateUserJourneyProgress = {
                 ...response.data,
